@@ -1,0 +1,4869 @@
+{
+  "lastModifiedTime": 1723572406323.437,
+  "data": [
+    {
+      "partycode": "GG010",
+      "result": "124055.21999967098 DR"
+    },
+    {
+      "partycode": "VG010",
+      "result": "2655135.0799999647 CR"
+    },
+    {
+      "partycode": "GK015",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GG027",
+      "result": "15674.829999999842 CR"
+    },
+    {
+      "partycode": "VG027",
+      "result": "57257.05999999999 DR"
+    },
+    {
+      "partycode": "MA011",
+      "result": "5002 DR"
+    },
+    {
+      "partycode": "GG014",
+      "result": "108230.65000006184 DR"
+    },
+    {
+      "partycode": "GG015",
+      "result": "159973.58999999845 DR"
+    },
+    {
+      "partycode": "GG016",
+      "result": "2208533.810000062 DR"
+    },
+    {
+      "partycode": "GG020",
+      "result": "729078.4800000098 DR"
+    },
+    {
+      "partycode": "VG014",
+      "result": "684162.1800000011 CR"
+    },
+    {
+      "partycode": "VG015",
+      "result": "228603.88999999964 CR"
+    },
+    {
+      "partycode": "VG016",
+      "result": "9885721.48999998 CR"
+    },
+    {
+      "partycode": "VG020",
+      "result": "2809190.959999987 CR"
+    },
+    {
+      "partycode": "GK016",
+      "result": "41296 DR"
+    },
+    {
+      "partycode": "EE001",
+      "result": "2.779999999997017 CR"
+    },
+    {
+      "partycode": "SN010",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA013",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU048",
+      "result": "5491 DR"
+    },
+    {
+      "partycode": "BD033",
+      "result": "12770 DR"
+    },
+    {
+      "partycode": "BC062",
+      "result": "145912 DR"
+    },
+    {
+      "partycode": "BU069",
+      "result": "62963 DR"
+    },
+    {
+      "partycode": "BK015",
+      "result": "50403 DR"
+    },
+    {
+      "partycode": "CS001",
+      "result": "166934 DR"
+    },
+    {
+      "partycode": "BG005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GG023",
+      "result": "132831.83000000473 CR"
+    },
+    {
+      "partycode": "VG023",
+      "result": "38270.7900000005 CR"
+    },
+    {
+      "partycode": "BP112",
+      "result": "13031 DR"
+    },
+    {
+      "partycode": "MA160",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GG026",
+      "result": "193346.56999996863 CR"
+    },
+    {
+      "partycode": "VG026",
+      "result": "1645469.259999995 CR"
+    },
+    {
+      "partycode": "BU207",
+      "result": "8850 DR"
+    },
+    {
+      "partycode": "MA124",
+      "result": "8117 DR"
+    },
+    {
+      "partycode": "BG002",
+      "result": "2681 DR"
+    },
+    {
+      "partycode": "MA090",
+      "result": "2454 DR"
+    },
+    {
+      "partycode": "BD036",
+      "result": "71496 DR"
+    },
+    {
+      "partycode": "BK011",
+      "result": "94298 DR"
+    },
+    {
+      "partycode": "BK130",
+      "result": "2240 DR"
+    },
+    {
+      "partycode": "BU010",
+      "result": "20 DR"
+    },
+    {
+      "partycode": "SN049",
+      "result": "400 CR"
+    },
+    {
+      "partycode": "BP055",
+      "result": "5180 DR"
+    },
+    {
+      "partycode": "BS002",
+      "result": "20990 DR"
+    },
+    {
+      "partycode": "BU264",
+      "result": "10 DR"
+    },
+    {
+      "partycode": "BC082",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC031",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC029",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "BG009",
+      "result": "9894 DR"
+    },
+    {
+      "partycode": "MA171",
+      "result": "55050 DR"
+    },
+    {
+      "partycode": "OT006",
+      "result": "21455 DR"
+    },
+    {
+      "partycode": "BR010",
+      "result": "62486 DR"
+    },
+    {
+      "partycode": "BP002",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA088",
+      "result": "74364 DR"
+    },
+    {
+      "partycode": "BC004",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT054",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD001",
+      "result": "10000 DR"
+    },
+    {
+      "partycode": "BC235",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU016",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU254",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG040",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK021",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU019",
+      "result": "57578 DR"
+    },
+    {
+      "partycode": "BU080",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU173",
+      "result": "6132 CR"
+    },
+    {
+      "partycode": "BD017",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CX002",
+      "result": "28157.88999999999 CR"
+    },
+    {
+      "partycode": "GK147",
+      "result": "314089 DR"
+    },
+    {
+      "partycode": "LD005",
+      "result": "16912 DR"
+    },
+    {
+      "partycode": "KG029",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG096",
+      "result": "40329 DR"
+    },
+    {
+      "partycode": "LD130",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK001",
+      "result": "30475 DR"
+    },
+    {
+      "partycode": "BC230",
+      "result": "74325 DR"
+    },
+    {
+      "partycode": "BP001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP042",
+      "result": "1 DR"
+    },
+    {
+      "partycode": "BD011",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD009",
+      "result": "87280 DR"
+    },
+    {
+      "partycode": "LD013",
+      "result": "120 DR"
+    },
+    {
+      "partycode": "CT205",
+      "result": "1000113.4800000191 CR"
+    },
+    {
+      "partycode": "CT188",
+      "result": "3900 DR"
+    },
+    {
+      "partycode": "EE024",
+      "result": "3206152 DR"
+    },
+    {
+      "partycode": "MA173",
+      "result": "1699 DR"
+    },
+    {
+      "partycode": "BP004",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD047",
+      "result": "282031 DR"
+    },
+    {
+      "partycode": "BG004",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK190",
+      "result": "0.31000000052154064 DR"
+    },
+    {
+      "partycode": "BK265",
+      "result": "104979.79999999981 DR"
+    },
+    {
+      "partycode": "BK262",
+      "result": "30040 DR"
+    },
+    {
+      "partycode": "BK266",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK261",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK267",
+      "result": "21093 DR"
+    },
+    {
+      "partycode": "BK268",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK269",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK197",
+      "result": "22370 DR"
+    },
+    {
+      "partycode": "BK020",
+      "result": "55709 DR"
+    },
+    {
+      "partycode": "BK152",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK104",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BB009",
+      "result": "36578831.02999896 CR"
+    },
+    {
+      "partycode": "BK191",
+      "result": "332139 DR"
+    },
+    {
+      "partycode": "BB016",
+      "result": "754802 CR"
+    },
+    {
+      "partycode": "LD004",
+      "result": "15069 DR"
+    },
+    {
+      "partycode": "BR070",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP104",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU113",
+      "result": "172702 DR"
+    },
+    {
+      "partycode": "BU121",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD003",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK140",
+      "result": "2000 DR"
+    },
+    {
+      "partycode": "MK032",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU022",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU138",
+      "result": "70798 DR"
+    },
+    {
+      "partycode": "BU176",
+      "result": "12512 DR"
+    },
+    {
+      "partycode": "BU039",
+      "result": "20430 DR"
+    },
+    {
+      "partycode": "BS001",
+      "result": "5186 DR"
+    },
+    {
+      "partycode": "MA068",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC003",
+      "result": "95726 DR"
+    },
+    {
+      "partycode": "MA111",
+      "result": "1 CR"
+    },
+    {
+      "partycode": "MA125",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG018",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP006",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU194",
+      "result": "302128 DR"
+    },
+    {
+      "partycode": "BK073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK136",
+      "result": "33515 DR"
+    },
+    {
+      "partycode": "LD074",
+      "result": "21037 DR"
+    },
+    {
+      "partycode": "SB001",
+      "result": "266691.64000000805 DR"
+    },
+    {
+      "partycode": "SN005",
+      "result": "86835 DR"
+    },
+    {
+      "partycode": "BP154",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD204",
+      "result": "45 DR"
+    },
+    {
+      "partycode": "EE003",
+      "result": "166303.01000000106 DR"
+    },
+    {
+      "partycode": "EE016",
+      "result": "13160 DR"
+    },
+    {
+      "partycode": "EE056",
+      "result": "5720 DR"
+    },
+    {
+      "partycode": "EE031",
+      "result": "137766 DR"
+    },
+    {
+      "partycode": "BP010",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT092",
+      "result": "167 DR"
+    },
+    {
+      "partycode": "EE093",
+      "result": "96053.5 DR"
+    },
+    {
+      "partycode": "MA143",
+      "result": "176335 DR"
+    },
+    {
+      "partycode": "BU118",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK084",
+      "result": "18374 DR"
+    },
+    {
+      "partycode": "BK258",
+      "result": "40 CR"
+    },
+    {
+      "partycode": "BK270",
+      "result": "11201 DR"
+    },
+    {
+      "partycode": "MA009",
+      "result": "45 DR"
+    },
+    {
+      "partycode": "BK271",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG011",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU258",
+      "result": "23656 CR"
+    },
+    {
+      "partycode": "BR092",
+      "result": "42699 DR"
+    },
+    {
+      "partycode": "BR012",
+      "result": "10260 DR"
+    },
+    {
+      "partycode": "BG058",
+      "result": "8132 DR"
+    },
+    {
+      "partycode": "BU105",
+      "result": "9015 DR"
+    },
+    {
+      "partycode": "BU030",
+      "result": "19287 DR"
+    },
+    {
+      "partycode": "MA177",
+      "result": "3 DR"
+    },
+    {
+      "partycode": "BU035",
+      "result": "9390 DR"
+    },
+    {
+      "partycode": "BU008",
+      "result": "2005 DR"
+    },
+    {
+      "partycode": "BU132",
+      "result": "9710 DR"
+    },
+    {
+      "partycode": "SH001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK060",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH011",
+      "result": "53510 DR"
+    },
+    {
+      "partycode": "MK022",
+      "result": "20859 DR"
+    },
+    {
+      "partycode": "BC193",
+      "result": "20380 DR"
+    },
+    {
+      "partycode": "BC218",
+      "result": "15292 DR"
+    },
+    {
+      "partycode": "LD014",
+      "result": "21206 DR"
+    },
+    {
+      "partycode": "MA015",
+      "result": "14659 DR"
+    },
+    {
+      "partycode": "BC186",
+      "result": "28140 DR"
+    },
+    {
+      "partycode": "BU226",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC196",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC020",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD084",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD199",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC236",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC237",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC240",
+      "result": "39581 DR"
+    },
+    {
+      "partycode": "BU141",
+      "result": "48210 DR"
+    },
+    {
+      "partycode": "GK152",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA101",
+      "result": "4802 DR"
+    },
+    {
+      "partycode": "SH061",
+      "result": "6767 DR"
+    },
+    {
+      "partycode": "BU179",
+      "result": "16038 DR"
+    },
+    {
+      "partycode": "SN142",
+      "result": "10325 DR"
+    },
+    {
+      "partycode": "LD066",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "LD012",
+      "result": "23395 DR"
+    },
+    {
+      "partycode": "LD195",
+      "result": "762 DR"
+    },
+    {
+      "partycode": "LD011",
+      "result": "18619 DR"
+    },
+    {
+      "partycode": "BK233",
+      "result": "14380 DR"
+    },
+    {
+      "partycode": "BP119",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD089",
+      "result": "48967 DR"
+    },
+    {
+      "partycode": "LD034",
+      "result": "47048 DR"
+    },
+    {
+      "partycode": "BR104",
+      "result": "55077 DR"
+    },
+    {
+      "partycode": "BK210",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC050",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG064",
+      "result": "13602 DR"
+    },
+    {
+      "partycode": "EE034",
+      "result": "142389 DR"
+    },
+    {
+      "partycode": "BG039",
+      "result": "24 DR"
+    },
+    {
+      "partycode": "BK227",
+      "result": "23208 DR"
+    },
+    {
+      "partycode": "SN046",
+      "result": "32875 DR"
+    },
+    {
+      "partycode": "LD183",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU197",
+      "result": "681 CR"
+    },
+    {
+      "partycode": "SH088",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU240",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN137",
+      "result": "31153 DR"
+    },
+    {
+      "partycode": "BC023",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU013",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD135",
+      "result": "30646 DR"
+    },
+    {
+      "partycode": "BU155",
+      "result": "3982 DR"
+    },
+    {
+      "partycode": "BR026",
+      "result": "40450.630000000005 DR"
+    },
+    {
+      "partycode": "MA153",
+      "result": "60505 DR"
+    },
+    {
+      "partycode": "LD040",
+      "result": "33472 DR"
+    },
+    {
+      "partycode": "BU020",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA147",
+      "result": "27954 DR"
+    },
+    {
+      "partycode": "MA136",
+      "result": "7977 DR"
+    },
+    {
+      "partycode": "LD041",
+      "result": "43260 DR"
+    },
+    {
+      "partycode": "BC203",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC016",
+      "result": "9925 DR"
+    },
+    {
+      "partycode": "BP177",
+      "result": "563919.1200000001 DR"
+    },
+    {
+      "partycode": "BS017",
+      "result": "192 DR"
+    },
+    {
+      "partycode": "BK232",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK027",
+      "result": "8658 DR"
+    },
+    {
+      "partycode": "BU122",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA176",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA167",
+      "result": "1 CR"
+    },
+    {
+      "partycode": "BP019",
+      "result": "833 DR"
+    },
+    {
+      "partycode": "BU053",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP029",
+      "result": "163443 DR"
+    },
+    {
+      "partycode": "OT056",
+      "result": "96 DR"
+    },
+    {
+      "partycode": "GK137",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK244",
+      "result": "16720 DR"
+    },
+    {
+      "partycode": "BK221",
+      "result": "8050 DR"
+    },
+    {
+      "partycode": "BK241",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD048",
+      "result": "100000 CR"
+    },
+    {
+      "partycode": "BG006",
+      "result": "17989 DR"
+    },
+    {
+      "partycode": "MA010",
+      "result": "2100 DR"
+    },
+    {
+      "partycode": "BU045",
+      "result": "6205 DR"
+    },
+    {
+      "partycode": "BU126",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU257",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP163",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "VI015",
+      "result": "211303.11000000004 DR"
+    },
+    {
+      "partycode": "VI016",
+      "result": "9669625.4 DR"
+    },
+    {
+      "partycode": "CT113",
+      "result": "1556132.0000001788 DR"
+    },
+    {
+      "partycode": "VI014",
+      "result": "653934.41 DR"
+    },
+    {
+      "partycode": "BU031",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN140",
+      "result": "78346 DR"
+    },
+    {
+      "partycode": "AG023",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA003",
+      "result": "86011 DR"
+    },
+    {
+      "partycode": "MK026",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU215",
+      "result": "32210 DR"
+    },
+    {
+      "partycode": "BK078",
+      "result": "12384 DR"
+    },
+    {
+      "partycode": "AG028",
+      "result": "46432 CR"
+    },
+    {
+      "partycode": "BK005",
+      "result": "22820 DR"
+    },
+    {
+      "partycode": "BG049",
+      "result": "69221 DR"
+    },
+    {
+      "partycode": "SH060",
+      "result": "12792 DR"
+    },
+    {
+      "partycode": "LD201",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC089",
+      "result": "153724 DR"
+    },
+    {
+      "partycode": "LD160",
+      "result": "9776 DR"
+    },
+    {
+      "partycode": "BC129",
+      "result": "465 CR"
+    },
+    {
+      "partycode": "BC221",
+      "result": "89480 DR"
+    },
+    {
+      "partycode": "SN061",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE108",
+      "result": "332731.29999999993 DR"
+    },
+    {
+      "partycode": "EE027",
+      "result": "68351.44 DR"
+    },
+    {
+      "partycode": "BK251",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE099",
+      "result": "5880 DR"
+    },
+    {
+      "partycode": "EE018",
+      "result": "72335 DR"
+    },
+    {
+      "partycode": "BG066",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK030",
+      "result": "50460 DR"
+    },
+    {
+      "partycode": "SN086",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR103",
+      "result": "60739 DR"
+    },
+    {
+      "partycode": "BU009",
+      "result": "12160 DR"
+    },
+    {
+      "partycode": "CT229",
+      "result": "661591.8999999985 DR"
+    },
+    {
+      "partycode": "BD002",
+      "result": "9182.609999999986 DR"
+    },
+    {
+      "partycode": "OT057",
+      "result": "3157 DR"
+    },
+    {
+      "partycode": "BU014",
+      "result": "58213.47999999998 DR"
+    },
+    {
+      "partycode": "BC064",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU196",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD015",
+      "result": "31400 DR"
+    },
+    {
+      "partycode": "BP142",
+      "result": "809.0200000000186 DR"
+    },
+    {
+      "partycode": "CT234",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CL021",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK255",
+      "result": "39750 DR"
+    },
+    {
+      "partycode": "BK260",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK272",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU252",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN143",
+      "result": "81968 DR"
+    },
+    {
+      "partycode": "VI020",
+      "result": "2762013.1800000006 DR"
+    },
+    {
+      "partycode": "SH090",
+      "result": "1 DR"
+    },
+    {
+      "partycode": "BP041",
+      "result": "16106.080000000016 DR"
+    },
+    {
+      "partycode": "BP009",
+      "result": "267 DR"
+    },
+    {
+      "partycode": "BP183",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK025",
+      "result": "35213 DR"
+    },
+    {
+      "partycode": "BP133",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK273",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH055",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG022",
+      "result": "6186 DR"
+    },
+    {
+      "partycode": "BC068",
+      "result": "4940 DR"
+    },
+    {
+      "partycode": "BU218",
+      "result": "33264 DR"
+    },
+    {
+      "partycode": "LD050",
+      "result": "26846 DR"
+    },
+    {
+      "partycode": "LD024",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD100",
+      "result": "5000 DR"
+    },
+    {
+      "partycode": "BC057",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU217",
+      "result": "10500 DR"
+    },
+    {
+      "partycode": "LD205",
+      "result": "75496 DR"
+    },
+    {
+      "partycode": "LD093",
+      "result": "10520 DR"
+    },
+    {
+      "partycode": "BU171",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA016",
+      "result": "14352 DR"
+    },
+    {
+      "partycode": "LD202",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD072",
+      "result": "15900 DR"
+    },
+    {
+      "partycode": "LD161",
+      "result": "572 DR"
+    },
+    {
+      "partycode": "BK139",
+      "result": "104 DR"
+    },
+    {
+      "partycode": "BK263",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK256",
+      "result": "31400 DR"
+    },
+    {
+      "partycode": "BK274",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK278",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK279",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK276",
+      "result": "17609 DR"
+    },
+    {
+      "partycode": "BK277",
+      "result": "4560 DR"
+    },
+    {
+      "partycode": "BK257",
+      "result": "12291 DR"
+    },
+    {
+      "partycode": "BC238",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK275",
+      "result": "20 DR"
+    },
+    {
+      "partycode": "BK280",
+      "result": "8900 DR"
+    },
+    {
+      "partycode": "BK259",
+      "result": "12556 DR"
+    },
+    {
+      "partycode": "SH070",
+      "result": "3215 DR"
+    },
+    {
+      "partycode": "SN084",
+      "result": "18549 DR"
+    },
+    {
+      "partycode": "BU151",
+      "result": "27060 DR"
+    },
+    {
+      "partycode": "BU266",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG027",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK131",
+      "result": "222154 DR"
+    },
+    {
+      "partycode": "MA021",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC229",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH083",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK029",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG042",
+      "result": "3587 DR"
+    },
+    {
+      "partycode": "BP030",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK142",
+      "result": "66054 DR"
+    },
+    {
+      "partycode": "LD079",
+      "result": "42718 DR"
+    },
+    {
+      "partycode": "CT175",
+      "result": "122157 DR"
+    },
+    {
+      "partycode": "BU041",
+      "result": "55479.78999999998 DR"
+    },
+    {
+      "partycode": "BP051",
+      "result": "10932 DR"
+    },
+    {
+      "partycode": "SN105",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD006",
+      "result": "49904 DR"
+    },
+    {
+      "partycode": "BU255",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU038",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN109",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE044",
+      "result": "2350 DR"
+    },
+    {
+      "partycode": "MA129",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC183",
+      "result": "200 DR"
+    },
+    {
+      "partycode": "BC107",
+      "result": "72990 DR"
+    },
+    {
+      "partycode": "BC001",
+      "result": "8884 DR"
+    },
+    {
+      "partycode": "LD108",
+      "result": "72941 DR"
+    },
+    {
+      "partycode": "LD042",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH084",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT233",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK110",
+      "result": "38740 DR"
+    },
+    {
+      "partycode": "BS063",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK007",
+      "result": "43769 DR"
+    },
+    {
+      "partycode": "BK016",
+      "result": "22000 DR"
+    },
+    {
+      "partycode": "BK282",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK023",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS020",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG021",
+      "result": "4099 DR"
+    },
+    {
+      "partycode": "AD007",
+      "result": "18400 DR"
+    },
+    {
+      "partycode": "SH003",
+      "result": "38500 DR"
+    },
+    {
+      "partycode": "BK205",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS016",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS059",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD006",
+      "result": "68450 DR"
+    },
+    {
+      "partycode": "BC035",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG046",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC149",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC211",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK041",
+      "result": "4406 DR"
+    },
+    {
+      "partycode": "LD061",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK220",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC202",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC022",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC116",
+      "result": "13050 DR"
+    },
+    {
+      "partycode": "BK214",
+      "result": "49284 DR"
+    },
+    {
+      "partycode": "BK047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK027",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK252",
+      "result": "1 DR"
+    },
+    {
+      "partycode": "BK174",
+      "result": "30296 DR"
+    },
+    {
+      "partycode": "BK006",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK219",
+      "result": "4000 DR"
+    },
+    {
+      "partycode": "BK171",
+      "result": "8000 DR"
+    },
+    {
+      "partycode": "BK116",
+      "result": "13602 DR"
+    },
+    {
+      "partycode": "BK031",
+      "result": "10980 DR"
+    },
+    {
+      "partycode": "BK055",
+      "result": "1 DR"
+    },
+    {
+      "partycode": "KG007",
+      "result": "30620 DR"
+    },
+    {
+      "partycode": "BC159",
+      "result": "87965 DR"
+    },
+    {
+      "partycode": "SN067",
+      "result": "611 DR"
+    },
+    {
+      "partycode": "EE045",
+      "result": "14987 DR"
+    },
+    {
+      "partycode": "EE033",
+      "result": "978534 DR"
+    },
+    {
+      "partycode": "EE053",
+      "result": "900 DR"
+    },
+    {
+      "partycode": "DT031",
+      "result": "92000 DR"
+    },
+    {
+      "partycode": "KG026",
+      "result": "5360 DR"
+    },
+    {
+      "partycode": "KG016",
+      "result": "6497 DR"
+    },
+    {
+      "partycode": "LD193",
+      "result": "11180 DR"
+    },
+    {
+      "partycode": "LD115",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG040",
+      "result": "1022 DR"
+    },
+    {
+      "partycode": "LD176",
+      "result": "20800 DR"
+    },
+    {
+      "partycode": "LD019",
+      "result": "13401 DR"
+    },
+    {
+      "partycode": "CT235",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH008",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU005",
+      "result": "12512.979999999996 DR"
+    },
+    {
+      "partycode": "BC060",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT058",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP043",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "BP139",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK015",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC208",
+      "result": "65938 DR"
+    },
+    {
+      "partycode": "BU159",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG067",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE007",
+      "result": "3948081 DR"
+    },
+    {
+      "partycode": "LD111",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK245",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK248",
+      "result": "29911 DR"
+    },
+    {
+      "partycode": "BK283",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK264",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "BK222",
+      "result": "61990 DR"
+    },
+    {
+      "partycode": "LD179",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK013",
+      "result": "75203 DR"
+    },
+    {
+      "partycode": "BC018",
+      "result": "11880 DR"
+    },
+    {
+      "partycode": "BU043",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU268",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC013",
+      "result": "192 DR"
+    },
+    {
+      "partycode": "FA012",
+      "result": "118288.09 DR"
+    },
+    {
+      "partycode": "VI027",
+      "result": "73433.14000000003 DR"
+    },
+    {
+      "partycode": "BC190",
+      "result": "143010 DR"
+    },
+    {
+      "partycode": "GK140",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC028",
+      "result": "26477 DR"
+    },
+    {
+      "partycode": "BU200",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK090",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP152",
+      "result": "11676 DR"
+    },
+    {
+      "partycode": "BU102",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU112",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU162",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK030",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP171",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK115",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC146",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU066",
+      "result": "9151 DR"
+    },
+    {
+      "partycode": "CT182",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT023",
+      "result": "0.10999999986961484 DR"
+    },
+    {
+      "partycode": "BP151",
+      "result": "23563 DR"
+    },
+    {
+      "partycode": "SN122",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD129",
+      "result": "85 DR"
+    },
+    {
+      "partycode": "LD143",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG006",
+      "result": "4600 DR"
+    },
+    {
+      "partycode": "KG094",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG017",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG052",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG083",
+      "result": "200 DR"
+    },
+    {
+      "partycode": "KG088",
+      "result": "177 DR"
+    },
+    {
+      "partycode": "MA007",
+      "result": "10884 DR"
+    },
+    {
+      "partycode": "BU241",
+      "result": "1133 DR"
+    },
+    {
+      "partycode": "BC224",
+      "result": "10240 DR"
+    },
+    {
+      "partycode": "AD009",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD194",
+      "result": "153 DR"
+    },
+    {
+      "partycode": "LD001",
+      "result": "3882 DR"
+    },
+    {
+      "partycode": "BS003",
+      "result": "7907 DR"
+    },
+    {
+      "partycode": "BP128",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC094",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN045",
+      "result": "32032 DR"
+    },
+    {
+      "partycode": "BP129",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC039",
+      "result": "28772 DR"
+    },
+    {
+      "partycode": "BC008",
+      "result": "30000 DR"
+    },
+    {
+      "partycode": "OT059",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK103",
+      "result": "4467.5 DR"
+    },
+    {
+      "partycode": "BK039",
+      "result": "22410 DR"
+    },
+    {
+      "partycode": "BK250",
+      "result": "17720 DR"
+    },
+    {
+      "partycode": "BK202",
+      "result": "1760 DR"
+    },
+    {
+      "partycode": "MK001",
+      "result": "5872 DR"
+    },
+    {
+      "partycode": "MA037",
+      "result": "8529 DR"
+    },
+    {
+      "partycode": "BP130",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD203",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE105",
+      "result": "56066.33 DR"
+    },
+    {
+      "partycode": "BR118",
+      "result": "54697 DR"
+    },
+    {
+      "partycode": "KG076",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE042",
+      "result": "625 DR"
+    },
+    {
+      "partycode": "EE101",
+      "result": "1700 DR"
+    },
+    {
+      "partycode": "BC206",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD101",
+      "result": "56765 DR"
+    },
+    {
+      "partycode": "BC005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK049",
+      "result": "47222 DR"
+    },
+    {
+      "partycode": "BR120",
+      "result": "1227 DR"
+    },
+    {
+      "partycode": "BK281",
+      "result": "14210 DR"
+    },
+    {
+      "partycode": "BU135",
+      "result": "4512 DR"
+    },
+    {
+      "partycode": "BU216",
+      "result": "10 CR"
+    },
+    {
+      "partycode": "AD008",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN057",
+      "result": "48923 DR"
+    },
+    {
+      "partycode": "BU261",
+      "result": "1248 DR"
+    },
+    {
+      "partycode": "SH021",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD091",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD090",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD173",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD032",
+      "result": "6420 DR"
+    },
+    {
+      "partycode": "LD039",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC030",
+      "result": "58031 DR"
+    },
+    {
+      "partycode": "BC056",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC234",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD023",
+      "result": "7187 DR"
+    },
+    {
+      "partycode": "LD065",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK044",
+      "result": "200 DR"
+    },
+    {
+      "partycode": "LD096",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC216",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC222",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR076",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU007",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU056",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN038",
+      "result": "90 DR"
+    },
+    {
+      "partycode": "LD046",
+      "result": "7515 DR"
+    },
+    {
+      "partycode": "BK237",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU253",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK242",
+      "result": "27261 DR"
+    },
+    {
+      "partycode": "BC074",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC200",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD142",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD059",
+      "result": "6914 DR"
+    },
+    {
+      "partycode": "BR112",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC150",
+      "result": "2304 DR"
+    },
+    {
+      "partycode": "SN097",
+      "result": "67572 DR"
+    },
+    {
+      "partycode": "BU250",
+      "result": "27130 DR"
+    },
+    {
+      "partycode": "BK236",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP156",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA121",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK285",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK286",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK287",
+      "result": "50 DR"
+    },
+    {
+      "partycode": "BK218",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH002",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK240",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC077",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC228",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC225",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD158",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GG021",
+      "result": "2222.3500000000004 DR"
+    },
+    {
+      "partycode": "VG021",
+      "result": "209.60000000000002 CR"
+    },
+    {
+      "partycode": "GK088",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "VI026",
+      "result": "1472742.4399999997 DR"
+    },
+    {
+      "partycode": "CT033",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE102",
+      "result": "51342 DR"
+    },
+    {
+      "partycode": "BU109",
+      "result": "3000 CR"
+    },
+    {
+      "partycode": "BS062",
+      "result": "5708 DR"
+    },
+    {
+      "partycode": "BK284",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE110",
+      "result": "36343 DR"
+    },
+    {
+      "partycode": "CL017",
+      "result": "1917897.76 DR"
+    },
+    {
+      "partycode": "SH059",
+      "result": "43044 DR"
+    },
+    {
+      "partycode": "SH006",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SB008",
+      "result": "437101.74999999814 DR"
+    },
+    {
+      "partycode": "BK126",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BB012",
+      "result": "2600 DR"
+    },
+    {
+      "partycode": "BB015",
+      "result": "691438 CR"
+    },
+    {
+      "partycode": "BB014",
+      "result": "4665639.15 CR"
+    },
+    {
+      "partycode": "BC213",
+      "result": "2 CR"
+    },
+    {
+      "partycode": "KG011",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG012",
+      "result": "300 DR"
+    },
+    {
+      "partycode": "BC002",
+      "result": "18040 DR"
+    },
+    {
+      "partycode": "GK130",
+      "result": "98281 DR"
+    },
+    {
+      "partycode": "KG080",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG043",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG086",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "DZ002",
+      "result": "31950 CR"
+    },
+    {
+      "partycode": "BK062",
+      "result": "147090 DR"
+    },
+    {
+      "partycode": "BK289",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "GK154",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC053",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG024",
+      "result": "2 CR"
+    },
+    {
+      "partycode": "BP116",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT154",
+      "result": "95500 CR"
+    },
+    {
+      "partycode": "BC118",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE030",
+      "result": "122287 DR"
+    },
+    {
+      "partycode": "MA166",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK293",
+      "result": "6000 DR"
+    },
+    {
+      "partycode": "BK292",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU106",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR046",
+      "result": "1528 DR"
+    },
+    {
+      "partycode": "BR018",
+      "result": "9050 DR"
+    },
+    {
+      "partycode": "BR050",
+      "result": "9050 DR"
+    },
+    {
+      "partycode": "BR024",
+      "result": "28385 DR"
+    },
+    {
+      "partycode": "BR020",
+      "result": "20943 DR"
+    },
+    {
+      "partycode": "BR098",
+      "result": "40000 DR"
+    },
+    {
+      "partycode": "BR005",
+      "result": "31879.719999999972 DR"
+    },
+    {
+      "partycode": "BR109",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR049",
+      "result": "15750 DR"
+    },
+    {
+      "partycode": "BR110",
+      "result": "8143 DR"
+    },
+    {
+      "partycode": "BR090",
+      "result": "36997 DR"
+    },
+    {
+      "partycode": "DZ005",
+      "result": "80392.07999999999 CR"
+    },
+    {
+      "partycode": "BG062",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK037",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP132",
+      "result": "7022 DR"
+    },
+    {
+      "partycode": "BC110",
+      "result": "24662 DR"
+    },
+    {
+      "partycode": "BP131",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR006",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU269",
+      "result": "177 DR"
+    },
+    {
+      "partycode": "VI010",
+      "result": "2125348.25 DR"
+    },
+    {
+      "partycode": "CT204",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT168",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC104",
+      "result": "4028 DR"
+    },
+    {
+      "partycode": "BK294",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK291",
+      "result": "1 CR"
+    },
+    {
+      "partycode": "BK295",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP157",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD146",
+      "result": "16400 DR"
+    },
+    {
+      "partycode": "FA017",
+      "result": "2019990.36 DR"
+    },
+    {
+      "partycode": "EE032",
+      "result": "48455.65 DR"
+    },
+    {
+      "partycode": "BK290",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG030",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "DL003",
+      "result": "164000 DR"
+    },
+    {
+      "partycode": "LD196",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AA001",
+      "result": "10891886.299999999 CR"
+    },
+    {
+      "partycode": "CT197",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE054",
+      "result": "76083.79000000001 DR"
+    },
+    {
+      "partycode": "SB007",
+      "result": "30078.04 DR"
+    },
+    {
+      "partycode": "CT231",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "VG022",
+      "result": "285 DR"
+    },
+    {
+      "partycode": "VG024",
+      "result": "448.04999999999995 DR"
+    },
+    {
+      "partycode": "EE084",
+      "result": "3842306.620000003 CR"
+    },
+    {
+      "partycode": "MA006",
+      "result": "12199 DR"
+    },
+    {
+      "partycode": "CT068",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK296",
+      "result": "313 CR"
+    },
+    {
+      "partycode": "EE094",
+      "result": "181138 DR"
+    },
+    {
+      "partycode": "OT049",
+      "result": "120197 DR"
+    },
+    {
+      "partycode": "DT073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT060",
+      "result": "2196 DR"
+    },
+    {
+      "partycode": "EE076",
+      "result": "105400 DR"
+    },
+    {
+      "partycode": "BK299",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK298",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD207",
+      "result": "23460 DR"
+    },
+    {
+      "partycode": "BK249",
+      "result": "1164 CR"
+    },
+    {
+      "partycode": "LD062",
+      "result": "11536 DR"
+    },
+    {
+      "partycode": "BK297",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU271",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD010",
+      "result": "134 DR"
+    },
+    {
+      "partycode": "BK034",
+      "result": "177 DR"
+    },
+    {
+      "partycode": "GK070",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG035",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD004",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN062",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE098",
+      "result": "603142.51 CR"
+    },
+    {
+      "partycode": "MA042",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU193",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC212",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD104",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "BC027",
+      "result": "25330 DR"
+    },
+    {
+      "partycode": "BU204",
+      "result": "13932 DR"
+    },
+    {
+      "partycode": "BK051",
+      "result": "47300 DR"
+    },
+    {
+      "partycode": "SN047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD186",
+      "result": "17164 DR"
+    },
+    {
+      "partycode": "LD045",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC220",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU208",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD031",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC040",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC209",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK301",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD013",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG060",
+      "result": "2233 DR"
+    },
+    {
+      "partycode": "BK180",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP121",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC034",
+      "result": "58 DR"
+    },
+    {
+      "partycode": "BR001",
+      "result": "2300 DR"
+    },
+    {
+      "partycode": "GK138",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG043",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE020",
+      "result": "5550 DR"
+    },
+    {
+      "partycode": "AG006",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC063",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD208",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU164",
+      "result": "14681 DR"
+    },
+    {
+      "partycode": "KG057",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK119",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD020",
+      "result": "13758 DR"
+    },
+    {
+      "partycode": "BP180",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC026",
+      "result": "4000 CR"
+    },
+    {
+      "partycode": "BC239",
+      "result": "4480 DR"
+    },
+    {
+      "partycode": "GK057",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD157",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA133",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA091",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU152",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK024",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG099",
+      "result": "4370 DR"
+    },
+    {
+      "partycode": "MA134",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH022",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH081",
+      "result": "139812 DR"
+    },
+    {
+      "partycode": "BU136",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP181",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD182",
+      "result": "1056 DR"
+    },
+    {
+      "partycode": "LD175",
+      "result": "3358 DR"
+    },
+    {
+      "partycode": "LD192",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR021",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR019",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR033",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK144",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC215",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA126",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK153",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK093",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC192",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD149",
+      "result": "23041 DR"
+    },
+    {
+      "partycode": "BC182",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC071",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK300",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG098",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD131",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG038",
+      "result": "4400 DR"
+    },
+    {
+      "partycode": "KG009",
+      "result": "2723 DR"
+    },
+    {
+      "partycode": "KG042",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG033",
+      "result": "20 DR"
+    },
+    {
+      "partycode": "KG050",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG063",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG092",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK004",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU127",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD041",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK148",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD137",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU011",
+      "result": "179351 DR"
+    },
+    {
+      "partycode": "BU260",
+      "result": "3825 DR"
+    },
+    {
+      "partycode": "CH019",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK302",
+      "result": "18590 DR"
+    },
+    {
+      "partycode": "BK313",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK304",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK305",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE092",
+      "result": "500 DR"
+    },
+    {
+      "partycode": "CT097",
+      "result": "1512 DR"
+    },
+    {
+      "partycode": "BP005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK306",
+      "result": "1100 DR"
+    },
+    {
+      "partycode": "BK307",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG044",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE100",
+      "result": "13910.720000000001 CR"
+    },
+    {
+      "partycode": "EE073",
+      "result": "17681.22 CR"
+    },
+    {
+      "partycode": "KG100",
+      "result": "80 DR"
+    },
+    {
+      "partycode": "GK073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE095",
+      "result": "1295 DR"
+    },
+    {
+      "partycode": "EE022",
+      "result": "177099 DR"
+    },
+    {
+      "partycode": "MA169",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG052",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS006",
+      "result": "6512 DR"
+    },
+    {
+      "partycode": "BC128",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG069",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD178",
+      "result": "14136 DR"
+    },
+    {
+      "partycode": "BU094",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU002",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK156",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU055",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH091",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK312",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK310",
+      "result": "50 CR"
+    },
+    {
+      "partycode": "CL023",
+      "result": "164057 CR"
+    },
+    {
+      "partycode": "BU272",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK022",
+      "result": "15462 DR"
+    },
+    {
+      "partycode": "BK187",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK314",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT063",
+      "result": "6497 CR"
+    },
+    {
+      "partycode": "AG005",
+      "result": "30120 DR"
+    },
+    {
+      "partycode": "DT010",
+      "result": "32643.999999999996 CR"
+    },
+    {
+      "partycode": "CT236",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE068",
+      "result": "21492.71 DR"
+    },
+    {
+      "partycode": "VG017",
+      "result": "8699.87 DR"
+    },
+    {
+      "partycode": "CT237",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT238",
+      "result": "1250000 CR"
+    },
+    {
+      "partycode": "LD152",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP172",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG036",
+      "result": "2312 DR"
+    },
+    {
+      "partycode": "BK201",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD010",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS067",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT043",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE035",
+      "result": "14890.52 DR"
+    },
+    {
+      "partycode": "VI011",
+      "result": "285 DR"
+    },
+    {
+      "partycode": "CT239",
+      "result": "2 CR"
+    },
+    {
+      "partycode": "BR030",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD012",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT048",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK060",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK317",
+      "result": "6200 DR"
+    },
+    {
+      "partycode": "BP175",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG095",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU153",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK318",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK160",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE057",
+      "result": "4811.26 DR"
+    },
+    {
+      "partycode": "EE107",
+      "result": "13487.05 CR"
+    },
+    {
+      "partycode": "BK213",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC241",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS066",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE002",
+      "result": "80 DR"
+    },
+    {
+      "partycode": "GG009",
+      "result": "42061.219999999994 DR"
+    },
+    {
+      "partycode": "BK316",
+      "result": "15920 DR"
+    },
+    {
+      "partycode": "BC180",
+      "result": "7046 DR"
+    },
+    {
+      "partycode": "BP184",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG025",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD190",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD211",
+      "result": "748 DR"
+    },
+    {
+      "partycode": "BU177",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "VG011",
+      "result": "540 DR"
+    },
+    {
+      "partycode": "DZ004",
+      "result": "5474.240000000002 DR"
+    },
+    {
+      "partycode": "DT024",
+      "result": "1.4551915228366852e-11 CR"
+    },
+    {
+      "partycode": "FA018",
+      "result": "597482 DR"
+    },
+    {
+      "partycode": "OT064",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC012",
+      "result": "6300 DR"
+    },
+    {
+      "partycode": "DT001",
+      "result": "92471 DR"
+    },
+    {
+      "partycode": "DT005",
+      "result": "2055 DR"
+    },
+    {
+      "partycode": "FC001",
+      "result": "2000 DR"
+    },
+    {
+      "partycode": "FC002",
+      "result": "10000 DR"
+    },
+    {
+      "partycode": "FC003",
+      "result": "3000 DR"
+    },
+    {
+      "partycode": "CL009",
+      "result": "2759862.36 CR"
+    },
+    {
+      "partycode": "FA001",
+      "result": "186436.25 DR"
+    },
+    {
+      "partycode": "JJ001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "DL002",
+      "result": "800 DR"
+    },
+    {
+      "partycode": "MA019",
+      "result": "1384 DR"
+    },
+    {
+      "partycode": "FA002",
+      "result": "19987.54 DR"
+    },
+    {
+      "partycode": "FA003",
+      "result": "628626.11 DR"
+    },
+    {
+      "partycode": "GK032",
+      "result": "5606 DR"
+    },
+    {
+      "partycode": "MA074",
+      "result": "6000 DR"
+    },
+    {
+      "partycode": "MA075",
+      "result": "4668 DR"
+    },
+    {
+      "partycode": "DT021",
+      "result": "284160 CR"
+    },
+    {
+      "partycode": "CC015",
+      "result": "3680 DR"
+    },
+    {
+      "partycode": "FA005",
+      "result": "53687.58 DR"
+    },
+    {
+      "partycode": "BP097",
+      "result": "8850 DR"
+    },
+    {
+      "partycode": "MA106",
+      "result": "2351 DR"
+    },
+    {
+      "partycode": "FA006",
+      "result": "7505.89 DR"
+    },
+    {
+      "partycode": "CC014",
+      "result": "20000 DR"
+    },
+    {
+      "partycode": "FA007",
+      "result": "88691.17 CR"
+    },
+    {
+      "partycode": "FA008",
+      "result": "117264.25 DR"
+    },
+    {
+      "partycode": "CT054",
+      "result": "31686.76999999999 DR"
+    },
+    {
+      "partycode": "FA009",
+      "result": "36798.04 DR"
+    },
+    {
+      "partycode": "BU123",
+      "result": "4326.32 DR"
+    },
+    {
+      "partycode": "FC010",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU100",
+      "result": "56731 DR"
+    },
+    {
+      "partycode": "BU120",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "FA013",
+      "result": "2277.81 DR"
+    },
+    {
+      "partycode": "CT064",
+      "result": "400000 DR"
+    },
+    {
+      "partycode": "BR075",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK196",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD134",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "FC019",
+      "result": "10000 DR"
+    },
+    {
+      "partycode": "BP141",
+      "result": "38178 DR"
+    },
+    {
+      "partycode": "GG011",
+      "result": "5807.03 DR"
+    },
+    {
+      "partycode": "FC013",
+      "result": "941125 DR"
+    },
+    {
+      "partycode": "BU206",
+      "result": "105850 DR"
+    },
+    {
+      "partycode": "GG019",
+      "result": "416.52 DR"
+    },
+    {
+      "partycode": "BU210",
+      "result": "9000 DR"
+    },
+    {
+      "partycode": "FA019",
+      "result": "14743293.35 DR"
+    },
+    {
+      "partycode": "SB004",
+      "result": "1462.54 DR"
+    },
+    {
+      "partycode": "FC014",
+      "result": "472488 DR"
+    },
+    {
+      "partycode": "FA020",
+      "result": "25291.2 DR"
+    },
+    {
+      "partycode": "GG022",
+      "result": "1199.01 DR"
+    },
+    {
+      "partycode": "DT061",
+      "result": "151000 DR"
+    },
+    {
+      "partycode": "CT093",
+      "result": "7411 DR"
+    },
+    {
+      "partycode": "SB005",
+      "result": "27830 DR"
+    },
+    {
+      "partycode": "BP146",
+      "result": "3763 DR"
+    },
+    {
+      "partycode": "CT096",
+      "result": "1647.1 DR"
+    },
+    {
+      "partycode": "GG025",
+      "result": "8354.09 DR"
+    },
+    {
+      "partycode": "MA148",
+      "result": "5000 CR"
+    },
+    {
+      "partycode": "CT109",
+      "result": "4000 DR"
+    },
+    {
+      "partycode": "BU236",
+      "result": "37964.26 DR"
+    },
+    {
+      "partycode": "FA022",
+      "result": "62651.59 DR"
+    },
+    {
+      "partycode": "FC024",
+      "result": "11000 DR"
+    },
+    {
+      "partycode": "CT146",
+      "result": "9500 CR"
+    },
+    {
+      "partycode": "DZ001",
+      "result": "305989.18 DR"
+    },
+    {
+      "partycode": "FC020",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT167",
+      "result": "0.47999999998137355 CR"
+    },
+    {
+      "partycode": "FA023",
+      "result": "59447.86 DR"
+    },
+    {
+      "partycode": "FA024",
+      "result": "993869.46 DR"
+    },
+    {
+      "partycode": "FA025",
+      "result": "6796.4 DR"
+    },
+    {
+      "partycode": "BG061",
+      "result": "3545 DR"
+    },
+    {
+      "partycode": "FC021",
+      "result": "10000 DR"
+    },
+    {
+      "partycode": "OT052",
+      "result": "42000 DR"
+    },
+    {
+      "partycode": "FC023",
+      "result": "696131 DR"
+    },
+    {
+      "partycode": "SN138",
+      "result": "2420 DR"
+    },
+    {
+      "partycode": "CT183",
+      "result": "100000 DR"
+    },
+    {
+      "partycode": "FA026",
+      "result": "779896.64 DR"
+    },
+    {
+      "partycode": "BU265",
+      "result": "3038 DR"
+    },
+    {
+      "partycode": "FA027",
+      "result": "1984132 DR"
+    },
+    {
+      "partycode": "FA028",
+      "result": "4046040 DR"
+    },
+    {
+      "partycode": "FA029",
+      "result": "1600000 DR"
+    },
+    {
+      "partycode": "FC025",
+      "result": "400000 DR"
+    },
+    {
+      "partycode": "DZ007",
+      "result": "19016 DR"
+    },
+    {
+      "partycode": "AD019",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK159",
+      "result": "1212 DR"
+    },
+    {
+      "partycode": "BK311",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG022",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT178",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE059",
+      "result": "1259 DR"
+    },
+    {
+      "partycode": "EE017",
+      "result": "1000 DR"
+    },
+    {
+      "partycode": "BK194",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT240",
+      "result": "40000 DR"
+    },
+    {
+      "partycode": "LD213",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN139",
+      "result": "1 CR"
+    },
+    {
+      "partycode": "BC111",
+      "result": "1 CR"
+    },
+    {
+      "partycode": "GK157",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC242",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP186",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC125",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR116",
+      "result": "9050 DR"
+    },
+    {
+      "partycode": "CT203",
+      "result": "4 CR"
+    },
+    {
+      "partycode": "EE021",
+      "result": "41858.61 DR"
+    },
+    {
+      "partycode": "CT241",
+      "result": "7500 CR"
+    },
+    {
+      "partycode": "MA183",
+      "result": "0.33999999999650754 CR"
+    },
+    {
+      "partycode": "CT193",
+      "result": "30000 DR"
+    },
+    {
+      "partycode": "CT223",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR115",
+      "result": "4525 DR"
+    },
+    {
+      "partycode": "EE067",
+      "result": "950 DR"
+    },
+    {
+      "partycode": "EE047",
+      "result": "1300 DR"
+    },
+    {
+      "partycode": "BU076",
+      "result": "28777 DR"
+    },
+    {
+      "partycode": "BK228",
+      "result": "90 DR"
+    },
+    {
+      "partycode": "CH008",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD212",
+      "result": "2026 DR"
+    },
+    {
+      "partycode": "BU001",
+      "result": "1 CR"
+    },
+    {
+      "partycode": "BK321",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK049",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK320",
+      "result": "10880 DR"
+    },
+    {
+      "partycode": "BK322",
+      "result": "13565 DR"
+    },
+    {
+      "partycode": "BK225",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA182",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK323",
+      "result": "276 DR"
+    },
+    {
+      "partycode": "SN112",
+      "result": "39291 DR"
+    },
+    {
+      "partycode": "GK160",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR023",
+      "result": "4600 DR"
+    },
+    {
+      "partycode": "SN149",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD076",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK325",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG035",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT220",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE069",
+      "result": "15974.66 DR"
+    },
+    {
+      "partycode": "MA184",
+      "result": "9223 DR"
+    },
+    {
+      "partycode": "BK319",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK315",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP169",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK326",
+      "result": "2232 DR"
+    },
+    {
+      "partycode": "LD085",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG003",
+      "result": "14906 DR"
+    },
+    {
+      "partycode": "GK162",
+      "result": "5 DR"
+    },
+    {
+      "partycode": "EE040",
+      "result": "17320 DR"
+    },
+    {
+      "partycode": "EE078",
+      "result": "949 DR"
+    },
+    {
+      "partycode": "CT194",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU184",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK054",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE052",
+      "result": "10850 DR"
+    },
+    {
+      "partycode": "CT242",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK011",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK022",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK110",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT243",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT244",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK329",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA151",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU277",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT065",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD034",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT245",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK047",
+      "result": "4980 DR"
+    },
+    {
+      "partycode": "AD036",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD037",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU276",
+      "result": "309 DR"
+    },
+    {
+      "partycode": "BR051",
+      "result": "7132 DR"
+    },
+    {
+      "partycode": "CT246",
+      "result": "5897 CR"
+    },
+    {
+      "partycode": "BK331",
+      "result": "18457 DR"
+    },
+    {
+      "partycode": "BK330",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD082",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CX001",
+      "result": "2875 CR"
+    },
+    {
+      "partycode": "BU274",
+      "result": "40150 DR"
+    },
+    {
+      "partycode": "EE043",
+      "result": "130 DR"
+    },
+    {
+      "partycode": "BC243",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK328",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK134",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT171",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK324",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC246",
+      "result": "8857 DR"
+    },
+    {
+      "partycode": "BU032",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH092",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA186",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP187",
+      "result": "94718 DR"
+    },
+    {
+      "partycode": "CT102",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA023",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS045",
+      "result": "35100 DR"
+    },
+    {
+      "partycode": "LD214",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN151",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK025",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR031",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK166",
+      "result": "7705 DR"
+    },
+    {
+      "partycode": "BU279",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR067",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC084",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA179",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN079",
+      "result": "180 DR"
+    },
+    {
+      "partycode": "MA049",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA180",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN146",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK076",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG064",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG015",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD043",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH072",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK017",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "VG019",
+      "result": "27.05 CR"
+    },
+    {
+      "partycode": "OT047",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK155",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU166",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH075",
+      "result": "6600 DR"
+    },
+    {
+      "partycode": "BG068",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP008",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC093",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA089",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR121",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK017",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR060",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN074",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR071",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA035",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK012",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK018",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA181",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU017",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP033",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH020",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG070",
+      "result": "14041 DR"
+    },
+    {
+      "partycode": "KG028",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG090",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG024",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG054",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG071",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD174",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC038",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD128",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK147",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK103",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN113",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD209",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD027",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR036",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR037",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG097",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD055",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK021",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC223",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK161",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK151",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU234",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU086",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD042",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK009",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK002",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK016",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK032",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK029",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU175",
+      "result": "7439 DR"
+    },
+    {
+      "partycode": "BP085",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU029",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP031",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK184",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU244",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD077",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS005",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU036",
+      "result": "4610 DR"
+    },
+    {
+      "partycode": "LD010",
+      "result": "1668 DR"
+    },
+    {
+      "partycode": "",
+      "result": "65.84999999999991 DR"
+    },
+    {
+      "partycode": "GK158",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD156",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK010",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK150",
+      "result": "6930 CR"
+    },
+    {
+      "partycode": "BC123",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN035",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD180",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU034",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG091",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG059",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK215",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR089",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR119",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK246",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP147",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC226",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC126",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK161",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU068",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK001",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK003",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SK015",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG101",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK095",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK327",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU275",
+      "result": "2 CR"
+    },
+    {
+      "partycode": "LD022",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD215",
+      "result": "5579 DR"
+    },
+    {
+      "partycode": "GK163",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK070",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD008",
+      "result": "16880 DR"
+    },
+    {
+      "partycode": "KG093",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK105",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG058",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK164",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU278",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG072",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK185",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK065",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK142",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN150",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP188",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AD016",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG063",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC058",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR077",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK243",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG019",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT147",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA185",
+      "result": "1150 DR"
+    },
+    {
+      "partycode": "BC245",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN152",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK165",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD044",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC009",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP189",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP140",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA187",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC152",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS069",
+      "result": "2054 DR"
+    },
+    {
+      "partycode": "SH079",
+      "result": "24452 DR"
+    },
+    {
+      "partycode": "BK172",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG018",
+      "result": "4000 DR"
+    },
+    {
+      "partycode": "BK253",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SH093",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BD026",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BS041",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC066",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA119",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG031",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG054",
+      "result": "20000 CR"
+    },
+    {
+      "partycode": "KG013",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG023",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP063",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT247",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG082",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU280",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD216",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BR117",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MK033",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK332",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA149",
+      "result": "20123 DR"
+    },
+    {
+      "partycode": "MA188",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT066",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN153",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU281",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU282",
+      "result": "1030 DR"
+    },
+    {
+      "partycode": "BC132",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BG073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD217",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA022",
+      "result": "10 DR"
+    },
+    {
+      "partycode": "BS060",
+      "result": "3969 DR"
+    },
+    {
+      "partycode": "BU082",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK333",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK334",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK335",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU185",
+      "result": "79278 DR"
+    },
+    {
+      "partycode": "BU115",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU283",
+      "result": "849 DR"
+    },
+    {
+      "partycode": "BC247",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP190",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK336",
+      "result": "8605 DR"
+    },
+    {
+      "partycode": "FA030",
+      "result": "1893300 DR"
+    },
+    {
+      "partycode": "MA066",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP185",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC248",
+      "result": "5000 DR"
+    },
+    {
+      "partycode": "SK017",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK337",
+      "result": "200 DR"
+    },
+    {
+      "partycode": "BC173",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "EE080",
+      "result": "1000 DR"
+    },
+    {
+      "partycode": "BG074",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK338",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU267",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU284",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BP054",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC249",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OB000",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "VC016",
+      "result": "22.06 CR"
+    },
+    {
+      "partycode": "Dr AC",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CR AC",
+      "result": "0 CR"
+    },
+    {
+      "partycode": ".NULL",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "AG007",
+      "result": "66102 DR"
+    },
+    {
+      "partycode": "SH062",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU285",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU286",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "MA165",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BU050",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "OT067",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG073",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "KG036",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT248",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "DT062",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BK339",
+      "result": "48360 DR"
+    },
+    {
+      "partycode": "BK163",
+      "result": "100 DR"
+    },
+    {
+      "partycode": "OT068",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "BC233",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "SN154",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "GK167",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT249",
+      "result": "1355.82 CR"
+    },
+    {
+      "partycode": "BK340",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD052",
+      "result": "45250 DR"
+    },
+    {
+      "partycode": "EE082",
+      "result": "94592 CR"
+    },
+    {
+      "partycode": "LD218",
+      "result": "178563 CR"
+    },
+    {
+      "partycode": "BU287",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "LD081",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "CT250",
+      "result": "24000 DR"
+    },
+    {
+      "partycode": "BK341",
+      "result": "0 CR"
+    },
+    {
+      "partycode": "PL001",
+      "result": "587456.61 DR"
+    },
+    {
+      "partycode": "MA189",
+      "result": "168440 DR"
+    },
+    {
+      "partycode": "DZ006",
+      "result": "16524 DR"
+    },
+    {
+      "partycode": "EE081",
+      "result": "20600 DR"
+    },
+    {
+      "partycode": "EE019",
+      "result": "20 DR"
+    },
+    {
+      "partycode": "EE006",
+      "result": "2500 DR"
+    },
+    {
+      "partycode": "OT069",
+      "result": "16895 DR"
+    }
+  ]
+}
