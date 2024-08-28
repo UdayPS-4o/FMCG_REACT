@@ -119,6 +119,12 @@ const Router = [
     element: <FullLayout />,
     children: [
       { path: '/', element: <Navigate to="/dashboards/modern" /> },
+      { path: '/account-master', exact: true, element: <ModernDash /> },
+      { path: '/invoicing', exact: true, element: <ModernDash /> },
+      { path: '/cash-receipts', exact: true, element: <ModernDash /> },
+      { path: '/dash-payments', exact: true, element: <ModernDash /> },
+      { path: '/godown', exact: true, element: <ModernDash /> },
+      { path: '/dbf', exact: true, element: <ModernDash /> },
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },
       { path: '/apps/chats', element: <Chats /> },

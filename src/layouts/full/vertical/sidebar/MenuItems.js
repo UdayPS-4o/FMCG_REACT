@@ -48,11 +48,57 @@ import {
   IconBorderStyle2,
   IconAppWindow,
   IconLockAccess,
+  IconUser,
+  IconReceipt,
+  IconCurrencyDollarCanadian,
+  IconBrandMastercard,
+  IconTransferIn,
+  IconDatabase,
 } from '@tabler/icons';
 
 import { uniqueId } from 'lodash';
 
 const Menuitems = [
+  {
+    navlabel: true,
+    subheader: 'Fmcg',
+  },
+  {
+    id: uniqueId(),
+    title: 'Account Master',
+    icon: IconUser,
+    href: '/account-master',
+  },
+  {
+    id: uniqueId(),
+    title: 'Invoicing',
+    icon: IconReceipt,
+    href: '/invoicing',
+  },
+  {
+    id: uniqueId(),
+    title: 'Cash Receipt',
+    icon: IconCurrencyDollarCanadian,
+    href: '/cash-receipts',
+  },
+  {
+    id: uniqueId(),
+    title: 'Cash Payments',
+    icon: IconBrandMastercard,
+    href: '/dash-payments',
+  },
+  {
+    id: uniqueId(),
+    title: 'Godown Transfer',
+    icon: IconTransferIn,
+    href: '/godown',
+  },
+  {
+    id: uniqueId(),
+    title: 'DBF READER',
+    icon: IconDatabase,
+    href: '/dbf',
+  },
   {
     navlabel: true,
     subheader: 'Home',
