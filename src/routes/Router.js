@@ -7,6 +7,7 @@ import Invoicing from 'src/components/pages/invoicing/Invoicing';
 import Cash_Receipt from 'src/components/pages/CashRecipt/Cash_Receipt';
 import AccountMaster from 'src/components/pages/AccountMaster/AccountMaster';
 import CashPayment from 'src/components/pages/CashPayment/CashPayment';
+import DBFReader from 'src/components/pages/DBFReader/dbfReader';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -129,7 +130,7 @@ const Router = [
       { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
       { path: '/dash-payments', exact: true, element: <CashPayment /> },
       { path: '/godown', exact: true, element: <GodownTransfer /> },
-      { path: '/dbf', exact: true, element: <ModernDash /> },
+      { path: '/dbf', exact: true, element: <DBFReader /> },
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },
       { path: '/apps/chats', element: <Chats /> },

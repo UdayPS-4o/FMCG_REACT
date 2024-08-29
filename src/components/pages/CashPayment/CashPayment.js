@@ -18,7 +18,7 @@ const FormVertical = () => {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <ParentCard title="">
+          <ParentCard title="Cash Payments">
             <FormSeparator />
           </ParentCard>
         </Grid>

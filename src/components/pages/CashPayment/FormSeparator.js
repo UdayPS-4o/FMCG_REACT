@@ -44,7 +44,14 @@ function FormSeparator() {
         <Form>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <Field name="date" type="date" as={TextField} label="Date" fullWidth defaultValue="2024-08-10" />
+              <Field
+                name="date"
+                type="date"
+                as={TextField}
+                label="Date"
+                fullWidth
+                defaultValue="2024-08-10"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Field name="voucherNo" type="number" as={TextField} label="Voucher No." fullWidth />
@@ -67,8 +74,8 @@ function FormSeparator() {
               <Field name="Discount" type="number" as={TextField} label="Discount" fullWidth />
             </Grid>
             <Grid item xs={12}>
-              <Stack direction="row" spacing={2}>
-                <Button variant="contained" color="primary" type='submit' disabled={isSubmitting}>
+              <Stack direction="row" spacing={2} justifyContent="flex-end">
+                <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
                   Save changes
                 </Button>
                 <Button variant="text" color="error">
