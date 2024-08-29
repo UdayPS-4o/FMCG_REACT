@@ -61,6 +61,7 @@ const FullLayout = () => {
             maxWidth: customizer.isLayout === 'boxed' ? 'lg' : '100%!important',
           }}
         >
+          <br/>
           {/* ------------------------------------------- */}
           {/* Page Route */}
           {/* ------------------------------------------- */}
