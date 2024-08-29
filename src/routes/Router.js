@@ -4,6 +4,9 @@ import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
 import GodownTransfer from 'src/components/pages/GodownTransfer/GodownTransfer';
 import Invoicing from 'src/components/pages/invoicing/Invoicing';
+import Cash_Receipt from 'src/components/pages/CashRecipt/Cash_Receipt';
+import AccountMaster from 'src/components/pages/AccountMaster/AccountMaster';
+import CashPayment from 'src/components/pages/CashPayment/CashPayment';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -121,10 +124,10 @@ const Router = [
     element: <FullLayout />,
     children: [
       { path: '/', element: <Navigate to="/dashboards/modern" /> },
-      { path: '/account-master', exact: true, element: <ModernDash /> },
+      { path: '/account-master', exact: true, element: <AccountMaster /> },
       { path: '/invoicing', exact: true, element: <Invoicing /> },
-      { path: '/cash-receipts', exact: true, element: <ModernDash /> },
-      { path: '/dash-payments', exact: true, element: <ModernDash /> },
+      { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
+      { path: '/dash-payments', exact: true, element: <CashPayment /> },
       { path: '/godown', exact: true, element: <GodownTransfer /> },
       { path: '/dbf', exact: true, element: <ModernDash /> },
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
