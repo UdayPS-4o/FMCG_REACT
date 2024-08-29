@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
-
+import constants from 'src/constants';
 import { Grid, Button, Stack, TextField, Autocomplete } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 
@@ -13,12 +13,12 @@ function FormSeparator() {
 
   useEffect(() => {
     const fetchOptions = async () => {
-      const res = await fetch('http://103.184.192.68/cmpl');
+      const res = await fetch(constants.baseURL + '/cmpl');
       const data = await res.json();
 
-      const pmplRes = await fetch('http://103.184.192.68/api/dbf/pmpl.json');
+      const pmplRes = await fetch(constants.baseURL + '/api/dbf/pmpl.json');
       const pmplData = await pmplRes.json();
-      const balanceRes = await fetch('http://103.184.192.68/json/balance');
+      const balanceRes = await fetch(constants.baseURL + '/json/balance');
       const balanceData = await balanceRes.json();
 
       const getBalance = (C_CODE) =>
