@@ -2,6 +2,8 @@ import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import Loadable from '../layouts/full/shared/loadable/Loadable';
+import GodownTransfer from 'src/components/pages/GodownTransfer/GodownTransfer';
+import Invoicing from 'src/components/pages/invoicing/Invoicing';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -120,10 +122,10 @@ const Router = [
     children: [
       { path: '/', element: <Navigate to="/dashboards/modern" /> },
       { path: '/account-master', exact: true, element: <ModernDash /> },
-      { path: '/invoicing', exact: true, element: <ModernDash /> },
+      { path: '/invoicing', exact: true, element: <Invoicing /> },
       { path: '/cash-receipts', exact: true, element: <ModernDash /> },
       { path: '/dash-payments', exact: true, element: <ModernDash /> },
-      { path: '/godown', exact: true, element: <ModernDash /> },
+      { path: '/godown', exact: true, element: <GodownTransfer /> },
       { path: '/dbf', exact: true, element: <ModernDash /> },
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },

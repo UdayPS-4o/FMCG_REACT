@@ -1,17 +1,8 @@
-import React from 'react';
-import { Grid, Typography } from '@mui/material';
-
-// components
-import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
+import { Grid } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
-
-import BasicLayout from '../../components/forms/form-vertical/BasicLayout';
-
-import BasicIcons from '../../components/forms/form-vertical/BasicIcons';
-import FormSeparator from '../../components/forms/form-vertical/FormSeparator';
-import CollapsibleForm from '../../components/forms/form-vertical/CollapsibleForm';
-import FormTabs from '../../components/forms/form-vertical/FormTabs';
+import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
+import FormSeparator from './GFormSeparator';
 const BCrumb = [
   {
     to: '/',
@@ -22,7 +13,7 @@ const BCrumb = [
   },
 ];
 
-const FormVertical = () => {
+const GodownTransfer = () => {
   return (
     <PageContainer title="Vertical Form" description="this is Vertical Form page">
       {/* breadcrumb */}
@@ -39,4 +30,4 @@ const FormVertical = () => {
   );
 };
 
-export default FormVertical;
+export default GodownTransfer;

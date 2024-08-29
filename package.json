@@ -22,7 +22,7 @@
     "chance": "^1.1.9",
     "date-fns": "^2.29.2",
     "emoji-picker-react": "^3.6.1",
-    "formik": "^2.2.9",
+    "formik": "^2.4.6",
     "framer-motion": "^8.5.2",
     "i18next": "^22.0.6",
     "lodash": "^4.17.21",
