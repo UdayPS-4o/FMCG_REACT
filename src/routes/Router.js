@@ -141,7 +141,7 @@ const Router = [
       { path: '/db/account-master', exact: true, element: <DBaccountmaster /> },
       { path: '/db/invoicing', exact: true, element: <DBinvoicing /> },
       { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
-      { path: '/db/dash-payments', exact: true, element: <DBcashpayments /> },
+      { path: '/db/cash-payments', exact: true, element: <DBcashpayments /> },
       { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },

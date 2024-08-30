@@ -4,6 +4,7 @@ import PageContainer from 'src/components/container/PageContainer';
 
 import SearchTable from './SearchTable';
 
+import MasterTable from './accountMasterTable';
 function CashReceipt() {
   return (
     <PageContainer title="Cash Receipts" description="Cash Receipts Form">
@@ -15,7 +16,8 @@ function CashReceipt() {
         </Grid>
         {/* Render the SearchTable below Cash Receipts */}
         <Grid item xs={12}>
-          <SearchTable />
+          {/* <SearchTable /> */}
+          <MasterTable />
         </Grid>
       </Grid>
     </PageContainer>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Stack, TextField, Autocomplete } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
+import MasterTable from './accountMasterTable';
 
-import SearchTable from './SearchTable';
 
 function CashReceipt() {
   return (
@@ -15,7 +15,8 @@ function CashReceipt() {
         </Grid>
         {/* Render the SearchTable below Cash Receipts */}
         <Grid item xs={12}>
-          <SearchTable />
+          {/* <SearchTable /> */}
+          <MasterTable />
         </Grid>
       </Grid>
     </PageContainer>
