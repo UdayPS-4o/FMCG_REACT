@@ -1,0 +1,22 @@
+[
+  {
+    "name": "example0",
+    "action": "action0"
+  },
+  {
+    "name": "example1",
+    "action": "action1"
+  },
+  {
+    "name": "example2",
+    "action": "action2"
+  },
+  {
+    "name": "example3",
+    "action": "action3"
+  },
+  {
+    "name": "example4",
+    "action": "action4"
+  }
+]

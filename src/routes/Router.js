@@ -7,6 +7,13 @@ import Invoicing from 'src/components/pages/invoicing/Invoicing';
 import Cash_Receipt from 'src/components/pages/CashRecipt/Cash_Receipt';
 import AccountMaster from 'src/components/pages/AccountMaster/AccountMaster';
 import CashPayment from 'src/components/pages/CashPayment/CashPayment';
+import DBFReader from 'src/components/pages/DBFReader/dbfReader';
+import DBaccountmaster from 'src/components/pages/Database/account-master.js';
+import DBcashpayments from 'src/components/pages/Database/cash-payment';
+import DBcashreceipt from 'src/components/pages/Database/cash-receipt';
+import DBgodowntransfer from 'src/components/pages/Database/godown-transfer';
+import DBinvoicing from 'src/components/pages/Database/invoicing';
+import Adduser from 'src/components/pages/AddUser/create-new-user.js';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -129,7 +136,13 @@ const Router = [
       { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
       { path: '/dash-payments', exact: true, element: <CashPayment /> },
       { path: '/godown', exact: true, element: <GodownTransfer /> },
-      { path: '/dbf', exact: true, element: <ModernDash /> },
+      { path: '/dbf', exact: true, element: <DBFReader /> },
+      { path: '/adduser', exact: true, element: <Adduser /> },
+      { path: '/db/account-master', exact: true, element: <DBaccountmaster /> },
+      { path: '/db/invoicing', exact: true, element: <DBinvoicing /> },
+      { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
+      { path: '/db/dash-payments', exact: true, element: <DBcashpayments /> },
+      { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },
       { path: '/apps/chats', element: <Chats /> },

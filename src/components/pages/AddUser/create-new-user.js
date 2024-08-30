@@ -13,18 +13,21 @@ const BCrumb = [
   },
 ];
 
-const FormVertical = () => {
+const GodownTransfer = () => {
   return (
-    <>
+    <PageContainer title="Vertical Form" description="this is Vertical Form page">
+      {/* breadcrumb */}
+      <Breadcrumb title="Vertical Form" items={BCrumb} />
+      {/* end breadcrumb */}
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <ParentCard title="Cash Payments">
+          <ParentCard title="Multi Column with Form Separator">
             <FormSeparator />
           </ParentCard>
         </Grid>
       </Grid>
-    </>
+    </PageContainer>
   );
 };
 
-export default FormVertical;
+export default GodownTransfer;
