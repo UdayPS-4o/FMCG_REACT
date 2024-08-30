@@ -73,10 +73,10 @@ const CollapsibleItemSection = ({
         pcBx: selectedItem.MULT_F,
         mrp: selectedItem.MRP1,
         rate: selectedItem.RATE1,
-        qty: '',
+        qty: 0,
         unit: units[0], // Auto-select the first unit option
-        amount: '',
-        netAmount: '',
+        amount: 0,
+        netAmount: 0,
       };
 
       setGodownOptions(availableGodowns);
