@@ -73,10 +73,10 @@ const CollapsibleItemSection = ({
         pcBx: selectedItem.MULT_F,
         mrp: selectedItem.MRP1,
         rate: selectedItem.RATE1,
-        qty: 0,
+        qty: '',
         unit: units[0], // Auto-select the first unit option
-        amount: 0,
-        netAmount: 0,
+        amount: '',
+        netAmount: '',
       };
 
       setGodownOptions(availableGodowns);
@@ -125,28 +125,15 @@ const CollapsibleItemSection = ({
   };
 
   const calculateAmounts = (data) => {
-    console.log(data)
     let amount = data.rate * data.qty;
     const selectedItem = pmplData.find((item) => item.CODE === data.item);
 
-    if (data.unit === selectedItem.UNIT_2 || selectedItem.UNIT_1 == selectedItem.UNIT_2) {
+    if (data.unit === selectedItem.UNIT_2) {
       amount *= selectedItem.MULT_F;
     }
 
-    let netAmount = amount;
-
-    if (data.cess && data.cess !== '') {
-      netAmount += amount * (data.cess / 100);
-    }
-
-    if (data.cd && data.cd !== '') {
-      netAmount -= amount * (data.cd / 100);
-    }
-
-    if (data.sch && data.sch !== '') {
-      netAmount -= amount * (data.sch / 100);
-    }
-    console.log({amount, netAmount})
+    const netAmount =
+      amount + amount * (data.cess / 100) - amount * (data.cd / 100) - amount * (data.sch / 100);
     return {
       ...data,
       amount: amount.toFixed(2),

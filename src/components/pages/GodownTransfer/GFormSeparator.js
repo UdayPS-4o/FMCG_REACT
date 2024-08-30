@@ -186,7 +186,7 @@ function FormSeparator() {
       </Grid>
 
       <Grid item xs={12}>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} justifyContent="flex-end">
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit
           </Button>

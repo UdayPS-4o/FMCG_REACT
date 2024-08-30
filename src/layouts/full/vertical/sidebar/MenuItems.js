@@ -100,6 +100,50 @@ const Menuitems = [
     href: '/dbf',
   },
   {
+    id: uniqueId(),
+    title: 'Add User',
+    icon: IconDatabase,
+    href: '/adduser',
+  },
+  {
+    id: uniqueId(),
+    title: 'Database',
+    icon: IconChartDonut3,
+    href: '/db/',
+    children: [
+      {
+        id: uniqueId(),
+        title: 'Account Master',
+        icon: IconUser,
+        href: '/db/account-master',
+      },
+      {
+        id: uniqueId(),
+        title: 'Invoicing',
+        icon: IconReceipt,
+        href: '/db/invoicing',
+      },
+      {
+        id: uniqueId(),
+        title: 'Cash Receipt',
+        icon: IconCurrencyDollarCanadian,
+        href: '/db/cash-receipts',
+      },
+      {
+        id: uniqueId(),
+        title: 'Cash Payments',
+        icon: IconBrandMastercard,
+        href: '/db/dash-payments',
+      },
+      {
+        id: uniqueId(),
+        title: 'Godown Transfer',
+        icon: IconTransferIn,
+        href: '/db/godown',
+      },
+    ],
+  },
+  {
     navlabel: true,
     subheader: 'Home',
   },
