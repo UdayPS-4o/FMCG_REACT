@@ -134,7 +134,7 @@ const Router = [
       { path: '/account-master', exact: true, element: <AccountMaster /> },
       { path: '/invoicing', exact: true, element: <Invoicing /> },
       { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
-      { path: '/dash-payments', exact: true, element: <CashPayment /> },
+      { path: '/cash-payments', exact: true, element: <CashPayment /> },
       { path: '/godown', exact: true, element: <GodownTransfer /> },
       { path: '/dbf', exact: true, element: <DBFReader /> },
       { path: '/adduser', exact: true, element: <Adduser /> },

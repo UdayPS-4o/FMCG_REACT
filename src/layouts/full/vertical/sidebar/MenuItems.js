@@ -85,7 +85,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Cash Payments',
     icon: IconBrandMastercard,
-    href: '/dash-payments',
+    href: '/cash-payments',
   },
   {
     id: uniqueId(),

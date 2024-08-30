@@ -42,9 +42,10 @@ const ProductTableList = () => {
 
   React.useEffect(() => {
     let point = window.location.href.split('/db/')[1].toLowerCase();
-    // console.log(point);
+    // console.log('point', point);
     setEndpoint(point);
     fetchProducts(point).then((data) => {
+      console.log('data', data);
       setRows(data);
       if (data.length > 0) {
         setHeaders(Object.keys(data[0]));
@@ -73,9 +74,7 @@ const ProductTableList = () => {
   };
 
   const filteredRows = rows.filter((row) =>
-    headers.some((header) =>
-      row[header]?.toString().toLowerCase().includes(search.toLowerCase())
-    )
+    headers.some((header) => row[header]?.toString().toLowerCase().includes(search.toLowerCase())),
   );
 
   const sortedRows = [...filteredRows].sort((a, b) => {
@@ -134,19 +133,20 @@ const ProductTableList = () => {
                     {headers.map((header) => (
                       <TableCell key={header}>{row[header]}</TableCell>
                     ))}
-                 
+
                     <TableCell>
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                      <IconButton>
+                        <EditIcon />
+                      </IconButton>
+                      {endpoint !== 'account-master' ? (
                         <IconButton>
-                            <DeleteIcon />
+                          <PrintIcon />
                         </IconButton>
-                        <IconButton>
-                            <EditIcon />
-                        </IconButton>
-                        {(endpoint !== 'account-master') ? <IconButton>
-                            <PrintIcon />
-                            </IconButton> : null}
+                      ) : null}
                     </TableCell>
-                    
                   </TableRow>
                 ))}
             </TableBody>
