@@ -130,9 +130,16 @@ const ProductTableList = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow hover tabIndex={-1} key={index}>
-                    {headers.map((header) => (
-                      <TableCell key={header}>{row[header]}</TableCell>
-                    ))}
+                    {headers.map((header) => {
+                      console.log('header', header);
+
+                      console.log('row[header]', row[header]);
+                      return (
+                        <TableCell key={header}>
+                          {header === 'items' ? row[header].length : row[header]}
+                        </TableCell>
+                      );
+                    })}
 
                     <TableCell>
                       <IconButton>
