@@ -21,7 +21,7 @@ const GodownTransfer = () => {
       {/* end breadcrumb */}
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <ParentCard title="Multi Column with Form Separator">
+          <ParentCard title="Create New User">
             <FormSeparator />
           </ParentCard>
         </Grid>

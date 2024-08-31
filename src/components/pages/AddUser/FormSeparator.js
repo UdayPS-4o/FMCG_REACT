@@ -1,71 +1,127 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Button, Stack, TextField } from '@mui/material';
+import { Grid, Button, Stack, TextField, Autocomplete } from '@mui/material';
+import { Formik, Form, Field } from 'formik';
 import constants from 'src/constants';
 
+import UserTable from './UserTable';
+
 function FormSeparator() {
-  const [party, setParty] = useState(null);
-  const [sm, setSm] = useState(null);
-  const [items, setItems] = useState([]);
+  const [routeAccessOptions, setRouteAccessOptions] = useState([]);
+  const [powersOptions, setPowersOptions] = useState([]);
+  const baseURL = constants.baseURL;
+  const [data, setData] = useState([]);
 
-  const handleSubmit = () => {
-    console.log('Party:', party);
-    console.log('S/M:', sm);
-    console.log('Items:', items); // Log the array of objects
+  useEffect(() => {
+    const fetchOptions = async () => {
+      const res = await fetch(baseURL + '/json/users');
+      const users = await res.json();
 
-    const postForm = document.createElement('form');
-    postForm.method = 'POST';
-    postForm.action = '/godown';
+      // Sorting the data by `id`
+      const sortedData = users.sort((a, b) => a.id - b.id);
+      setData(sortedData);
 
-    const data = {
-      date: document.querySelector('input[name="date"]').value,
-      series: document.querySelector('input[name="series"]').value,
-      cash: document.querySelector('input[name="Cash"]').value,
-      party: party?.value || '',
-      sm: sm?.value || '',
-      dueDays: document.querySelector('input[name="due-days"]').value,
-      ref: document.querySelector('input[name="ref"]').value,
-      items,
+      const routeAccessList = [
+        ...new Set(
+          users.flatMap((user) =>
+            Array.isArray(user.routeAccess) ? user.routeAccess : [user.routeAccess],
+          ),
+        ),
+      ];
+
+      const powersList = [
+        ...new Set(
+          users.flatMap((user) => (Array.isArray(user.powers) ? user.powers : [user.powers])),
+        ),
+      ];
+
+      setRouteAccessOptions(routeAccessList);
+      setPowersOptions(powersList);
     };
 
-    Object.keys(data).forEach((key) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = key === 'items' ? JSON.stringify(data[key]) : data[key];
-      postForm.appendChild(input);
-    });
-
-    document.body.appendChild(postForm);
-    postForm.submit();
-  };
+    fetchOptions();
+  }, []);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-        <TextField label="Name" type="text" fullWidth defaultValue="" />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField label="Select Route Access" type="text" fullWidth defaultValue="" />
-      </Grid>
+    <>
+      <Formik
+        initialValues={{
+          name: '',
+          number: '',
+          password: '',
+          routeAccess: [],
+          powers: [],
+        }}
+        onSubmit={async (values) => {
+          await new Promise((r) => setTimeout(r, 500));
+          alert(JSON.stringify(values, null, 2));
+        }}
+      >
+        {({ isSubmitting, setFieldValue, values }) => (
+          <Form>
+            <Grid container spacing={2}>
+              {/* First Row */}
+              <Grid item xs={12} sm={6}>
+                <Field name="name" as={TextField} label="Name" fullWidth />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Autocomplete
+                  multiple
+                  options={routeAccessOptions}
+                  getOptionLabel={(option) => option}
+                  value={values.routeAccess}
+                  onChange={(event, newValue) => {
+                    setFieldValue('routeAccess', newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Select Route Access" fullWidth />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <Field name="number" as={TextField} label="Number" fullWidth />
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <Field name="password" as={TextField} label="Password" fullWidth />
+              </Grid>
 
-      <Grid item xs={12} sm={4}>
-        <TextField label="Number" placeholder="T" fullWidth />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <TextField label="Password" placeholder="Y" fullWidth />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <TextField label="Select Powers" type="text" fullWidth defaultValue="" />
-      </Grid>
+              {/* Second Row */}
+              <Grid item xs={12} sm={6}>
+                <Autocomplete
+                  multiple
+                  options={powersOptions}
+                  getOptionLabel={(option) => option}
+                  value={values.powers}
+                  onChange={(event, newValue) => {
+                    setFieldValue('powers', newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Select Powers" fullWidth />
+                  )}
+                />
+              </Grid>
 
-      <Grid item xs={12}>
-        <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Stack>
-      </Grid>
-    </Grid>
+              {/* Submit Button */}
+            </Grid>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+              <Stack spacing={2} direction="row">
+                <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
+                  Submit
+                </Button>
+              </Stack>
+            </div>
+          </Form>
+        )}
+      </Formik>
+      {/* Pass sorted data to UserTable */}
+      <div
+        style={{
+          padding: '20px',
+        }}
+      >
+        <UserTable data={data} />
+      </div>
+    </>
   );
 }
 
