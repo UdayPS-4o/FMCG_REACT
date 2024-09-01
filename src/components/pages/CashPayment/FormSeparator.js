@@ -24,6 +24,7 @@ function FormSeparator() {
         value: user.C_CODE,
         label: `${user.C_NAME} | ${getBalance(user.C_CODE)}`,
       }));
+      console.log('partyList', partyList);
 
       setParty(partyList);
     };
@@ -35,8 +36,19 @@ function FormSeparator() {
     <Formik
       initialValues={{}}
       onSubmit={async (values) => {
-        await new Promise((r) => setTimeout(r, 500));
-        values.party = party;
+        // await new Promise((r) => setTimeout(r, 500));
+        console.log('submit');
+        // values.party = party;
+        // alert(JSON.stringify(values, null, 2));
+        const defultval = await fetch(constants.baseURL + '/slink/cash-receipts');
+        const defultvaldata = await defultval.json();
+        // values.receipt_no = defultvaldata.nextReceiptNo;
+        values.receiptNo = defultvaldata.nextReceiptNo;
+        values.party = party?.value;
+        values.name = party?.label;
+        // fetch the value of party from the data
+        //
+
         alert(JSON.stringify(values, null, 2));
       }}
     >

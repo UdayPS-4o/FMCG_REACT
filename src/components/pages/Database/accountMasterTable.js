@@ -24,7 +24,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import constants from 'src/constants';
 
 const fetchProducts = async (endpoint) => {
-  let data = await fetch('http://103.184.192.68/json/' + endpoint);
+  let data = await fetch(constants.baseURL + '/json/' + endpoint);
   let response = await data.json();
   return response;
 };

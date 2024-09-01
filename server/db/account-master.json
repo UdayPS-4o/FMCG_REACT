@@ -30,5 +30,28 @@
     "fssaino": "ergh",
     "email": "contact@udayps.com",
     "statecode": "Madhya Pradesh"
+  },
+  {
+    "a/c_head": "Magna neque in nulla",
+    "address_l1": "309 North Green New Parkway",
+    "address_l2": "Elit mollit aliqua",
+    "place": "Nostrum at voluptate",
+    "pin_Code": "Eaque ex eligendi hi",
+    "mobile": "Et itaque eiusmod re",
+    "pan": "Enim laborum Ex del",
+    "aadhar": "Dignissimos dolore d",
+    "gstin": "Consequatur aspernat",
+    "dl_no": "Aute amet eum nisi ",
+    "fssai": "Autem ducimus dolor",
+    "email": "zuny@mailinator.com",
+    "receiptNo": 1,
+    "party": {
+      "value": "AA001",
+      "label": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
+    },
+    "sm": {
+      "value": "SM004",
+      "label": "KESHAV THAKUR S/O VIJAY BINWAR | 0"
+    }
   }
 ]

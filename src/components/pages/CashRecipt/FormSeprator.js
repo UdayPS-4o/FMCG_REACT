@@ -7,6 +7,7 @@ function FormSeparator() {
   const [party, setParty] = useState(null);
   const [partyOptions, setPartyOptions] = useState([]);
   const baseURL = constants.baseURL;
+  const [defulatval, setDefulatval] = useState(null);
 
   useEffect(() => {
     const fetchOptions = async () => {
@@ -23,6 +24,10 @@ function FormSeparator() {
         label: `${user.C_NAME} | ${getBalance(user.C_CODE)}`,
       }));
 
+      const defultval = await fetch(baseURL + '/slink/cash-receipts');
+      const defultvaldata = await defultval.json();
+      console.log('defultvaldata', defultvaldata);
+      setDefulatval(defultvaldata.nextReceiptNo);
       setPartyOptions(partyList);
     };
 
@@ -35,14 +40,35 @@ function FormSeparator() {
 
   return (
     <Formik
-      initialValues={{}}
+      initialValues={{
+        date: '', // Initial value for the date
+        series: '',
+        amount: '',
+        discount: '',
+        receipt_no: '',
+      }}
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
-        values.party = party;
-        alert(JSON.stringify(values, null, 2));
+        values.party = party?.value;
+        values.name = party?.label;
+
+        // Set receipt number from the default value
+        values.receiptNo = defulatval;
+
+        let res = await fetch(constants.baseURL + '/cash-receipts', {
+          method: 'POST',
+          body: JSON.stringify(values),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        let data = await res.text();
+        console.log('data', data);
+        console.log(values.date, 'date ');
+        alert(JSON.stringify(data, null, 2));
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, setFieldValue }) => (
         <Form>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={3}>
@@ -52,31 +78,26 @@ function FormSeparator() {
                 as={TextField}
                 label="Date"
                 fullWidth
-                defaultValue="2024-08-10"
+                onChange={(event) => setFieldValue('date', event.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={3}>
               <Field name="series" as={TextField} label="Series" placeholder="T" fullWidth />
             </Grid>
             <Grid item xs={12} sm={3}>
-              <Field
-                name="receipt_no"
-                as={TextField}
+              <TextField
                 label="Receipt No."
                 type="number"
                 fullWidth
-                defaultValue={56}
+                disabled
+                value={defulatval || ''}
               />
             </Grid>
             <Grid item xs={12} sm={3}>
-              <Field
-                name="amount"
-                as={TextField}
-                label="Amount"
-                type="number"
-                fullWidth
-                defaultValue={0.2}
-              />
+              <Field name="amount" as={TextField} label="Amount" type="number" fullWidth />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Autocomplete

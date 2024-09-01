@@ -48,10 +48,23 @@ function FormSeparator() {
     <Formik
       initialValues={{}}
       onSubmit={async (values) => {
-        await new Promise((r) => setTimeout(r, 500));
+        // await new Promise((r) => setTimeout(r, 500));
+        const defultval = await fetch(constants.baseURL + '/slink/cash-receipts');
+        const defultvaldata = await defultval.json();
+        // values.receipt_no = defultvaldata.nextReceiptNo;
+        values.receiptNo = defultvaldata.nextReceiptNo;
         values.party = party;
         values.sm = sm;
-        alert(JSON.stringify(values, null, 2));
+        // alert(JSON.stringify(values, null, 2));
+        let res = await fetch(constants.baseURL + '/account-master', {
+          method: 'POST',
+          body: JSON.stringify(values),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        let response = await res.text();
+        alert(response);
       }}
     >
       {({ isSubmitting }) => (

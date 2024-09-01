@@ -14,5 +14,41 @@
     "series": "X",
     "amount": "69",
     "discount": "10"
+  },
+  {
+    "date": "2013-11-11",
+    "voucherNo": 87,
+    "series": "Consequatur et dolo",
+    "Amount": "Culpa quia aliqua ",
+    "Discount": 9,
+    "receiptNo": 1,
+    "party": {
+      "value": "OB001",
+      "label": "OPENING BALANCE | 0"
+    }
+  },
+  {
+    "date": "2024-09-01",
+    "voucherNo": "12",
+    "party": "CT001",
+    "series": "123",
+    "amount": "123",
+    "discount": "123"
+  },
+  {
+    "date": "2024-09-01",
+    "voucherNo": "12314",
+    "party": "CT000",
+    "series": "1234",
+    "amount": "1324",
+    "discount": "1234"
+  },
+  {
+    "date": "2024-09-01",
+    "voucherNo": "11234",
+    "party": "CT001",
+    "series": "1234",
+    "amount": "1234",
+    "discount": "1234"
   }
 ]
