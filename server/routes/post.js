@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express.Router();
 const fs = require('fs');
+const fss = require('fs/promises');
 const path = require('path');
 
 const {
@@ -16,14 +17,26 @@ const uniqueIdentifiers = ['receiptNo', 'voucherNo', 'subgroup', 'id'];
 app.post('/:formType', async (req, res) => {
   const { formType } = req.params;
   const formData = req.body;
+  const { email, mobile, aadhar } = req.body;
   console.log(req.body);
+  console.log(__dirname);
+
+  const accountMasterPath = path.join(__dirname, '..', 'db', 'account-master.json');
+  const accountMasterData = JSON.parse(await fss.readFile(accountMasterPath, 'utf8'));
+  // console.log(accountMasterData, 'accountMasterData');
+  accountMasterData.forEach((element) => {
+    if (element.email === email || element.mobile === mobile || element.aadhar === aadhar) {
+      console.log('User already exists');
+      res.status(400).send({ message: 'User already exists' });
+    }
+  });
 
   // Parse formData.items if it's a JSON string
   if (formData.items && typeof formData.items === 'string') {
     try {
       formData.items = JSON.parse(formData.items);
     } catch (err) {
-      return res.status(400).send('Invalid JSON in formData.items');
+      res.status(400).send({ message: 'Invalid format for items.' });
     }
   }
 
