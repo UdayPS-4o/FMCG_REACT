@@ -22,6 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/Print';
 import constants from 'src/constants';
+import { red } from '@mui/material/colors';
 
 const fetchProducts = async (endpoint) => {
   let data = await fetch(constants.baseURL + '/json/' + endpoint);
@@ -83,6 +84,11 @@ const ProductTableList = () => {
     }
     return a[orderBy] > b[orderBy] ? -1 : 1;
   });
+
+  console.log('sortedRows', sortedRows);
+  const handlePrint = (ReceiptNo) => {
+    window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
+  };
 
   return (
     <Box>
@@ -150,7 +156,13 @@ const ProductTableList = () => {
                       </IconButton>
                       {endpoint !== 'account-master' ? (
                         <IconButton>
-                          <PrintIcon />
+                          <div
+                            onClick={() => {
+                              handlePrint(row.receiptNo);
+                            }}
+                          >
+                            <PrintIcon />
+                          </div>
                         </IconButton>
                       ) : null}
                     </TableCell>

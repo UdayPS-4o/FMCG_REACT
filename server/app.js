@@ -30,8 +30,10 @@ const loginRoutes = require('./routes/login');
 app.use(loginRoutes);
 
 const slinkRoutes = require('./routes/slink');
-
+const orcusRoutes = require('./routes/orcusRoutes');
 app.use('/slink', slinkRoutes);
+app.use('/', orcusRoutes);
+
 // set middleware to check if user is logged in
 const middleware = require('./routes/middleware');
 app.use(middleware);
@@ -47,6 +49,19 @@ app.get('/', (req, res) => {
 app.get('/admin', async (req, res) => {
   let firms = await getDbfData(path.join(__dirname, '..', '..', 'FIRM', 'FIRM.DBF'));
   res.render('pages/admin/admin', { firm: firms });
+});
+
+app.get('/print', async (req, res) => {
+  try {
+    const { receiptNo } = req.query;
+    const data = await fetch('http://localhost/json/cash-receipts');
+    const json = await data.json();
+    const receipt = json.find((receipt) => receipt.receiptNo === receiptNo);
+    res.send(receipt);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
 });
 
 app.post('/addUser', async (req, res) => {
