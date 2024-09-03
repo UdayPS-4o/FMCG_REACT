@@ -5,10 +5,74 @@ const path = require('path');
 const {
   redirect,
   getDbfData,
-  getCmplData,
   ensureDirectoryExistence,
   saveDataToJsonFile,
 } = require('./utilities');
+const { max } = require('lodash');
+
+const getCmplData = async () => {
+  const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'CMPL.dbf');
+  console.log(dbfFilePath);
+  try {
+    let jsonData = await getDbfData(dbfFilePath);
+    jsonData = jsonData.map((entry) => {
+      return {
+        M_GROUP: entry.M_GROUP,
+        M_NAME: entry.M_NAME,
+        C_CODE: entry.C_CODE,
+        C_NAME: entry.C_NAME,
+      };
+    });
+    return jsonData;
+  } catch (error) {
+    console.error('Error reading CMPL.dbf:', error);
+    throw error;
+  }
+};
+
+function newData(json, accountMasterData) {
+  json = json.filter((item) => item.M_GROUP === 'DT');
+
+  let usersList = json.map((user) => ({
+    name: user.C_NAME,
+    title: user.C_NAME,
+    email: user.C_CODE,
+    value: user.C_CODE.substring(0, 2),
+  }));
+
+  usersList = usersList.filter((user) => user.email.endsWith('000'));
+  usersList = usersList.filter((user) => user.name && user.email);
+  usersList.sort((a, b) => a.email.localeCompare(b.email));
+
+  let newUserList = usersList.map((user) => ({
+    title: user.name,
+    subgroupCode: getNextSubgroupCode(accountMasterData, user.value),
+  }));
+
+  return newUserList;
+}
+
+function getNextSubgroupCode(accountMasterData, subGroup) {
+  let maxCode = 0;
+
+  // Filter entries in accountMasterData that match the current subGroup prefix
+  const filterData = accountMasterData.filter((entry) => entry.subgroup.startsWith(subGroup));
+
+  if (filterData.length > 0) {
+    // Iterate through filtered data to find the highest subgroup number
+    filterData.forEach((entry) => {
+      const entryNumber = parseInt(entry.subgroup.slice(2), 10); // Get the numeric part of the subgroup code
+      if (maxCode < entryNumber) {
+        maxCode = entryNumber;
+      }
+    });
+    // Increment the max code for the new subgroup
+    return subGroup + (maxCode + 1).toString().padStart(3, '0');
+  }
+
+  // If no matching subgroup exists, return the initial code
+  return `${subGroup}001`;
+}
 
 app.get('/cash-receipts', async (req, res) => {
   const filePath = path.join(__dirname, '..', 'db', 'cash-receipts.json');
@@ -34,6 +98,19 @@ app.get('/cash-receipts', async (req, res) => {
   res.send({ nextReceiptNo });
 });
 
-//getNextSubgroupCode -> input : subgroup, output : next subgroup code
+app.get('/subgrp', async (req, res) => {
+  try {
+    const cmplData = await getCmplData();
+    const accountMasterPath = path.join(__dirname, '..', 'db', 'account-master.json');
+    const accountMasterData = JSON.parse(await fs.readFile(accountMasterPath, 'utf8'));
+
+    let partyList = newData(cmplData, accountMasterData);
+    console.log('Generated Party List:', partyList);
+    res.json(partyList);
+  } catch (error) {
+    console.error('Error fetching or processing data:', error);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = app;
