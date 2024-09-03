@@ -50,5 +50,21 @@
     "series": "1234",
     "amount": "1234",
     "discount": "1234"
+  },
+  {
+    "date": "2024-09-01",
+    "voucherNo": "1",
+    "party": "AA001",
+    "series": "T",
+    "amount": "12",
+    "discount": "12"
+  },
+  {
+    "date": "2024-09-01",
+    "voucherNo": "16668",
+    "party": "AA001",
+    "series": "12",
+    "amount": "12",
+    "discount": "12"
   }
 ]

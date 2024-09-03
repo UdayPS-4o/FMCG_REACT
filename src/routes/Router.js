@@ -14,6 +14,7 @@ import DBcashreceipt from 'src/components/pages/Database/cash-receipt';
 import DBgodowntransfer from 'src/components/pages/Database/godown-transfer';
 import DBinvoicing from 'src/components/pages/Database/invoicing';
 import Adduser from 'src/components/pages/AddUser/create-new-user.js';
+import PrintCashReceipt from 'src/components/pages/Database/PrintCashReceipt';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -136,6 +137,7 @@ const Router = [
       { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
       { path: '/cash-payments', exact: true, element: <CashPayment /> },
       { path: '/godown', exact: true, element: <GodownTransfer /> },
+      { path: '/print', exact: true, element: <PrintCashReceipt /> },
       { path: '/dbf', exact: true, element: <DBFReader /> },
       { path: '/adduser', exact: true, element: <Adduser /> },
       { path: '/db/account-master', exact: true, element: <DBaccountmaster /> },
@@ -210,27 +212,27 @@ const Router = [
       { path: '/widgets/banners', element: <WidgetBanners /> },
       { path: '/widgets/charts', element: <WidgetCharts /> },
 
-      { path: '*', element: <Navigate to="/auth/404" /> },
+      // { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
-  {
-    path: '/',
-    element: <BlankLayout />,
-    children: [
-      { path: '/auth/404', element: <Error /> },
-      { path: '/auth/login', element: <Login /> },
-      { path: '/auth/login2', element: <Login2 /> },
-      { path: '/auth/register', element: <Register /> },
-      { path: '/auth/register2', element: <Register2 /> },
-      { path: '/auth/forgot-password', element: <ForgotPassword /> },
-      { path: '/auth/forgot-password2', element: <ForgotPassword2 /> },
-      { path: '/auth/two-steps', element: <TwoSteps /> },
-      { path: '/auth/two-steps2', element: <TwoSteps2 /> },
-      { path: '/auth/maintenance', element: <Maintenance /> },
-      { path: '/landingpage', element: <Landingpage /> },
-      { path: '*', element: <Navigate to="/auth/404" /> },
-    ],
-  },
+  // {
+  //   path: '/',
+  //   element: <BlankLayout />,
+  //   children: [
+  //     { path: '/auth/404', element: <Error /> },
+  //     { path: '/auth/login', element: <Login /> },
+  //     { path: '/auth/login2', element: <Login2 /> },
+  //     { path: '/auth/register', element: <Register /> },
+  //     { path: '/auth/register2', element: <Register2 /> },
+  //     { path: '/auth/forgot-password', element: <ForgotPassword /> },
+  //     { path: '/auth/forgot-password2', element: <ForgotPassword2 /> },
+  //     { path: '/auth/two-steps', element: <TwoSteps /> },
+  //     { path: '/auth/two-steps2', element: <TwoSteps2 /> },
+  //     { path: '/auth/maintenance', element: <Maintenance /> },
+  //     { path: '/landingpage', element: <Landingpage /> },
+  //     { path: '*', element: <Navigate to="/auth/404" /> },
+  //   ],
+  // },
 ];
 
 export default Router;
