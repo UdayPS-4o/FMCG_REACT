@@ -96,6 +96,10 @@ function FormSeparator() {
     await new Promise((r) => setTimeout(r, 500));
     values.fromGodown = fromGodown.GDN_CODE;
     values.toGodown = toGodown.GDN_CODE;
+    const items = values.items.map((item) => {
+      const { item: code, qty, unit } = item;
+      return { code, qty, unit };
+    });
     values.items = items;
     values.series = 'T';
     values.date = new Date().toISOString().split('T')[0];
