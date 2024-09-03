@@ -126,13 +126,13 @@ app.post('/:formType', async (req, res) => {
       }&inWords=${convertAmountToWords(formData.amount)}&party=${formData.party}&series=${
         formData.series
       }&discount=${formData.discount}&name=${formData.name}`;
-      res.send(url);
+      res.send({ url });
     }
     if (formType === 'godown') {
       let url = `/printGODOWN?data=${encodeURIComponent(JSON.stringify(formData))}`;
-      res.send(url);
+      res.send({ url });
     }
-    res.send(`/db/${formType}`);
+    res.send({ url: `/db/${formType}` });
   }
 
   try {
@@ -159,7 +159,7 @@ app.post('/:formType', async (req, res) => {
     } else {
       dbData.push(formData);
       await fs.promises.writeFile(filePath, JSON.stringify(dbData, null, 2), 'utf8');
-      res.status(200).send('Entry added successfully.' + ToBeRedirect(formType, 500));
+      res.status(200).send('Entry added successfully.');
     }
   } catch (err) {
     console.error(err);

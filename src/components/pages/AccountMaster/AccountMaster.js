@@ -4,67 +4,93 @@ import ParentCard from 'src/components/shared/ParentCard';
 import constants from 'src/constants';
 import { Grid, Button, Stack, TextField, Autocomplete } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
+import { set } from 'lodash';
 
 function FormSeparator() {
   const [party, setParty] = useState(null);
   const [sm, setSm] = useState(null);
   const [partyOptions, setPartyOptions] = useState([]);
   const [smOptions, setSmOptions] = useState([]);
+  const [stateCountry, setStateofCountry] = useState([]);
 
+  const [subGroupCode, setSubGroupCode] = useState(null);
   useEffect(() => {
     const fetchOptions = async () => {
-      const res = await fetch(constants.baseURL + '/cmpl');
+      const res = await fetch(constants.baseURL + '/slink/subgrp');
       const data = await res.json();
+      console.log(data);
 
-      const pmplRes = await fetch(constants.baseURL + '/api/dbf/pmpl.json');
-      const pmplData = await pmplRes.json();
-      const balanceRes = await fetch(constants.baseURL + '/json/balance');
-      const balanceData = await balanceRes.json();
+      const partyList = data.map((party) => ({
+        label: party.title,
+        value: party.subgroupCode,
+      }));
+      console.log(partyList);
+      setPartyOptions(partyList);
+      // console.log(partyList + 'partyOptions');
+      // setPartyOptions(partyList);
 
-      const getBalance = (C_CODE) =>
-        balanceData.data.find((user) => user.partycode === C_CODE)?.result || 0;
+      const stateres = await fetch(constants.baseURL + '/api/dbf/state.json');
+      const statedata = await stateres.json();
 
-      const partyList = data.map((user) => ({
-        value: user.C_CODE,
-        label: `${user.C_NAME} | ${getBalance(user.C_CODE)}`,
+      const stateList = statedata.map((state) => ({
+        value: state.ST_CODE,
+        label: state.ST_NAME,
       }));
 
-      setPartyOptions(partyList);
-      setSmOptions(partyList.filter((user) => user.value.startsWith('SM')));
+      setSmOptions(stateList);
+      setStateofCountry(stateList);
     };
 
     fetchOptions();
   }, []);
 
   const handlePartyChange = (event, newValue) => {
-    setParty(newValue);
+    setParty(newValue.label);
+    //sett the subgroup code of the party
+    console.log(newValue);
+    setSubGroupCode(newValue.value);
   };
 
   const handleSmChange = (event, newValue) => {
     setSm(newValue);
   };
 
+  // useEffect(() => {
+  //   console.log(party);
+  //   console.log(subGroupCode + 'subGroupCode');
+  //   // console.log(sm);
+  // }, [party, subGroupCode]);
+
   return (
     <Formik
       initialValues={{}}
       onSubmit={async (values) => {
-        // await new Promise((r) => setTimeout(r, 500));
-        const defultval = await fetch(constants.baseURL + '/slink/cash-receipts');
-        const defultvaldata = await defultval.json();
-        // values.receipt_no = defultvaldata.nextReceiptNo;
-        values.receiptNo = defultvaldata.nextReceiptNo;
-        values.party = party;
-        values.sm = sm;
-        // alert(JSON.stringify(values, null, 2));
-        let res = await fetch(constants.baseURL + '/account-master', {
+        // values.subgroup = subGroupCode;
+        console.log('handler', { values, party });
+        values.subgroup = subGroupCode;
+        console.log(values.subgroup);
+        // values.receiptNo = recieptData.nextCode;
+
+        const stateCode = stateCountry.find((state) => state.label === sm.label);
+        values.statecode = stateCode?.value;
+
+        const res = await fetch(constants.baseURL + '/account-master', {
           method: 'POST',
           body: JSON.stringify(values),
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        let response = await res.text();
-        alert(response);
+
+        let groupCode = subGroupCode;
+        groupCode = Number(groupCode.slice(2));
+        groupCode++;
+        let groupLetter = subGroupCode.slice(0, 2);
+        groupCode = groupLetter + groupCode;
+        console.log(groupCode);
+        setSubGroupCode(groupCode);
+
+        // setSubGroupCode(subGroupCode)
       }}
     >
       {({ isSubmitting }) => (
@@ -79,21 +105,21 @@ function FormSeparator() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="a/c_head" as={TextField} label="A/C Head" fullWidth />
+              <Field name="achead" as={TextField} label="A/C Head" fullWidth />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Field name="address_l1" as={TextField} label="Address Line 1" fullWidth />
+              <Field name="addressline1" as={TextField} label="Address Line 1" fullWidth />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Field name="addressline2" as={TextField} label="Address Line 2" fullWidth />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <Field name="address_l2" as={TextField} label="Address Line 2" fullWidth />
-            </Grid>
             <Grid item xs={12} sm={6}>
               <Field name="place" as={TextField} label="Place" fullWidth />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="pin_Code" as={TextField} label="Pin Code" fullWidth />
+              <Field name="pincode" as={TextField} label="Pin Code" fullWidth />
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -106,17 +132,17 @@ function FormSeparator() {
             <Grid item xs={12} sm={6}>
               <Field name="aadhar" as={TextField} label="Aadhar" fullWidth />
             </Grid>
-
             <Grid item xs={12} sm={6}>
-              <Field name="gstin" as={TextField} label="GSTIN" fullWidth />
+              <Field name="gst" as={TextField} label="GSTIN" fullWidth />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Field name="dl_no" as={TextField} label="DL NO." fullWidth />
+              <Field name="dlno" as={TextField} label="DL NO." fullWidth />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="fssai" as={TextField} label="FSSAI NO." fullWidth />
+              <Field name="fssaino" as={TextField} label="FSSAI NO." fullWidth />
             </Grid>
+
             <Grid item xs={12} sm={6}>
               <Field name="email" as={TextField} label="Email" fullWidth />
             </Grid>
@@ -126,7 +152,7 @@ function FormSeparator() {
                 options={smOptions}
                 getOptionLabel={(option) => option.label}
                 onChange={handleSmChange}
-                renderInput={(params) => <TextField {...params} label="S/M" fullWidth />}
+                renderInput={(params) => <TextField {...params} label="State Code" fullWidth />}
               />
             </Grid>
 

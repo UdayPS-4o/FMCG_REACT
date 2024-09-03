@@ -278,5 +278,15 @@
     "party": "CT000",
     "name": "TRADE CREDITORS | 0",
     "receiptNo": 71
+  },
+  {
+    "date": "2024-09-04",
+    "series": "234",
+    "amount": 12341234,
+    "discount": 123,
+    "receipt_no": "",
+    "party": "AA001",
+    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR",
+    "receiptNo": 72
   }
 ]
