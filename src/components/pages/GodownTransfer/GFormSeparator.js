@@ -94,9 +94,12 @@ function FormSeparator() {
 
   const handleSubmit = async (values) => {
     await new Promise((r) => setTimeout(r, 500));
-    values.fromGodown = fromGodown;
-    values.toGodown = toGodown;
+    values.fromGodown = fromGodown.GDN_CODE;
+    values.toGodown = toGodown.GDN_CODE;
     values.items = items;
+    values.series = 'T';
+    values.date = new Date().toISOString().split('T')[0];
+    console.log('Form data:', values);
     alert(JSON.stringify(values, null, 2));
   };
 
