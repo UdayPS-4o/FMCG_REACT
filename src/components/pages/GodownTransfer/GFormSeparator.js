@@ -96,9 +96,9 @@ function FormSeparator() {
     await new Promise((r) => setTimeout(r, 500));
     values.fromGodown = fromGodown.GDN_CODE;
     values.toGodown = toGodown.GDN_CODE;
-    const items = values.items.map((item) => {
-      const { item: code, qty, unit } = item;
-      return { code, qty, unit };
+    const items = values.items.map((el) => {
+      const { item, qty, unit } = el;
+      return { code: item, qty, unit };
     });
     values.items = items;
     values.series = 'T';
