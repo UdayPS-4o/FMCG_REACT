@@ -2,54 +2,142 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Button, Stack, TextField, Autocomplete } from '@mui/material';
 import constants from 'src/constants';
 import { Formik, Form, Field } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 function FormSeparator() {
+  const [partyOptions, setPartyOptions] = useState([]);
   const [party, setParty] = useState(null);
+  const [voucherNo, setVoucherNo] = useState(null);
+  const [initialValues, setInitialValues] = useState({
+    date: '',
+    series: '',
+    amount: '', // Changed to lowercase 'amount'
+    discount: '', // Changed to lowercase 'discount'
+    voucherNo: '',
+  });
+  const [isEDIT, setIsEDIT] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEditData = async () => {
+      try {
+        const res = await fetch(constants.baseURL + '/json/cash-payments');
+        const data = await res.json();
+        console.log('data', data);
+
+        const params = new URLSearchParams(window.location.search);
+        const voucher = params.get('sub');
+
+        const paymentToEdit = data.find((payment) => payment.voucherNo === voucher);
+        console.log('paymentToEdit', paymentToEdit);
+
+        if (!paymentToEdit) {
+          toast.error('Payment record not found');
+          return;
+        }
+
+        setVoucherNo(paymentToEdit.voucherNo);
+
+        setInitialValues({
+          date: paymentToEdit.date,
+          series: paymentToEdit.series,
+          amount: paymentToEdit.amount,
+          discount: paymentToEdit.discount,
+          voucherNo: paymentToEdit.voucherNo,
+        });
+
+        const resParty = await fetch(constants.baseURL + '/cmpl');
+        const partyData = await resParty.json();
+        const balanceRes = await fetch(constants.baseURL + '/json/balance');
+        const balanceData = await balanceRes.json();
+
+        const getBalance = (C_CODE) =>
+          balanceData.data.find((user) => user.partycode === C_CODE)?.result || 0;
+
+        const partyList = partyData.map((user) => ({
+          value: user.C_CODE,
+          label: `${user.C_NAME} | ${getBalance(user.C_CODE)}`,
+        }));
+
+        setPartyOptions(partyList);
+        setParty(partyList.find((p) => p.value === paymentToEdit.party));
+      } catch (error) {
+        console.error('Failed to fetch data for edit:', error);
+        toast.error('Failed to load cash payment details');
+      }
+    };
+
+    const fetchNewData = async () => {
+      try {
+        const resVoucher = await fetch(constants.baseURL + '/slink/cash-payments');
+        const dataVoucher = await resVoucher.json();
+        setVoucherNo(dataVoucher.nextReceiptNo);
+
+        const resParty = await fetch(constants.baseURL + '/cmpl');
+        const dataParty = await resParty.json();
+        const balanceRes = await fetch(constants.baseURL + '/json/balance');
+        const balanceData = await balanceRes.json();
+
+        const getBalance = (C_CODE) =>
+          balanceData.data.find((user) => user.partycode === C_CODE)?.result || 0;
+
+        const partyList = dataParty.map((user) => ({
+          value: user.C_CODE,
+          label: `${user.C_NAME} | ${getBalance(user.C_CODE)}`,
+        }));
+
+        setPartyOptions(partyList);
+      } catch (error) {
+        toast.error('Failed to fetch data for new entry');
+      }
+    };
+
+    const currentUrl = window.location.href;
+    if (currentUrl.includes('edit')) {
+      setIsEDIT(true);
+      fetchEditData();
+    } else {
+      fetchNewData();
+    }
+  }, []);
 
   const handlePartyChange = (event, newValue) => {
     setParty(newValue);
   };
 
-  useEffect(() => {
-    const fetchOptions = async () => {
-      const res = await fetch(constants.baseURL + '/cmpl');
-      const data = await res.json();
-      const balanceRes = await fetch(constants.baseURL + '/json/balance');
-      const balanceData = await balanceRes.json();
-
-      const getBalance = (C_CODE) =>
-        balanceData.data.find((user) => user.partycode === C_CODE)?.result || 0;
-
-      const partyList = data.map((user) => ({
-        value: user.C_CODE,
-        label: `${user.C_NAME} | ${getBalance(user.C_CODE)}`,
-      }));
-      console.log('partyList', partyList);
-
-      setParty(partyList);
-    };
-
-    fetchOptions();
-  }, []);
-
   return (
     <Formik
-      initialValues={{}}
+      initialValues={initialValues}
+      enableReinitialize
       onSubmit={async (values) => {
-        // await new Promise((r) => setTimeout(r, 500));
-        console.log('submit');
-        // values.party = party;
-        // alert(JSON.stringify(values, null, 2));
-        const defultval = await fetch(constants.baseURL + '/slink/cash-receipts');
-        const defultvaldata = await defultval.json();
-        // values.receipt_no = defultvaldata.nextReceiptNo;
-        values.receiptNo = defultvaldata.nextReceiptNo;
+        values.voucherNo = `${voucherNo || values.voucherNo}`;
         values.party = party?.value;
-        values.name = party?.label;
-        // fetch the value of party from the data
-        //
+        values.amount = `${values.amount}`;
 
-        alert(JSON.stringify(values, null, 2));
+        try {
+          const route = isEDIT ? `/slink/editCashPay` : `/cash-payments`;
+          const response = await fetch(constants.baseURL + route, {
+            method: 'POST',
+            body: JSON.stringify(values),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (!response.ok) {
+            const errorMessage = await response.text();
+            toast.error(`Error: ${errorMessage}`);
+            return;
+          }
+
+          toast.success('Data saved successfully!');
+          navigate('/db/cash-payments');
+        } catch (error) {
+          console.error('Network error:', error);
+          toast.error('Network error. Please try again later.');
+        }
       }}
     >
       {({ isSubmitting }) => (
@@ -62,17 +150,24 @@ function FormSeparator() {
                 as={TextField}
                 label="Date"
                 fullWidth
-                defaultValue="2024-08-10"
+                defaultValue={initialValues.date}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="voucherNo" type="number" as={TextField} label="Voucher No." fullWidth />
+              <TextField
+                label="Voucher No."
+                type="number"
+                fullWidth
+                disabled
+                value={voucherNo || initialValues.voucherNo || ''}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Autocomplete
-                options={party}
+                options={partyOptions}
                 getOptionLabel={(option) => option.label}
                 onChange={handlePartyChange}
+                value={party || null}
                 renderInput={(params) => <TextField {...params} label="Party" fullWidth />}
               />
             </Grid>
@@ -80,22 +175,23 @@ function FormSeparator() {
               <Field name="series" as={TextField} label="Series" fullWidth />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="Amount" as={TextField} label="Amount" fullWidth />
+              <Field name="amount" as={TextField} label="Amount" fullWidth />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="Discount" type="number" as={TextField} label="Discount" fullWidth />
+              <Field name="discount" type="number" as={TextField} label="Discount" fullWidth />
             </Grid>
             <Grid item xs={12}>
               <Stack direction="row" spacing={2} justifyContent="flex-end">
                 <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
                   Save changes
                 </Button>
-                <Button variant="text" color="error">
+                <Button variant="text" color="error" onClick={() => navigate('/db/cash-payments')}>
                   Cancel
                 </Button>
               </Stack>
             </Grid>
           </Grid>
+          <ToastContainer />
         </Form>
       )}
     </Formik>

@@ -42,9 +42,9 @@ function FormSeparator() {
         try {
           const accounts = await fetch(constants.baseURL + '/json/account-master');
           const data = await accounts.json();
-          
+
           const account = data.find((account) => account.subgroup === subgroup);
-          
+
           if (account) {
             setPartyOptions([{ label: account.subgroup, value: account.subgroup }]);
             setSubGroupCode(account.subgroup);
@@ -66,7 +66,6 @@ function FormSeparator() {
               statecode: account.statecode,
             });
 
-        
             // Set the state options if needed
             const stateres = await fetch(constants.baseURL + '/api/dbf/state.json');
             const statedata = await stateres.json();
@@ -82,6 +81,33 @@ function FormSeparator() {
           }
         } catch (error) {
           console.log(error);
+          toast.error('Failed to fetch account details');
+        }
+      };
+
+      fetchAccountData();
+    } else {
+      setIsEDIT(false);
+      const fetchAccountData = async () => {
+        try {
+          const res = await fetch(constants.baseURL + '/slink/subgrp');
+          const data = await res.json();
+          setPartyOptions(
+            data.map((party) => ({
+              label: party.title,
+              value: party.subgroupCode,
+            })),
+          );
+
+          const stateres = await fetch(constants.baseURL + '/api/dbf/state.json');
+          const statedata = await stateres.json();
+          setSmOptions(
+            statedata.map((state) => ({
+              value: state.ST_CODE,
+              label: state.ST_NAME,
+            })),
+          );
+        } catch (error) {
           toast.error('Failed to fetch account details');
         }
       };
@@ -144,10 +170,10 @@ function FormSeparator() {
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <Autocomplete
-                options={partyOptions}
-                getOptionLabel={(option) => option.label}
-                onChange={handlePartyChange}
-                renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
+                  options={partyOptions}
+                  getOptionLabel={(option) => option.label}
+                  onChange={handlePartyChange}
+                  renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -231,15 +257,14 @@ function FormSeparator() {
               </Grid>
               <Grid item xs={12}>
                 <Stack direction="row" spacing={2} justifyContent="flex-end">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
+                  <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
                     Save Changes
                   </Button>
-                  <Button variant="text" color="error" onClick={() => navigate('/db/account-master')}>
+                  <Button
+                    variant="text"
+                    color="error"
+                    onClick={() => navigate('/db/account-master')}
+                  >
                     Cancel
                   </Button>
                 </Stack>

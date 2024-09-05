@@ -111,6 +111,116 @@ app.get('/subgrp', async (req, res) => {
     console.error('Error fetching or processing data:', error);
     res.status(500).send('Server error');
   }
+  z;
+});
+
+app.get('/cash-payments', async (req, res) => {
+  const filePath = path.join(__dirname, '..', 'db', 'cash-payments.json');
+  let nextReceiptNo = 1;
+
+  try {
+    const data = await fs.readFile(filePath, 'utf8').then(
+      (data) => JSON.parse(data),
+      (error) => {
+        if (error.code !== 'ENOENT') throw error; // Ignore file not found errors
+      },
+    );
+    if (data && data.length) {
+      const lastEntry = data[data.length - 1];
+      nextReceiptNo = Number(lastEntry.voucherNo) + 1;
+    }
+  } catch (error) {
+    console.error('Failed to read or parse cash-payments.json:', error);
+    res.status(500).send('Server error');
+    return;
+  }
+
+  res.send({ nextReceiptNo });
+});
+
+app.post('/editCashPay', async (req, res) => {
+  const filePath = path.join(__dirname, '..', 'db', 'cash-payments.json');
+  try {
+    // Read the cash-payments.json file
+    const data = await fs.readFile(filePath, 'utf8');
+    let cashPayments = JSON.parse(data);
+
+    // Extract and trim the voucherNo from the request body
+    const { voucherNo, date, series, party, amount, discount } = req.body;
+    const trimmedVoucherNo = voucherNo.trim();
+
+    // Find the index of the entry with the provided voucherNo
+    const entryIndex = cashPayments.findIndex(
+      (entry) => entry.voucherNo.trim() === trimmedVoucherNo,
+    );
+
+    if (entryIndex === -1) {
+      res.status(404).json({ message: 'Entry not found' });
+      return;
+    }
+
+    // Update the entry
+    cashPayments[entryIndex] = {
+      ...cashPayments[entryIndex], // preserve any fields not being updated
+      date,
+      series,
+      party,
+      amount,
+      discount,
+    };
+
+    // Write the updated data back to the JSON file
+    await fs.writeFile(filePath, JSON.stringify(cashPayments, null, 2));
+
+    res.status(200).json({ message: 'Cash payment updated successfully' });
+  } catch (error) {
+    console.error('Failed to update cash-payments.json:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.post('/editCashReciept', async (req, res) => {
+  const filePath = path.join(__dirname, '..', 'db', 'cash-receipts.json');
+  try {
+    // Read the cash-receipts.json file
+    const data = await fs.readFile(filePath, 'utf8').then(
+      (data) => JSON.parse(data),
+      (error) => {
+        if (error.code === 'ENOENT') return [];
+        throw error;
+      },
+    );
+
+    // Extract and trim the receiptNo from the request body
+    const { receiptNo, date, series, party, amount, discount } = req.body;
+    const trimmedReceiptNo = receiptNo.trim();
+
+    // Find the index of the entry with the provided receiptNo
+    const entryIndex = data.findIndex((entry) => entry.receiptNo.trim() === trimmedReceiptNo);
+
+    if (entryIndex === -1) {
+      res.status(404).json({ message: 'Entry not found' });
+      return;
+    }
+
+    // Update the entry
+    data[entryIndex] = {
+      ...data[entryIndex], // preserve any fields not being updated
+      date,
+      series,
+      party,
+      amount,
+      discount,
+    };
+
+    // Write the updated data back to the JSON file
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+
+    res.status(200).json({ message: 'Cash receipt updated successfully' });
+  } catch (error) {
+    console.error('Failed to update cash-receipts.json:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 module.exports = app;
