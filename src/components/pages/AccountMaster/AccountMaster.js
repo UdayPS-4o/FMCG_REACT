@@ -48,6 +48,7 @@ function FormSeparator() {
           if (account) {
             setPartyOptions([{ label: account.subgroup, value: account.subgroup }]);
             setSubGroupCode(account.subgroup);
+            console.log(account.aadhar);
 
             // Set the form fields with the fetched data
             setInitialValues({
@@ -253,6 +254,10 @@ function FormSeparator() {
                   getOptionLabel={(option) => option.label}
                   onChange={handleSmChange}
                   renderInput={(params) => <TextField {...params} label="State Code" fullWidth />}
+                  // autoHighlight={true}
+                  value={
+                    smOptions.find((option) => option.label === initialValues.statecode) || null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>

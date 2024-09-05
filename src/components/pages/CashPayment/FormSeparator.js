@@ -5,13 +5,14 @@ import { Formik, Form, Field } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { set } from 'lodash';
 
 function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
   const [party, setParty] = useState(null);
   const [voucherNo, setVoucherNo] = useState(null);
   const [initialValues, setInitialValues] = useState({
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     series: '',
     amount: '', // Changed to lowercase 'amount'
     discount: '', // Changed to lowercase 'discount'
@@ -71,10 +72,6 @@ function FormSeparator() {
 
     const fetchNewData = async () => {
       try {
-        const resVoucher = await fetch(constants.baseURL + '/slink/cash-payments');
-        const dataVoucher = await resVoucher.json();
-        setVoucherNo(dataVoucher.nextReceiptNo);
-
         const resParty = await fetch(constants.baseURL + '/cmpl');
         const dataParty = await resParty.json();
         const balanceRes = await fetch(constants.baseURL + '/json/balance');
@@ -99,6 +96,7 @@ function FormSeparator() {
       setIsEDIT(true);
       fetchEditData();
     } else {
+      setIsEDIT(false);
       fetchNewData();
     }
   }, []);
@@ -154,13 +152,7 @@ function FormSeparator() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                label="Voucher No."
-                type="number"
-                fullWidth
-                disabled
-                value={voucherNo || initialValues.voucherNo || ''}
-              />
+              <Field name="voucherNo" as={TextField} label="Voucher No" fullWidth />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Autocomplete

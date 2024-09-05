@@ -10,7 +10,7 @@ function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
   const [receiptNo, setReceiptNo] = useState(null);
   const [initialValues, setInitialValues] = useState({
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     series: '',
     amount: '',
     discount: '',

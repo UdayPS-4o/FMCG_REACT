@@ -87,9 +87,17 @@
   {
     "date": "2024-09-26",
     "series": "ST",
-    "amount": "1341234",
-    "discount": 12342134,
+    "amount": "134123412341234",
+    "discount": 1234213412341234,
     "voucherNo": "16674",
     "party": "CT002"
+  },
+  {
+    "date": "2024-09-05",
+    "series": "1234",
+    "amount": "12341234",
+    "discount": 12,
+    "voucherNo": "MyNigga",
+    "party": "CT007"
   }
 ]
