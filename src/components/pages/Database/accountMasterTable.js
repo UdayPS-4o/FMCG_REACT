@@ -90,6 +90,11 @@ const ProductTableList = () => {
     window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
   };
 
+  const handleEdit = (subgroup) => {
+    console.log('subgroup', subgroup);
+    window.location.href = `/edit/${endpoint}?sub=${subgroup}`;
+  }
+
   return (
     <Box>
       <Toolbar>
@@ -151,7 +156,9 @@ const ProductTableList = () => {
                       <IconButton>
                         <DeleteIcon />
                       </IconButton>
-                      <IconButton>
+                      <IconButton onClick={() => {
+                        handleEdit(row.subgroup)
+                      }}>
                         <EditIcon />
                       </IconButton>
                       {endpoint !== 'account-master' ? (

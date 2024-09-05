@@ -11,7 +11,7 @@
       }
     }
   },
-  "extends": ["react-app", "react-app/jest", "prettier", "plugin:react-hooks/recommended"],
+  "extends": ["react-app", "prettier", "plugin:react-hooks/recommended"],
   "plugins": ["prettier", "react", "react-hooks"],
   "rules": {
     "comma-dangle": "off",

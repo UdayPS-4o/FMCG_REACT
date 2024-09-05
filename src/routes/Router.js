@@ -133,6 +133,7 @@ const Router = [
     children: [
       { path: '/', element: <Navigate to="/dashboards/modern" /> },
       { path: '/account-master', exact: true, element: <AccountMaster /> },
+      { path: '/edit/account-master', exact: true, element: <AccountMaster /> },
       { path: '/invoicing', exact: true, element: <Invoicing /> },
       { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
       { path: '/cash-payments', exact: true, element: <CashPayment /> },
