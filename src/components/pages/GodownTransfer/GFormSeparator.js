@@ -3,6 +3,7 @@ import { Grid, Button, Stack, TextField, Autocomplete, Divider } from '@mui/mate
 import { Formik, Form, Field } from 'formik';
 import constants from 'src/constants';
 import CollapsibleItemSection from './CollapsibleItemSection'; // Adjust the import based on your file structure
+import { set } from 'lodash';
 
 function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
@@ -23,6 +24,7 @@ function FormSeparator() {
   ]);
   const [expanded, setExpanded] = useState(0);
   const [pmplData, setPmplData] = useState([]);
+  const [id, setId] = useState('');
   const baseURL = constants.baseURL;
 
   useEffect(() => {
@@ -50,7 +52,13 @@ function FormSeparator() {
 
     fetchOptions();
   }, []);
-
+  useEffect(() => {
+    async function fetchId() {
+      const lastHASH = await fetch('http://localhost/api/TRFLAST').then((res) => res.text());
+      setId(lastHASH);
+    }
+    fetchId();
+  }, []);
   const handleFromGodownChange = (event, newValue) => {
     console.log('From Godown:', newValue);
     setFromGodown(newValue);
@@ -101,6 +109,7 @@ function FormSeparator() {
       return { code: item, qty, unit };
     });
     values.items = items;
+    values.id = id;
     values.series = 'T';
     values.date = new Date().toISOString().split('T')[0];
     console.log('Form data:', values);
@@ -135,7 +144,7 @@ function FormSeparator() {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Field name="#" as={TextField} label="#" fullWidth disabled defaultValue="" />
+                  <Field name="#" as={TextField} label="#" fullWidth disabled defaultValue={id} />
                 </Grid>
               </Grid>
             </Grid>

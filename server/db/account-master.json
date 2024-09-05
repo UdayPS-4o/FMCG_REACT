@@ -446,5 +446,37 @@
     "email": "poqovijy@mailinator.com",
     "subgroup": "BG002",
     "statecode": "27"
+  },
+  {
+    "achead": "12",
+    "addressline1": "2",
+    "addressline2": "2",
+    "place": "22",
+    "pincode": 400004,
+    "email": "kusum.aayushi@gmail.com",
+    "mobile": 7223969523,
+    "pan": "2",
+    "aadhar": 2,
+    "gst": "2",
+    "dlno": "2",
+    "fssaino": "2",
+    "subgroup": "AG053",
+    "statecode": "27"
+  },
+  {
+    "achead": "12",
+    "addressline1": "street 1",
+    "pincode": 400004,
+    "email": "kusum.aayushi@gmail.com",
+    "addressline2": "2",
+    "place": "22",
+    "mobile": 7223969523,
+    "pan": "2",
+    "aadhar": 3,
+    "gst": "2",
+    "dlno": "2",
+    "fssaino": "2",
+    "subgroup": "AG054",
+    "statecode": "23"
   }
 ]

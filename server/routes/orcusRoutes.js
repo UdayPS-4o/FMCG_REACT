@@ -85,5 +85,15 @@ app.get('/print', async (req, res) => {
     res.send(error);
   }
 });
-
+app.get('/account-master', async (req, res) => {
+  try {
+    const { code } = req.query;
+    const data = await fetch('http://localhost/json/account-master');
+    const json = await data.json();
+    const user = json.find((user) => user.C_CODE === req.query.code);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 module.exports = app;
