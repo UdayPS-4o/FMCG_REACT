@@ -70,8 +70,9 @@ function convertAmountToWords(amount) {
 }
 app.get('/print', async (req, res) => {
   try {
-    const { ReceiptNo, voucherNo } = req.query;
-    if (!ReceiptNo && !voucherNo) throw new Error('ReceiptNo or VoucherNo is required');
+    const { ReceiptNo, voucherNo, godownId } = req.query;
+    if (!ReceiptNo && !voucherNo && !godownId)
+      throw new Error('ReceiptNo or VoucherNo is required');
     if (ReceiptNo) {
       const data = await fetch('http://localhost/json/cash-receipts');
       const json = await data.json();
@@ -87,6 +88,16 @@ app.get('/print', async (req, res) => {
       const data = await fetch('http://localhost/json/cash-payments');
       const json = await data.json();
       const receipt = json.find((receipt) => receipt.voucherNo === voucherNo);
+      const cmpl = await fetch('http://localhost/cmpl');
+      const cmplJson = await cmpl.json();
+      const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
+      const AmountInWords = convertAmountToWords(receipt.amount);
+      res.send({ ...receipt, ...cmplData, AmountInWords });
+    }
+    if (godownId) {
+      const data = await fetch('http://localhost/json/godown');
+      const json = await data.json();
+      const receipt = json.find((receipt) => receipt.id === godownId);
       const cmpl = await fetch('http://localhost/cmpl');
       const cmplJson = await cmpl.json();
       const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);

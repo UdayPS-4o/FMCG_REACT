@@ -6,6 +6,11 @@ import constants from 'src/constants';
 function FormSeparator() {
   const [party, setParty] = useState(null);
   const [sm, setSm] = useState(null);
+  const [date, setDate] = useState('2024-08-10');
+  const [series, setSeries] = useState('');
+  const [cash, setCash] = useState('');
+  const [dueDays, setDueDays] = useState('');
+  const [ref, setRef] = useState('');
   const [items, setItems] = useState([
     {
       item: '',
@@ -31,6 +36,7 @@ function FormSeparator() {
   const [smOptions, setSmOptions] = useState([]);
   const [pmplData, setPmplData] = useState([]);
   const baseURL = constants.baseURL;
+
   useEffect(() => {
     const fetchOptions = async () => {
       const res = await fetch(`${baseURL}/cmpl`);
@@ -103,48 +109,69 @@ function FormSeparator() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('Party:', party);
     console.log('S/M:', sm);
     console.log('Items:', items); // Log the array of objects
 
-    const postForm = document.createElement('form');
-    postForm.method = 'POST';
-    postForm.action = '/godown';
-
+    const InvoiceId = await fetch(`${baseURL}/slink/invoiceId`).then((res) => res.json());
+    console.log('InvoiceId', InvoiceId);
     const data = {
-      date: document.querySelector('input[name="date"]').value,
-      series: document.querySelector('input[name="series"]').value,
-      cash: document.querySelector('input[name="Cash"]').value,
+      date,
+      series,
+      cash,
+      id: InvoiceId.nextInvoiceId,
       party: party?.value || '',
       sm: sm?.value || '',
-      dueDays: document.querySelector('input[name="due-days"]').value,
-      ref: document.querySelector('input[name="ref"]').value,
+      dueDays,
+      ref,
       items,
     };
 
-    Object.keys(data).forEach((key) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = key === 'items' ? JSON.stringify(data[key]) : data[key];
-      postForm.appendChild(input);
-    });
-
-    document.body.appendChild(postForm);
-    postForm.submit();
+    console.log('Data:', data);
+    try {
+      const res = await fetch(`${baseURL}/invoicing`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      console.log('res', res);
+    } catch (error) {
+      console.error(error);
+    }
+    // Simulate form submission or handle your submission logic here
   };
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={4}>
-        <TextField label="Date" type="date" fullWidth defaultValue="2024-08-10" />
+        <TextField
+          label="Date"
+          type="date"
+          fullWidth
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <TextField label="Series" placeholder="T" fullWidth />
+        <TextField
+          label="Series"
+          placeholder="T"
+          fullWidth
+          value={series}
+          onChange={(e) => setSeries(e.target.value)}
+        />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <TextField label="Cash" placeholder="Y" fullWidth />
+        <TextField
+          label="Cash"
+          placeholder="Y"
+          fullWidth
+          value={cash}
+          onChange={(e) => setCash(e.target.value)}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <Autocomplete
@@ -162,7 +189,22 @@ function FormSeparator() {
           renderInput={(params) => <TextField {...params} label="S/M" fullWidth />}
         />
       </Grid>
-
+      <Grid item xs={12} sm={4}>
+        <TextField
+          label="Due Days"
+          fullWidth
+          value={dueDays}
+          onChange={(e) => setDueDays(e.target.value)}
+        />
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <TextField
+          label="Reference"
+          fullWidth
+          value={ref}
+          onChange={(e) => setRef(e.target.value)}
+        />
+      </Grid>
       <Grid item xs={12} alignItems="stretch">
         {items.map((item, index) => (
           <CollapsibleItemSection
@@ -178,13 +220,11 @@ function FormSeparator() {
         ))}
         <Divider />
       </Grid>
-
       <Grid item xs={12}>
         <Button variant="outlined" onClick={addItem}>
           Add Another Item
         </Button>
       </Grid>
-
       <Grid item xs={12}>
         <Stack direction="row" spacing={2} justifyContent="flex-end">
           <Button variant="contained" color="primary" onClick={handleSubmit}>

@@ -1,0 +1,121 @@
+[
+  {
+    "date": "2024-08-10",
+    "series": "R",
+    "cash": "1234",
+    "id": 11,
+    "party": "OB001",
+    "sm": "SM001",
+    "dueDays": "1234",
+    "ref": "rf2",
+    "items": [
+      {
+        "item": "MK001",
+        "stock": 1821,
+        "godown": "",
+        "pack": "4.5 KG",
+        "gst": 5,
+        "pcBx": 4,
+        "mrp": 907,
+        "rate": 585,
+        "qty": "01",
+        "unit": "Box",
+        "amount": "2340.00",
+        "netAmount": "2082.60",
+        "cess": "1",
+        "sch": "11",
+        "cd": "1"
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 12,
+    "party": "",
+    "sm": "",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "",
+        "godown": "",
+        "unit": "",
+        "stock": "",
+        "pack": "",
+        "gst": "",
+        "pcBx": "",
+        "mrp": "",
+        "rate": "",
+        "qty": "",
+        "cess": "",
+        "schRs": "",
+        "sch": "",
+        "cd": "",
+        "amount": "",
+        "netAmount": ""
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 13,
+    "party": "",
+    "sm": "",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "",
+        "godown": "",
+        "unit": "",
+        "stock": "",
+        "pack": "",
+        "gst": "",
+        "pcBx": "",
+        "mrp": "",
+        "rate": "",
+        "qty": "",
+        "cess": "",
+        "schRs": "",
+        "sch": "",
+        "cd": "",
+        "amount": "",
+        "netAmount": ""
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 14,
+    "party": "",
+    "sm": "",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "",
+        "godown": "",
+        "unit": "",
+        "stock": "",
+        "pack": "",
+        "gst": "",
+        "pcBx": "",
+        "mrp": "",
+        "rate": "",
+        "qty": "",
+        "cess": "",
+        "schRs": "",
+        "sch": "",
+        "cd": "",
+        "amount": "",
+        "netAmount": ""
+      }
+    ]
+  }
+]

@@ -50,7 +50,26 @@ function FormSeparator() {
       }
     };
 
+    const fetchEditData = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const godownId = params.get('id');
+
+      if (godownId) {
+        try {
+          const res = await fetch(`${baseURL}/godown/${godownId}`);
+          const data = await res.json();
+
+          setFormValues(data);
+          setFromGodown(data.fromGodown);
+          setToGodown(data.toGodown);
+        } catch (error) {
+          console.error('Error fetching edit data:', error);
+        }
+      }
+    };
+
     fetchOptions();
+    fetchEditData();
   }, []);
 
   const handleChange = (e) => {
@@ -131,9 +150,6 @@ function FormSeparator() {
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-
-    // console.log('Form data:', payload);
-    // alert(JSON.stringify(payload, null, 2));
   };
 
   return (

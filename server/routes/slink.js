@@ -244,6 +244,27 @@ async function getNextGodownId(req, res) {
   }
 }
 
+async function getNextInvoiceId(req, res) {
+  const filePath = path.join(__dirname, '..', 'db', 'invoicing.json');
+  let nextGodownId = 1;
+
+  try {
+    const data = await fs.readFile(filePath, 'utf8').then(
+      (data) => JSON.parse(data),
+      (error) => {
+        if (error.code !== 'ENOENT') throw error; // Ignore file not found errors
+      },
+    );
+    const GodownId = data[data.length - 1].id;
+    const nextInvoiceId = Number(GodownId) + 1;
+    res.send({ nextInvoiceId });
+  } catch (error) {
+    console.error('Failed to read or parse godowns.json:', error);
+    res.status(500).send('Server error');
+  }
+}
+
 app.get('/godownId', getNextGodownId);
+app.get('/invoiceId', getNextInvoiceId);
 
 module.exports = app;

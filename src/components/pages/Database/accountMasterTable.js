@@ -23,6 +23,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/Print';
 import constants from 'src/constants';
 import { red } from '@mui/material/colors';
+import { toast } from 'react-toastify';
 
 const fetchProducts = async (endpoint) => {
   let data = await fetch(constants.baseURL + '/json/' + endpoint);
@@ -86,8 +87,13 @@ const ProductTableList = () => {
 
   console.log('sortedRows', sortedRows);
   const handlePrint = (ReceiptNo) => {
+    console.log('ReceiptNo', ReceiptNo);
+    if (!endpoint) {
+      toast.error('Endpoint is required');
+    }
     if (endpoint == 'cash-receipts') window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
     if (endpoint == 'cash-payments') window.location.href = `/print?voucherNo=${ReceiptNo}`;
+    if (endpoint == 'godown') window.location.href = `/print?godownId=${ReceiptNo}`;
   };
 
   const handleEdit = (subgroup) => {
@@ -163,7 +169,9 @@ const ProductTableList = () => {
                             handleEdit(row.subgroup);
                           } else if (endpoint === 'cash-receipts') {
                             handleEdit(row.receiptNo);
-                          } else {
+                          } else if (endpoint === 'godown') {
+                            handleEdit(row.id);
+                          } else if (endpoint === 'cash-payments') {
                             handleEdit(row.voucherNo);
                           }
                         }}
@@ -178,7 +186,9 @@ const ProductTableList = () => {
                                 handlePrint(row.subgroup);
                               } else if (endpoint === 'cash-receipts') {
                                 handlePrint(row.receiptNo);
-                              } else {
+                              } else if (endpoint === 'godown') {
+                                handlePrint(row.id);
+                              } else if (endpoint === 'cash-payments') {
                                 handlePrint(row.voucherNo);
                               }
                             }}
