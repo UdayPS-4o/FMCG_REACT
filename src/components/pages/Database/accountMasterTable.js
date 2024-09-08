@@ -40,7 +40,6 @@ const ProductTableList = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [search, setSearch] = React.useState('');
-
   React.useEffect(() => {
     let point = window.location.href.split('/db/')[1].toLowerCase();
     // console.log('point', point);
@@ -87,7 +86,8 @@ const ProductTableList = () => {
 
   console.log('sortedRows', sortedRows);
   const handlePrint = (ReceiptNo) => {
-    window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
+    if (endpoint == 'cash-receipts') window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
+    if (endpoint == 'cash-payments') window.location.href = `/print?voucherNo=${ReceiptNo}`;
   };
 
   const handleEdit = (subgroup) => {
@@ -137,7 +137,8 @@ const ProductTableList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortedRows
+              {filteredRows
+                .reverse()
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow hover tabIndex={-1} key={index}>
@@ -173,7 +174,13 @@ const ProductTableList = () => {
                         <IconButton>
                           <div
                             onClick={() => {
-                              handlePrint(row.receiptNo);
+                              if (endpoint === 'account-master') {
+                                handlePrint(row.subgroup);
+                              } else if (endpoint === 'cash-receipts') {
+                                handlePrint(row.receiptNo);
+                              } else {
+                                handlePrint(row.voucherNo);
+                              }
                             }}
                           >
                             <PrintIcon />

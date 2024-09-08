@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
+// function getEndpoint
+
 export default function PrintCashReceipt() {
   const printRef = React.useRef();
   const [receipt, setReceipt] = useState(null);
   const queryParams = new URLSearchParams(window.location.search);
-  const retreat = queryParams.get('ReceiptNo');
-  const method = queryParams.get('method');
-  console.log('retreat', retreat);
+
+  const queryKey = queryParams.keys().next().value;
+  console.log('queryKey', queryKey);
+  const retreat = queryParams.get(queryKey);
+  console.log('retreat', queryKey);
 
   useEffect(() => {
-    fetch(`http://localhost/print?receiptNo=${retreat}`)
+    fetch(`http://localhost/print?${queryKey}=${retreat}`)
       .then((res) => res.json())
       .then((data) => {
         setReceipt(data);

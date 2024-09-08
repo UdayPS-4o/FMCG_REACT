@@ -8,12 +8,6 @@
     "discount": 3444
   },
   {
-    "date": "2024-07-20",
-    "voucherNo": "2420",
-    "party": "CT000",
-    "series": "X23"
-  },
-  {
     "date": "2024-09-01",
     "voucherNo": "12",
     "party": "CT001",
@@ -62,27 +56,12 @@
     "party": "CT000"
   },
   {
-    "date": "",
-    "series": "1132412341234",
-    "amount": "123412341234",
-    "discount": 261231234234412340000,
-    "voucherNo": "16671",
-    "party": "CT000"
-  },
-  {
     "date": "2024-09-18",
     "series": "111",
     "amount": "1234",
     "discount": 1234,
     "voucherNo": "16672",
     "party": "CT001"
-  },
-  {
-    "date": "",
-    "series": "",
-    "amount": "",
-    "discount": "",
-    "voucherNo": "16673"
   },
   {
     "date": "2024-09-26",
@@ -99,5 +78,13 @@
     "discount": 12,
     "voucherNo": "MyNigga",
     "party": "CT007"
+  },
+  {
+    "date": "2024-09-08",
+    "series": "O",
+    "amount": "12314",
+    "discount": 12,
+    "voucherNo": "orcus01",
+    "party": "AA001"
   }
 ]

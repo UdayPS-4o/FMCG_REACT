@@ -70,16 +70,29 @@ function convertAmountToWords(amount) {
 }
 app.get('/print', async (req, res) => {
   try {
-    const { receiptNo } = req.query;
-    const data = await fetch('http://localhost/json/cash-receipts');
-    const json = await data.json();
-    const receipt = json.find((receipt) => receipt.receiptNo === receiptNo);
-    const cmpl = await fetch('http://localhost/cmpl');
-    const cmplJson = await cmpl.json();
-    const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
-    const AmountInWords = convertAmountToWords(receipt.amount);
-    console.log('AmountInWords', AmountInWords);
-    res.send({ ...receipt, ...cmplData, AmountInWords });
+    const { ReceiptNo, voucherNo } = req.query;
+    if (!ReceiptNo && !voucherNo) throw new Error('ReceiptNo or VoucherNo is required');
+    if (ReceiptNo) {
+      const data = await fetch('http://localhost/json/cash-receipts');
+      const json = await data.json();
+      const receipt = json.find((receipt) => receipt.receiptNo === ReceiptNo);
+      console.log('receipt', receipt);
+      const cmpl = await fetch('http://localhost/cmpl');
+      const cmplJson = await cmpl.json();
+      const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
+      const AmountInWords = convertAmountToWords(receipt.amount);
+      res.send({ ...receipt, ...cmplData, AmountInWords });
+    }
+    if (voucherNo) {
+      const data = await fetch('http://localhost/json/cash-payments');
+      const json = await data.json();
+      const receipt = json.find((receipt) => receipt.voucherNo === voucherNo);
+      const cmpl = await fetch('http://localhost/cmpl');
+      const cmplJson = await cmpl.json();
+      const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
+      const AmountInWords = convertAmountToWords(receipt.amount);
+      res.send({ ...receipt, ...cmplData, AmountInWords });
+    }
   } catch (error) {
     console.log(error);
     res.send(error);
