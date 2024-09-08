@@ -182,6 +182,7 @@ const CollapsibleItemSection = ({
                 }))}
               getOptionLabel={(option) => option.label}
               onChange={handleItemChange}
+              isOptionEqualToValue={(option, value) => option.value === value.value}
               renderInput={(params) => <TextField {...params} label="Item Name" fullWidth />}
             />
           </Grid>

@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Stack, TextField, Autocomplete, Divider } from '@mui/material';
-import { Formik, Form, Field } from 'formik';
 import constants from 'src/constants';
 import CollapsibleItemSection from './CollapsibleItemSection'; // Adjust the import based on your file structure
-import { set } from 'lodash';
 
 function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
   const [fromGodown, setFromGodown] = useState(null);
   const [toGodown, setToGodown] = useState(null);
-  const [items, setItems] = useState([
-    {
-      item: '',
-      stock: '',
-      pack: '',
-      gst: '',
-      unit: '',
-      pcBx: '',
-      mrp: '',
-      rate: '',
-      qty: '',
-    },
-  ]);
+  const [formValues, setFormValues] = useState({
+    date: '2024-08-10',
+    series: 'T',
+    fromGodown: '',
+    toGodown: '',
+    items: [
+      {
+        item: '',
+        stock: '',
+        pack: '',
+        gst: '',
+        unit: '',
+        pcBx: '',
+        mrp: '',
+        rate: '',
+        qty: '',
+      },
+    ],
+  });
   const [expanded, setExpanded] = useState(0);
   const [pmplData, setPmplData] = useState([]);
-  const [id, setId] = useState('');
   const baseURL = constants.baseURL;
 
   useEffect(() => {
@@ -36,9 +39,6 @@ function FormSeparator() {
         const pmplRes = await fetch(`${baseURL}/api/dbf/pmpl.json`);
         const pmplData = await pmplRes.json();
         setPmplData(pmplData);
-
-        const balanceRes = await fetch(`${baseURL}/json/balance`);
-        const balanceData = await balanceRes.json();
 
         if (Array.isArray(data)) {
           setPartyOptions(data);
@@ -52,159 +52,179 @@ function FormSeparator() {
 
     fetchOptions();
   }, []);
-  useEffect(() => {
-    async function fetchId() {
-      const lastHASH = await fetch('http://localhost/api/TRFLAST').then((res) => res.text());
-      setId(lastHASH);
-    }
-    fetchId();
-  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   const handleFromGodownChange = (event, newValue) => {
-    console.log('From Godown:', newValue);
     setFromGodown(newValue);
+    setFormValues({ ...formValues, fromGodown: newValue });
     setToGodown(null);
   };
 
   const handleToGodownChange = (event, newValue) => {
     setToGodown(newValue);
+    setFormValues({ ...formValues, toGodown: newValue });
   };
 
   const addItem = () => {
-    setItems([
-      ...items,
-      {
-        item: '',
-        stock: '',
-        pack: '',
-        gst: '',
-        unit: '',
-        pcBx: '',
-        mrp: '',
-        rate: '',
-        qty: '',
-      },
-    ]);
-    setExpanded(items.length); // Automatically expand the newly added accordion
+    setFormValues({
+      ...formValues,
+      items: [
+        ...formValues.items,
+        {
+          item: '',
+          stock: '',
+          pack: '',
+          gst: '',
+          unit: '',
+          pcBx: '',
+          mrp: '',
+          rate: '',
+          qty: '',
+        },
+      ],
+    });
+    setExpanded(formValues.items.length); // Automatically expand the newly added accordion
   };
 
   const removeItem = (index) => {
-    setItems(items.filter((_, i) => i !== index));
+    const newItems = formValues.items.filter((_, i) => i !== index);
+    setFormValues({ ...formValues, items: newItems });
   };
 
   const updateItem = (index, newData) => {
-    const newItems = items.map((item, i) => (i === index ? newData : item));
-    setItems(newItems);
+    const newItems = formValues.items.map((item, i) => (i === index ? newData : item));
+    setFormValues({ ...formValues, items: newItems });
   };
 
   const handleAccordionChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleSubmit = async (values) => {
-    await new Promise((r) => setTimeout(r, 500));
-    values.fromGodown = fromGodown.GDN_CODE;
-    values.toGodown = toGodown.GDN_CODE;
-    const items = values.items.map((el) => {
-      const { item, qty, unit } = el;
-      return { code: item, qty, unit };
-    });
-    values.items = items;
-    values.id = id;
-    values.series = 'T';
-    values.date = new Date().toISOString().split('T')[0];
-    console.log('Form data:', values);
-    alert(JSON.stringify(values, null, 2));
+  const handleSubmit = async () => {
+    const payloadId = await fetch(`${baseURL}/slink/godownId`).then((res) => res.json());
+    const { fromGodown, toGodown, items } = formValues;
+    const payload = {
+      ...formValues,
+      id: payloadId.nextGodownId,
+      fromGodown: fromGodown?.GDN_CODE || '',
+      toGodown: toGodown?.GDN_CODE || '',
+      items: items.map((el) => ({
+        code: el.item,
+        qty: el.qty,
+        unit: el.unit,
+      })),
+      date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD
+    };
+
+    try {
+      const res = await fetch(`${baseURL}/godown`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+
+    // console.log('Form data:', payload);
+    // alert(JSON.stringify(payload, null, 2));
   };
 
   return (
-    <Formik initialValues={{}} onSubmit={handleSubmit}>
-      {({ isSubmitting }) => (
-        <Form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            name="date"
+            type="date"
+            label="Date"
+            fullWidth
+            value={formValues.date}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <Field
-                name="date"
-                type="date"
-                as={TextField}
-                label="Date"
+            <Grid item xs={6}>
+              <TextField
+                name="series"
+                label="Series"
                 fullWidth
-                defaultValue="2024-08-10"
+                value={formValues.series}
+                disabled
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <Field
-                    name="series"
-                    as={TextField}
-                    label="Series"
-                    fullWidth
-                    defaultValue="T"
-                    disabled
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Field name="#" as={TextField} label="#" fullWidth disabled defaultValue={id} />
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Autocomplete
-                options={partyOptions}
-                getOptionLabel={(option) => option.GDN_NAME}
-                value={fromGodown}
-                onChange={handleFromGodownChange}
-                renderInput={(params) => <TextField {...params} label="From Godown" fullWidth />}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Autocomplete
-                options={partyOptions.filter((option) => option.GDN_NAME !== fromGodown?.GDN_NAME)}
-                getOptionLabel={(option) => option.GDN_NAME}
-                value={toGodown}
-                onChange={handleToGodownChange}
-                renderInput={(params) => <TextField {...params} label="To Godown" fullWidth />}
-              />
-            </Grid>
-
-            <Grid item xs={12} alignItems="stretch">
-              {items.map((item, index) => (
-                <CollapsibleItemSection
-                  key={index}
-                  index={index}
-                  itemData={item}
-                  handleChange={handleAccordionChange}
-                  expanded={expanded}
-                  updateItem={updateItem}
-                  removeItem={removeItem}
-                  pmplData={pmplData}
-                />
-              ))}
-              <Divider />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Button variant="outlined" onClick={addItem}>
-                Add Another Item
-              </Button>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Stack direction="row" spacing={2} justifyContent="flex-end">
-                <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
-                  Save changes
-                </Button>
-                <Button variant="text" color="error">
-                  Cancel
-                </Button>
-              </Stack>
+            <Grid item xs={6}>
+              <TextField name="#" label="#" fullWidth disabled />
             </Grid>
           </Grid>
-        </Form>
-      )}
-    </Formik>
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Autocomplete
+            options={partyOptions}
+            getOptionLabel={(option) => option.GDN_NAME}
+            value={fromGodown}
+            onChange={handleFromGodownChange}
+            renderInput={(params) => <TextField {...params} label="From Godown" fullWidth />}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Autocomplete
+            options={partyOptions.filter((option) => option.GDN_NAME !== fromGodown?.GDN_NAME)}
+            getOptionLabel={(option) => option.GDN_NAME}
+            value={toGodown}
+            onChange={handleToGodownChange}
+            renderInput={(params) => <TextField {...params} label="To Godown" fullWidth />}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          {formValues.items.map((item, index) => (
+            <CollapsibleItemSection
+              key={index}
+              index={index}
+              itemData={item}
+              handleChange={handleAccordionChange}
+              expanded={expanded}
+              updateItem={updateItem}
+              removeItem={removeItem}
+              pmplData={pmplData}
+            />
+          ))}
+          <Divider />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button variant="outlined" onClick={addItem}>
+            Add Another Item
+          </Button>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Stack direction="row" spacing={2} justifyContent="flex-end">
+            <Button variant="contained" color="primary" type="submit">
+              Save changes
+            </Button>
+            <Button variant="text" color="error">
+              Cancel
+            </Button>
+          </Stack>
+        </Grid>
+      </Grid>
+    </form>
   );
 }
 

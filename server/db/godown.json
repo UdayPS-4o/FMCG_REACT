@@ -291,5 +291,19 @@
         "unit": "01"
       }
     ]
+  },
+  {
+    "date": "2024-09-08",
+    "series": "T",
+    "fromGodown": "03",
+    "toGodown": "04",
+    "items": [
+      {
+        "code": "MK010",
+        "qty": 2,
+        "unit": "PCS"
+      }
+    ],
+    "id": 10
   }
 ]

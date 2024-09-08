@@ -9,6 +9,7 @@ const {
   saveDataToJsonFile,
 } = require('./utilities');
 const { max } = require('lodash');
+const { ca } = require('date-fns/locale');
 
 const getCmplData = async () => {
   const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'CMPL.dbf');
@@ -112,5 +113,27 @@ app.get('/subgrp', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+async function getNextGodownId(req, res) {
+  const filePath = path.join(__dirname, '..', 'db', 'godown.json');
+  let nextGodownId = 1;
+
+  try {
+    const data = await fs.readFile(filePath, 'utf8').then(
+      (data) => JSON.parse(data),
+      (error) => {
+        if (error.code !== 'ENOENT') throw error; // Ignore file not found errors
+      },
+    );
+    const GodownId = data[data.length - 1].id;
+    const nextGodownId = Number(GodownId) + 1;
+    res.send({ nextGodownId });
+  } catch (error) {
+    console.error('Failed to read or parse godowns.json:', error);
+    res.status(500).send('Server error');
+  }
+}
+
+app.get('/godownId', getNextGodownId);
 
 module.exports = app;
