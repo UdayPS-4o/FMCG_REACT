@@ -93,7 +93,7 @@ const ProductTableList = () => {
   const handleEdit = (subgroup) => {
     console.log('subgroup', subgroup);
     window.location.href = `/edit/${endpoint}?sub=${subgroup}`;
-  }
+  };
 
   return (
     <Box>
@@ -156,9 +156,17 @@ const ProductTableList = () => {
                       <IconButton>
                         <DeleteIcon />
                       </IconButton>
-                      <IconButton onClick={() => {
-                        handleEdit(row.subgroup)
-                      }}>
+                      <IconButton
+                        onClick={() => {
+                          if (endpoint === 'account-master') {
+                            handleEdit(row.subgroup);
+                          } else if (endpoint === 'cash-receipts') {
+                            handleEdit(row.receiptNo);
+                          } else {
+                            handleEdit(row.voucherNo);
+                          }
+                        }}
+                      >
                         <EditIcon />
                       </IconButton>
                       {endpoint !== 'account-master' ? (

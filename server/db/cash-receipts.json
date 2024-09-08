@@ -139,154 +139,27 @@
     "discount": ""
   },
   {
-    "party": null,
-    "receiptNo": 55
+    "date": "2024-09-28",
+    "series": "1212342314",
+    "amount": "123424123432",
+    "discount": "123423412342314",
+    "receiptNo": "74",
+    "party": "CT000"
   },
   {
-    "discount": 123,
-    "party": {
-      "value": "DT007",
-      "label": "GODREJ SOAPS LTD | 0"
-    },
-    "receiptNo": 56
+    "date": "2024-09-20",
+    "series": "asdf",
+    "amount": "1234",
+    "discount": "1234",
+    "receiptNo": "75",
+    "party": "AA001"
   },
   {
-    "discount": 1234,
-    "amount": 1234,
-    "series": "1234",
-    "party": {
-      "value": "GX000",
-      "label": "DAMAGE/EXPIRY/BREAKAGES | 0"
-    },
-    "receiptNo": 57
-  },
-  {
-    "series": "Consectetur in odio",
-    "discount": 0,
-    "party": {
-      "value": "AA001",
-      "label": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
-    },
-    "receiptNo": 58
-  },
-  {
-    "series": "Consectetur in odio",
-    "amount": 123,
-    "discount": 12321,
-    "party": "OB001",
-    "receiptNo": 59,
-    "name": "OPENING BALANCE | 0"
-  },
-  {
-    "series": "Consectetur in odio",
-    "amount": 123,
-    "discount": 12321,
-    "party": "OB001",
-    "receiptNo": 60,
-    "name": "OPENING BALANCE | 0"
-  },
-  {
-    "date": "2024-09-01",
-    "series": "123",
-    "receiptNo": "61",
-    "party": "CT001",
-    "amount": "123",
-    "discount": "123"
-  },
-  {
-    "discount": 123213,
-    "party": "AA001",
-    "receiptNo": 62,
-    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
-  },
-  {
-    "series": "123",
-    "amount": 123,
-    "discount": 123,
-    "party": "AA001",
-    "receiptNo": 63,
-    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
-  },
-  {
-    "series": "123",
-    "amount": 123,
-    "discount": 123,
-    "party": "AA001",
-    "receiptNo": 64,
-    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
-  },
-  {
-    "series": "123",
-    "amount": 123,
-    "discount": 123,
-    "party": "AA001",
-    "receiptNo": 65,
-    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
-  },
-  {
-    "series": "123",
-    "amount": 123,
-    "discount": 123,
-    "party": "AA001",
-    "receiptNo": 66,
-    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR"
-  },
-  {
-    "date": "",
-    "series": "1233",
-    "amount": 123123,
-    "discount": 123123,
-    "receipt_no": "",
-    "party": "BP177",
-    "name": "PRAKASH AGENCIES SEONI | 563919.1200000001 DR",
-    "receiptNo": 67
-  },
-  {
-    "date": "2024-09-19",
-    "series": "1233",
-    "amount": 123123,
-    "discount": 123123,
-    "receipt_no": "",
-    "party": "BP177",
-    "name": "PRAKASH AGENCIES SEONI | 563919.1200000001 DR",
-    "receiptNo": 68
-  },
-  {
-    "date": "2024-08-28",
-    "series": "123",
-    "amount": 123,
-    "discount": 123,
-    "receipt_no": "",
-    "party": "GX000",
-    "name": "DAMAGE/EXPIRY/BREAKAGES | 0",
-    "receiptNo": 69
-  },
-  {
-    "date": "2024-08-30",
-    "series": "123",
-    "amount": 1234,
-    "discount": 1234,
-    "receipt_no": "",
-    "receiptNo": 70
-  },
-  {
-    "date": "2024-09-05",
-    "series": "",
-    "amount": 123,
-    "discount": 123,
-    "receipt_no": "",
-    "party": "CT000",
-    "name": "TRADE CREDITORS | 0",
-    "receiptNo": 71
-  },
-  {
-    "date": "2024-09-04",
-    "series": "234",
-    "amount": 12341234,
-    "discount": 123,
-    "receipt_no": "",
-    "party": "AA001",
-    "name": "SHRI BALRAM SEVLANI | 10891886.299999999 CR",
-    "receiptNo": 72
+    "date": "2024-09-27",
+    "series": "SS",
+    "amount": "1234",
+    "discount": "1234",
+    "receiptNo": "76",
+    "party": "CT002"
   }
 ]
