@@ -15,6 +15,7 @@ import DBgodowntransfer from 'src/components/pages/Database/godown-transfer';
 import DBinvoicing from 'src/components/pages/Database/invoicing';
 import Adduser from 'src/components/pages/AddUser/create-new-user.js';
 import PrintCashReceipt from 'src/components/pages/Database/PrintCashReceipt';
+import PrintGodownTransfer from 'src/components/pages/Database/PrintGodown';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -142,6 +143,7 @@ const Router = [
       { path: '/edit/godown', exact: true, element: <GodownTransfer /> },
       { path: '/godown', exact: true, element: <GodownTransfer /> },
       { path: '/print', exact: true, element: <PrintCashReceipt /> },
+      { path: '/printGodownT', exact: true, element: <PrintGodownTransfer /> },
       { path: '/dbf', exact: true, element: <DBFReader /> },
       { path: '/adduser', exact: true, element: <Adduser /> },
       { path: '/db/account-master', exact: true, element: <DBaccountmaster /> },

@@ -264,6 +264,37 @@ async function getNextInvoiceId(req, res) {
   }
 }
 
+async function printGodown(req, res) {
+  const filePath = path.join(__dirname, '..', 'db', 'godown.json');
+  const { godownId } = req.query;
+
+  try {
+   
+    const data = await fs
+      .readFile(filePath, 'utf8')
+      .then((data) => JSON.parse(data))
+      .catch((error) => {
+        console.error('Failed to read or parse godown.json:', error);
+        throw error;
+      }
+    );
+    
+    const godown = data.find((godown) => godown.id === godownId);
+    if (!godown) {
+      res.status(404).send('Godown not found');
+      return;
+    }
+    res.send(godown);
+
+}
+catch (error) {
+  console.error('Failed to read or parse godown.json:', error);
+  res.status(500).send('Server error');
+}
+}
+
+
+app.get('/printGodown' ,printGodown);
 app.get('/godownId', getNextGodownId);
 app.get('/invoiceId', getNextInvoiceId);
 

@@ -93,7 +93,7 @@ const ProductTableList = () => {
     }
     if (endpoint == 'cash-receipts') window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
     if (endpoint == 'cash-payments') window.location.href = `/print?voucherNo=${ReceiptNo}`;
-    if (endpoint == 'godown') window.location.href = `/print?godownId=${ReceiptNo}`;
+    if (endpoint == 'godown') window.location.href = `/printGodownT?godownId=${ReceiptNo}`;
   };
 
   const handleEdit = (subgroup) => {
