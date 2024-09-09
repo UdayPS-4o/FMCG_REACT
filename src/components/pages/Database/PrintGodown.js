@@ -9,13 +9,12 @@ export default function PrintGodownT() {
     const retreat = queryParams.get(queryKey);
 
     useEffect(() => {
-        fetch(`${constants.baseURL}/json/godown`)
+        fetch(`${constants.baseURL}/slink/printGodown?retreat=${retreat}`)
             .then((res) => res.json())
             .then((data) => {
-                // Filter data based on 'id' from query parameter
-                const godown = data.find((godown) => godown.id === retreat);
+                const godown = data;
+                
                 setGodownId(godown);
-                console.log('Filtered Godown:', godown);
             });
     }, [retreat]);
 
@@ -44,7 +43,7 @@ export default function PrintGodownT() {
 }
 
 const TransferGodownData = ({ transferData }) => {
-    const { date, fromGodown, toGodown, id, items } = transferData;
+    const { date, fromGodown, toGodown, id, items  } = transferData;
 
     return (
         <>

@@ -31,6 +31,28 @@ const getCmplData = async () => {
   }
 };
 
+const getPMPLData = async () => {
+  const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'PMPL.dbf');
+  console.log(dbfFilePath);
+  try {
+    let jsonData = await getDbfData(dbfFilePath);
+    jsonData = jsonData.map((entry) => {
+      return {
+        CODE: entry.CODE,
+        PRODUCT: entry.PRODUCT,
+        PACK: entry.PACK,
+
+        GST: entry.GST,
+      };
+    });
+    return jsonData;
+  } catch (error) {
+    console.error('Error reading PMPL.dbf:', error);
+    throw error;
+  }
+};
+
+
 function newData(json, accountMasterData) {
   json = json.filter((item) => item.M_GROUP === 'DT');
 
@@ -265,33 +287,33 @@ async function getNextInvoiceId(req, res) {
 }
 
 async function printGodown(req, res) {
-  const filePath = path.join(__dirname, '..', 'db', 'godown.json');
-  const { godownId } = req.query;
-
   try {
-   
-    const data = await fs
-      .readFile(filePath, 'utf8')
-      .then((data) => JSON.parse(data))
-      .catch((error) => {
-        console.error('Failed to read or parse godown.json:', error);
-        throw error;
-      }
-    );
-    
-    const godown = data.find((godown) => godown.id === godownId);
-    if (!godown) {
-      res.status(404).send('Godown not found');
-      return;
-    }
-    res.send(godown);
+    const { retreat } = req.query;
+ 
+    let godownData = await fs.readFile(path.join(__dirname, '..', 'db', 'godown.json'), 'utf8');
+     godownData = JSON.parse(godownData);
+ 
+    const godown = godownData.find((godown) => godown.id === retreat);
 
+    const pmplData = await getPMPLData();
+
+
+    godown.items.forEach((item) => {
+        const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.code);
+        console.log("pmplItem", pmplItem);
+        if (pmplItem) {
+            item.particular = pmplItem.PRODUCT;
+            item.pack = pmplItem.PACK;
+            item.gst = pmplItem.GST;
+        }
+        console.log("myitem", item);
+    });
+    res.send(godown);
+} catch (error) {
+    console.error('Error fetching data:', error);
 }
-catch (error) {
-  console.error('Failed to read or parse godown.json:', error);
-  res.status(500).send('Server error');
 }
-}
+
 
 
 app.get('/printGodown' ,printGodown);
