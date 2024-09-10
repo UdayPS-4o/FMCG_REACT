@@ -7,8 +7,9 @@ function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
   const [fromGodown, setFromGodown] = useState(null);
   const [toGodown, setToGodown] = useState(null);
+  const [pmplData, setPmplData] = useState([]); // Hold product data from pmpl.json
   const [formValues, setFormValues] = useState({
-    date: '2024-08-10',
+    date: new Date().toISOString().split('T')[0],
     series: 'T',
     fromGodown: '',
     toGodown: '',
@@ -27,19 +28,12 @@ function FormSeparator() {
     ],
   });
   const [expanded, setExpanded] = useState(0);
-  const [pmplData, setPmplData] = useState([]);
   const baseURL = constants.baseURL;
-
   useEffect(() => {
     const fetchOptions = async () => {
       try {
         const res = await fetch(`${baseURL}/api/dbf/godown.json`);
         const data = await res.json();
-
-        const pmplRes = await fetch(`${baseURL}/api/dbf/pmpl.json`);
-        const pmplData = await pmplRes.json();
-        setPmplData(pmplData);
-
         if (Array.isArray(data)) {
           setPartyOptions(data);
         } else {
@@ -50,27 +44,73 @@ function FormSeparator() {
       }
     };
 
+    const fetchPmplData = async () => {
+      try {
+        const pmplRes = await fetch(`${baseURL}/api/dbf/pmpl.json`);
+        const pmplData = await pmplRes.json();
+        setPmplData(pmplData); // Set pmplData here
+      } catch (error) {
+        console.error('Error fetching PMPL data:', error);
+      }
+    };
+
+    fetchOptions();
+    fetchPmplData();
+  }, []); // Empty dependency array prevents infinite re-renders
+
+  useEffect(() => {
     const fetchEditData = async () => {
       const params = new URLSearchParams(window.location.search);
-      const godownId = params.get('id');
+      const godownId = params.get('sub');
 
-      if (godownId) {
+      if (godownId && pmplData.length && partyOptions.length) {
         try {
-          const res = await fetch(`${baseURL}/godown/${godownId}`);
+          const res = await fetch(`${baseURL}/json/godown`);
           const data = await res.json();
+          const newData = data.find((el) => el.id === godownId);
+          console.log('Edit data:', newData);
 
-          setFormValues(data);
-          setFromGodown(data.fromGodown);
-          setToGodown(data.toGodown);
+          // Map items with pmplData to auto-fill fields
+          const mappedItems = newData.items.map((item) => {
+            const product = pmplData.find((p) => p.CODE === item.code);
+
+            return {
+              item: item.code,
+              stock: product?.STK || 0,
+              pack: product?.PACK || '',
+              gst: product?.GST || 0,
+              unit: product?.UNIT_1 || '',
+              pcBx: product?.MULT_F || '',
+              mrp: product?.MRP1 || '',
+              rate: product?.PL_RATE || '',
+              qty: item.qty,
+            };
+          });
+
+          setFormValues({
+            ...newData,
+            items: mappedItems,
+          });
+
+          const fromGodownOption = partyOptions.find(
+            (option) => option.GDN_CODE === newData.fromGodown,
+          );
+          const toGodownOption = partyOptions.find(
+            (option) => option.GDN_CODE === newData.toGodown,
+          );
+
+          setFromGodown(fromGodownOption);
+          setToGodown(toGodownOption);
         } catch (error) {
           console.error('Error fetching edit data:', error);
         }
       }
     };
 
-    fetchOptions();
-    fetchEditData();
-  }, []);
+    if (pmplData.length && partyOptions.length) {
+      fetchEditData();
+    }
+  }, [pmplData, partyOptions]); // Only runs when pmplData and partyOptions are available
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,13 +119,13 @@ function FormSeparator() {
 
   const handleFromGodownChange = (event, newValue) => {
     setFromGodown(newValue);
-    setFormValues({ ...formValues, fromGodown: newValue });
-    setToGodown(null);
+    setFormValues({ ...formValues, fromGodown: newValue.GDN_CODE });
+    setToGodown(null); // Reset toGodown when fromGodown changes
   };
 
   const handleToGodownChange = (event, newValue) => {
     setToGodown(newValue);
-    setFormValues({ ...formValues, toGodown: newValue });
+    setFormValues({ ...formValues, toGodown: newValue.GDN_CODE });
   };
 
   const addItem = () => {

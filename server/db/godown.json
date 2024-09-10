@@ -305,5 +305,89 @@
       }
     ],
     "id": 10
+  },
+  {
+    "date": "2024-09-08",
+    "series": "T",
+    "fromGodown": "",
+    "toGodown": "",
+    "id": 11,
+    "items": [
+      {
+        "code": "GJ947",
+        "qty": 0.6666666666666666,
+        "unit": "PCS"
+      },
+      {
+        "code": "GJ847",
+        "qty": "3",
+        "unit": "PCS"
+      },
+      {
+        "code": "GJ819",
+        "qty": "5",
+        "unit": "PCS"
+      },
+      {
+        "code": "H3537",
+        "qty": "10",
+        "unit": "PCS"
+      },
+      {
+        "code": "ME032",
+        "qty": "30",
+        "unit": "BOX"
+      },
+      {
+        "code": "GJ819",
+        "qty": "10",
+        "unit": "PCS"
+      },
+      {
+        "code": "GJ819",
+        "qty": "25",
+        "unit": "PCS"
+      },
+      {
+        "code": "ME006",
+        "qty": "25",
+        "unit": "BOX"
+      },
+      {
+        "code": "H1977",
+        "qty": "13",
+        "unit": "PCS"
+      },
+      {
+        "code": "H1977",
+        "qty": "5",
+        "unit": "PCS"
+      },
+      {
+        "code": "GJ819",
+        "qty": "10",
+        "unit": "PCS"
+      },
+      {
+        "code": "H2528",
+        "qty": "1",
+        "unit": "PCS"
+      },
+      {
+        "code": "ME006",
+        "qty": "12",
+        "unit": "BOX"
+      },
+      {
+        "code": "ME006",
+        "qty": "12",
+        "unit": "BOX"
+      },
+      {
+        "code": "DA005",
+        "qty": "16",
+        "unit": "PCS"
+      }
+    ]
   }
 ]
