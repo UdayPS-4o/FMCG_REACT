@@ -174,7 +174,13 @@ const CollapsibleItemSection = ({
     <Accordion expanded={expanded === index} onChange={handleChange(index)}>
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">Item {index + 1}</Typography>
+          <Typography variant="h6">
+            {itemData.item
+              ? `${itemData.item} | ${
+                  pmplData.find((item) => item.CODE === itemData.item)?.PRODUCT
+                }`
+              : `Item ${index + 1}`}
+          </Typography>
           <IconButton color="error" onClick={() => removeItem(index)}>
             <IconTrash />
           </IconButton>
@@ -203,7 +209,10 @@ const CollapsibleItemSection = ({
                       }`,
                       value: itemData.item,
                     }
-                  : []
+                  : {
+                      label: '',
+                      value: '',
+                    }
               } // Default item value
             />
           </Grid>
