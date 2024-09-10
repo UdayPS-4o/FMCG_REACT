@@ -15,13 +15,10 @@ const BCrumb = [
 
 const GodownTransfer = () => {
   return (
-    <PageContainer title="Vertical Form" description="this is Vertical Form page">
-      {/* breadcrumb */}
-      <Breadcrumb title="Vertical Form" items={BCrumb} />
-      {/* end breadcrumb */}
+    <PageContainer description="this is Vertical Form page">
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <ParentCard title="Multi Column with Form Separator">
+          <ParentCard>
             <FormSeparator />
           </ParentCard>
         </Grid>

@@ -28,6 +28,8 @@ function FormSeparator() {
     fssaino: '',
     email: '',
     statecode: '',
+    subgroup: '',
+    stateCode: '',
   });
 
   const navigate = useNavigate();
@@ -44,14 +46,15 @@ function FormSeparator() {
           const data = await accounts.json();
 
           const account = data.find((account) => account.subgroup === subgroup);
-
+          console.log('account', account);
           if (account) {
             setPartyOptions([{ label: account.subgroup, value: account.subgroup }]);
             setSubGroupCode(account.subgroup);
-            console.log(account.aadhar);
+            console.log('account', account);
 
             // Set the form fields with the fetched data
             setInitialValues({
+              subgroup: account.subgroup,
               achead: account.achead,
               addressline1: account.addressline1,
               addressline2: account.addressline2,
@@ -175,6 +178,17 @@ function FormSeparator() {
                   getOptionLabel={(option) => option.label}
                   onChange={handlePartyChange}
                   renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
+                  value={
+                    initialValues.subgroup
+                      ? {
+                          label: initialValues.subgroup,
+                          value: initialValues.subgroup,
+                        }
+                      : {
+                          label: '',
+                          value: '',
+                        }
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -254,10 +268,18 @@ function FormSeparator() {
                   getOptionLabel={(option) => option.label}
                   onChange={handleSmChange}
                   renderInput={(params) => <TextField {...params} label="State Code" fullWidth />}
-                  // autoHighlight={true}
                   value={
-                    smOptions.find((option) => option.label === initialValues.statecode) || null
+                    initialValues.stateCode
+                      ? {
+                          label: initialValues.statecode,
+                          value: initialValues.statecode,
+                        }
+                      : {
+                          label: '',
+                          value: '',
+                        }
                   }
+                  // autoHighlight={true}
                 />
               </Grid>
               <Grid item xs={12}>

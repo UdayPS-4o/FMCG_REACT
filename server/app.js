@@ -51,19 +51,6 @@ app.get('/admin', async (req, res) => {
   res.render('pages/admin/admin', { firm: firms });
 });
 
-app.get('/print', async (req, res) => {
-  try {
-    const { receiptNo } = req.query;
-    const data = await fetch('http://localhost/json/cash-receipts');
-    const json = await data.json();
-    const receipt = json.find((receipt) => receipt.receiptNo === receiptNo);
-    res.send(receipt);
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-});
-
 app.post('/addUser', async (req, res) => {
   const { name, number, perms, routes, password, powers } = req.body;
   console.log('Adding user', number, perms, routes, powers, password);
@@ -91,6 +78,11 @@ app.post('/addUser', async (req, res) => {
     fs.writeFile('./db/users.json', JSON.stringify(users, null, 2));
     res.redirect('/admin');
   }
+});
+
+app.get('/json/users', (req, res) => {
+  const users = require('./db/users.json');
+  res.send(users);
 });
 
 app.get('/users', (req, res) => {
