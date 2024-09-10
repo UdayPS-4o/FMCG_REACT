@@ -34,8 +34,8 @@ function FormSeparator() {
         ),
       ];
 
-      setRouteAccessOptions(routeAccessList);
-      setPowersOptions(powersList);
+      // setRouteAccessOptions(routeAccessList);
+      // setPowersOptions(powersList);
     };
 
     fetchOptions();

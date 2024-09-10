@@ -80,6 +80,11 @@ app.post('/addUser', async (req, res) => {
   }
 });
 
+app.get('/json/users', (req, res) => {
+  const users = require('./db/users.json');
+  res.send(users);
+});
+
 app.get('/users', (req, res) => {
   const users = require('./db/users.json');
   res.send(users);
