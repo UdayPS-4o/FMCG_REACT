@@ -315,8 +315,80 @@ async function printGodown(req, res) {
 }
 }
 
+const   EditUser = async (req, res) => {
+  const { id, name, number,  routeAccess, password, powers } = req.body;
+  console.log('Editing user', id, number,  routeAccess, powers, password);
 
+  try {
+    // Read users from users.json file
+    let users = await fs.readFile(path.join(__dirname, '../db/users.json'));
+    // Find the user by ID
+    users = JSON.parse(users);
+    const user = users.find((user) => user.id === id);
 
+    if (user) {
+      // Update the user details
+      user.name = name;
+      user.number = number;
+      user.routeAccess = routeAccess;
+      user.password = password;
+      user.powers = powers;
+
+      // Save the updated users list back to the JSON file
+      await fs.writeFile(path.join(__dirname, '../db/users.json'), JSON.stringify(users, null, 2)); 
+      
+
+      console.log(`User with ID: ${id} updated successfully.`);
+      // res.redirect('/admin'); // Redirect back to admin page after successful update
+      res.status(200).send({id: id, message: 'User updated successfully'});
+    } else {
+      // If user with the provided ID is not found, return an error
+      res.status(404).send('User not found');
+    }
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).send('Server error');
+  }
+};
+
+app.get('/json/users', async (req, res) => {  
+  try {
+    const users = await fs.readFile(path.join(__dirname, '../db/users.json'));
+    res.send(users);
+  } catch (error) {
+    console.error('Failed to read users.json:', error);
+    res.status(500).send('Server error');
+  }
+}
+);
+
+app.post('/addUser', async (req, res) => {
+  const { name, number, password, routeAccess, powers ,username } = req.body;
+  try {
+    let users = await fs.readFile('./db/users.json');
+    users = JSON.parse(users);
+    const maxId = users.reduce((max, user) => Math.max(max, user.id), 0); // Find max id
+
+    const newUser = {
+      id: maxId + 1,
+      name: name,
+      username: username,
+      number: number,
+      password: password,
+      routeAccess: routeAccess,
+      powers: powers,
+    };
+
+    users.push(newUser);
+    await fs.writeFile('./db/users.json', JSON.stringify(users, null, 2));
+    res.status(201).send({ message: 'User added successfully', id: newUser.id });
+  } catch (error) {
+    console.error('Failed to add user:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+app.post('/editUser', EditUser);
 app.get('/printGodown' ,printGodown);
 app.get('/godownId', getNextGodownId);
 app.get('/invoiceId', getNextInvoiceId);

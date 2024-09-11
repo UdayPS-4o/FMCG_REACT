@@ -146,6 +146,7 @@ const Router = [
       { path: '/printGodownT', exact: true, element: <PrintGodownTransfer /> },
       { path: '/dbf', exact: true, element: <DBFReader /> },
       { path: '/adduser', exact: true, element: <Adduser /> },
+      { path: '/editadduser', exact: true, element: <Adduser /> },
       { path: '/db/account-master', exact: true, element: <DBaccountmaster /> },
       { path: '/db/invoicing', exact: true, element: <DBinvoicing /> },
       { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },

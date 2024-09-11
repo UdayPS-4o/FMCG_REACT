@@ -123,7 +123,11 @@ const UserTable = ({ data }) => {
                         <IconButton>
                           <DeleteIcon />
                         </IconButton>
-                        <IconButton>
+                        <IconButton
+                          onClick={()=>{
+                            window.location.href = '/editadduser?id='+row.id;
+                          }}
+                          >
                           <EditIcon />
                         </IconButton>
                       </TableCell>
