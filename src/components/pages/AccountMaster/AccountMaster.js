@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import constants from 'src/constants';
+import { startOfWeekWithOptions } from 'date-fns/fp';
 
 function FormSeparator() {
   const [party, setParty] = useState(null);
@@ -53,6 +54,7 @@ function FormSeparator() {
             console.log('account', account);
 
             // Set the form fields with the fetched data
+            
             setInitialValues({
               subgroup: account.subgroup,
               achead: account.achead,
@@ -70,7 +72,6 @@ function FormSeparator() {
               statecode: account.statecode,
             });
 
-            // Set the state options if needed
             const stateres = await fetch(constants.baseURL + '/api/dbf/state.json');
             const statedata = await stateres.json();
             const stateList = statedata.map((state) => ({
@@ -169,7 +170,7 @@ function FormSeparator() {
           }
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting ,values }) => (
           <Form>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
@@ -268,17 +269,18 @@ function FormSeparator() {
                   getOptionLabel={(option) => option.label}
                   onChange={handleSmChange}
                   renderInput={(params) => <TextField {...params} label="State Code" fullWidth />}
+                  // value={}
                   value={
-                    initialValues.stateCode
-                      ? {
-                          label: initialValues.statecode,
-                          value: initialValues.statecode,
-                        }
-                      : {
-                          label: '',
-                          value: '',
-                        }
-                  }
+
+
+                    smOptions.find((state) => {
+                      console.log(state);
+                      return state.value === initialValues.statecode}) || {
+
+                      label: '',
+                      value: '',
+                    }
+                  } 
                   // autoHighlight={true}
                 />
               </Grid>

@@ -12,7 +12,7 @@ function UserForm() {
   const [powersOptions, setPowersOptions] = useState([]);
   const [initialValues, setInitialValues] = useState({
     name: '',
-    number: '', // Ensure this key matches what's used in the Field component
+    number: '', 
     password: '',
     routeAccess: [],
     powers: [],
@@ -58,7 +58,7 @@ function UserForm() {
     };
 
     fetchUserData();
-  }, [window.location.href]);  // Depend on href to re-fetch when URL changes
+  }, [window.location.href]);  
 
   const handleSubmit = async (values) => {
     values.username = 'admin';

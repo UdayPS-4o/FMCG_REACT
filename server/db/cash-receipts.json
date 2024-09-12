@@ -161,5 +161,13 @@
     "discount": "1234",
     "receiptNo": "76",
     "party": "CT002"
+  },
+  {
+    "date": "2024-05-01",
+    "series": "Sint voluptatem mini",
+    "amount": "Dolor magnam delenit",
+    "discount": "74",
+    "receiptNo": "77",
+    "party": "CT000"
   }
 ]

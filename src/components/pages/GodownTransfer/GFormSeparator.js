@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Button, Stack, TextField, Autocomplete, Divider } from '@mui/material';
 import constants from 'src/constants';
 import CollapsibleItemSection from './CollapsibleItemSection'; // Adjust the import based on your file structure
+import { set } from 'lodash';
 
 function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
   const [fromGodown, setFromGodown] = useState(null);
   const [toGodown, setToGodown] = useState(null);
   const [pmplData, setPmplData] = useState([]); // Hold product data from pmpl.json
+  const [urlParms , setUrlParms] = useState(window.location.search);
+
   const [formValues, setFormValues] = useState({
     date: new Date().toISOString().split('T')[0],
     series: 'T',
@@ -30,6 +33,9 @@ function FormSeparator() {
   const [expanded, setExpanded] = useState(0);
   const baseURL = constants.baseURL;
   useEffect(() => {
+    const url = new URL(window.location.href);
+    const godownId = url.searchParams.get('sub');
+    setUrlParms(godownId);
     const fetchOptions = async () => {
       try {
         const res = await fetch(`${baseURL}/api/dbf/godown.json`);
@@ -222,7 +228,7 @@ function FormSeparator() {
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField name="#" label="#" fullWidth disabled />
+              <TextField name="#" label="#"  value={urlParms||null} fullWidth disabled />
             </Grid>
           </Grid>
         </Grid>

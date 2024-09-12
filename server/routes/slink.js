@@ -8,8 +8,6 @@ const {
   ensureDirectoryExistence,
   saveDataToJsonFile,
 } = require('./utilities');
-const { max } = require('lodash');
-const { ca } = require('date-fns/locale');
 
 const getCmplData = async () => {
   const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'CMPL.dbf');
