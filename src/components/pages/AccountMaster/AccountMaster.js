@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import constants from 'src/constants';
 import { startOfWeekWithOptions } from 'date-fns/fp';
+import useAuth from 'src/utils/useAuth';
 
 function FormSeparator() {
   const [party, setParty] = useState(null);
@@ -32,7 +33,6 @@ function FormSeparator() {
     subgroup: '',
     stateCode: '',
   });
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function FormSeparator() {
             console.log('account', account);
 
             // Set the form fields with the fetched data
-            
+
             setInitialValues({
               subgroup: account.subgroup,
               achead: account.achead,
@@ -170,7 +170,7 @@ function FormSeparator() {
           }
         }}
       >
-        {({ isSubmitting ,values }) => (
+        {({ isSubmitting, values }) => (
           <Form>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
@@ -271,16 +271,14 @@ function FormSeparator() {
                   renderInput={(params) => <TextField {...params} label="State Code" fullWidth />}
                   // value={}
                   value={
-
-
                     smOptions.find((state) => {
                       console.log(state);
-                      return state.value === initialValues.statecode}) || {
-
+                      return state.value === initialValues.statecode;
+                    }) || {
                       label: '',
                       value: '',
                     }
-                  } 
+                  }
                   // autoHighlight={true}
                 />
               </Grid>
