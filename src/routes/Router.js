@@ -16,11 +16,8 @@ import DBinvoicing from 'src/components/pages/Database/invoicing';
 import Adduser from 'src/components/pages/AddUser/create-new-user.js';
 import PrintCashReceipt from 'src/components/pages/Database/PrintCashReceipt';
 import PrintGodownTransfer from 'src/components/pages/Database/PrintGodown';
-<<<<<<< HEAD
 import PrintInvoicing from 'src/components/pages/Database/PrintInvoice';
-=======
 import PrivateRoute from 'src/components/auth/PrivateRoute';
->>>>>>> 1e2f97bd20b3ca3daf9e1a403ecb389ae01d9db8
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -137,7 +134,6 @@ const Router = [
     path: '/',
     element: <FullLayout />,
     children: [
-<<<<<<< HEAD
       { path: '/', element: <Navigate to="/dashboards/modern" /> },
       { path: '/account-master', exact: true, element: <AccountMaster /> },
       { path: '/invoicing', exact: true, element: <Invoicing /> },
@@ -159,7 +155,6 @@ const Router = [
       { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
       { path: '/db/cash-payments', exact: true, element: <DBcashpayments /> },
       { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
-=======
       { path: '/', element: <Navigate to="/account-master" /> },
       {
         path: '/account-master',
@@ -332,7 +327,6 @@ const Router = [
           </PrivateRoute>
         ),
       },
->>>>>>> 1e2f97bd20b3ca3daf9e1a403ecb389ae01d9db8
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },
       { path: '/apps/chats', element: <Chats /> },
