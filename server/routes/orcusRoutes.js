@@ -120,4 +120,20 @@ app.get('/account-master', async (req, res) => {
     res.send(error);
   }
 });
+
+app.post('/signin', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const data = await fs.readFile(path.resolve(__dirname, '../db/users.json'));
+    const users = JSON.parse(data);
+    const user = users.find((user) => user.username === username && user.password === password);
+    console.log('user', user);
+    if (!user) throw new Error('Invalid username or password');
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
 module.exports = app;

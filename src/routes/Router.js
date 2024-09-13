@@ -16,7 +16,11 @@ import DBinvoicing from 'src/components/pages/Database/invoicing';
 import Adduser from 'src/components/pages/AddUser/create-new-user.js';
 import PrintCashReceipt from 'src/components/pages/Database/PrintCashReceipt';
 import PrintGodownTransfer from 'src/components/pages/Database/PrintGodown';
+<<<<<<< HEAD
 import PrintInvoicing from 'src/components/pages/Database/PrintInvoice';
+=======
+import PrivateRoute from 'src/components/auth/PrivateRoute';
+>>>>>>> 1e2f97bd20b3ca3daf9e1a403ecb389ae01d9db8
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -133,6 +137,7 @@ const Router = [
     path: '/',
     element: <FullLayout />,
     children: [
+<<<<<<< HEAD
       { path: '/', element: <Navigate to="/dashboards/modern" /> },
       { path: '/account-master', exact: true, element: <AccountMaster /> },
       { path: '/invoicing', exact: true, element: <Invoicing /> },
@@ -154,6 +159,180 @@ const Router = [
       { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
       { path: '/db/cash-payments', exact: true, element: <DBcashpayments /> },
       { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
+=======
+      { path: '/', element: <Navigate to="/account-master" /> },
+      {
+        path: '/account-master',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <AccountMaster />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/invoicing',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <Invoicing />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/cash-receipts',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <Cash_Receipt />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/cash-payments',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <CashPayment />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/edit/account-master',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <AccountMaster />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/edit/cash-receipts',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <Cash_Receipt />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/edit/cash-payments',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <CashPayment />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/edit/godown',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <GodownTransfer />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/godown',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <GodownTransfer />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/print',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <PrintCashReceipt />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/printGodownT',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <PrintGodownTransfer />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dbf',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <DBFReader />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/adduser',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <Adduser />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/editadduser',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <Adduser />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/db/account-master',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <DBaccountmaster />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/db/invoicing',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <DBinvoicing />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/db/cash-receipts',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <DBcashreceipt />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/db/cash-payments',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <DBcashpayments />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/db/godown',
+        exact: true,
+        element: (
+          <PrivateRoute>
+            <DBgodowntransfer />
+          </PrivateRoute>
+        ),
+      },
+>>>>>>> 1e2f97bd20b3ca3daf9e1a403ecb389ae01d9db8
       { path: '/dashboards/modern', exact: true, element: <ModernDash /> },
       { path: '/dashboards/ecommerce', exact: true, element: <EcommerceDash /> },
       { path: '/apps/chats', element: <Chats /> },
@@ -221,27 +400,27 @@ const Router = [
       { path: '/widgets/banners', element: <WidgetBanners /> },
       { path: '/widgets/charts', element: <WidgetCharts /> },
 
-      // { path: '*', element: <Navigate to="/auth/404" /> },
+      { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
-  // {
-  //   path: '/',
-  //   element: <BlankLayout />,
-  //   children: [
-  //     { path: '/auth/404', element: <Error /> },
-  //     { path: '/auth/login', element: <Login /> },
-  //     { path: '/auth/login2', element: <Login2 /> },
-  //     { path: '/auth/register', element: <Register /> },
-  //     { path: '/auth/register2', element: <Register2 /> },
-  //     { path: '/auth/forgot-password', element: <ForgotPassword /> },
-  //     { path: '/auth/forgot-password2', element: <ForgotPassword2 /> },
-  //     { path: '/auth/two-steps', element: <TwoSteps /> },
-  //     { path: '/auth/two-steps2', element: <TwoSteps2 /> },
-  //     { path: '/auth/maintenance', element: <Maintenance /> },
-  //     { path: '/landingpage', element: <Landingpage /> },
-  //     { path: '*', element: <Navigate to="/auth/404" /> },
-  //   ],
-  // },
+  {
+    path: '/',
+    element: <BlankLayout />,
+    children: [
+      { path: '/auth/404', element: <Error /> },
+      { path: '/auth/login', element: <Login /> },
+      { path: '/auth/login2', element: <Login2 /> },
+      { path: '/auth/register', element: <Register /> },
+      { path: '/auth/register2', element: <Register2 /> },
+      { path: '/auth/forgot-password', element: <ForgotPassword /> },
+      { path: '/auth/forgot-password2', element: <ForgotPassword2 /> },
+      { path: '/auth/two-steps', element: <TwoSteps /> },
+      { path: '/auth/two-steps2', element: <TwoSteps2 /> },
+      { path: '/auth/maintenance', element: <Maintenance /> },
+      { path: '/landingpage', element: <Landingpage /> },
+      { path: '*', element: <Navigate to="/auth/404" /> },
+    ],
+  },
 ];
 
 export default Router;
