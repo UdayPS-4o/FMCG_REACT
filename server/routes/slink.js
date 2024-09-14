@@ -386,6 +386,38 @@ app.post('/addUser', async (req, res) => {
   }
 });
 
+
+async function printInvoicing(req, res) {
+  try {
+    const { id } = req.query;
+    console.log(id);
+ 
+    let invoiceData = await fs.readFile(path.join(__dirname, '..', 'db', 'invoicing.json'), 'utf8');
+    invoiceData = JSON.parse(invoiceData);
+    
+    // console.log(invoiceData)
+    const invoice  = invoiceData.find((inv )=>inv.id=== Number(id));
+    console.log("THe invoice we found is",invoice)
+    const pmplData = await getPMPLData(); 
+
+
+    invoice.items.forEach((item) => {
+        const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.item);
+        console.log("pmplItem", pmplItem);
+        if (pmplItem) {
+            item.particular = pmplItem.PRODUCT;
+            item.pack = pmplItem.PACK;
+            item.gst = pmplItem.GST;
+        }
+        console.log("myitem", item);
+    });
+    res.send(invoice);
+} catch (error) {
+    console.error('Error fetching data:', error);
+}
+}
+
+app.get('/printInvoice' ,printInvoicing);
 app.post('/editUser', EditUser);
 app.get('/printGodown' ,printGodown);
 app.get('/godownId', getNextGodownId);

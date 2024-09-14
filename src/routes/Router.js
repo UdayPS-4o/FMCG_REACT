@@ -16,6 +16,7 @@ import DBinvoicing from 'src/components/pages/Database/invoicing';
 import Adduser from 'src/components/pages/AddUser/create-new-user.js';
 import PrintCashReceipt from 'src/components/pages/Database/PrintCashReceipt';
 import PrintGodownTransfer from 'src/components/pages/Database/PrintGodown';
+import PrintInvoicing from 'src/components/pages/Database/PrintInvoice';
 import PrivateRoute from 'src/components/auth/PrivateRoute';
 
 /* ***Layouts**** */
@@ -133,6 +134,27 @@ const Router = [
     path: '/',
     element: <FullLayout />,
     children: [
+      { path: '/', element: <Navigate to="/dashboards/modern" /> },
+      { path: '/account-master', exact: true, element: <AccountMaster /> },
+      { path: '/invoicing', exact: true, element: <Invoicing /> },
+      { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
+      { path: '/cash-payments', exact: true, element: <CashPayment /> },
+      { path: '/edit/account-master', exact: true, element: <AccountMaster /> },
+      { path: '/edit/cash-receipts', exact: true, element: <Cash_Receipt /> },
+      { path: '/edit/cash-payments', exact: true, element: <CashPayment /> },
+      { path: '/edit/godown', exact: true, element: <GodownTransfer /> },
+      { path: '/godown', exact: true, element: <GodownTransfer /> },
+      { path: '/print', exact: true, element: <PrintCashReceipt /> },
+      { path: '/printGodownT', exact: true, element: <PrintGodownTransfer /> },
+      { path: '/printInvoicing', exact: true, element: <PrintInvoicing /> },
+      { path: '/dbf', exact: true, element: <DBFReader /> },
+      { path: '/adduser', exact: true, element: <Adduser /> },
+      { path: '/editadduser', exact: true, element: <Adduser /> },
+      { path: '/db/account-master', exact: true, element: <DBaccountmaster /> },
+      { path: '/db/invoicing', exact: true, element: <DBinvoicing /> },
+      { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
+      { path: '/db/cash-payments', exact: true, element: <DBcashpayments /> },
+      { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
       { path: '/', element: <Navigate to="/account-master" /> },
       {
         path: '/account-master',
