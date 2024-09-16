@@ -136,4 +136,39 @@ app.post('/signin', async (req, res) => {
   }
 });
 
+app.post('/approve', async (req, res) => {
+  try {
+    const { approved, endpoint } = req.body;
+    console.log('approved', approved, 'endpoint', endpoint);
+    const data = await fs.readFile(path.resolve(__dirname, `../db/${endpoint}.json`));
+    const json = JSON.parse(data);
+    const id =
+      endpoint === 'account-master'
+        ? 'subgroup'
+        : endpoint === 'cash-receipts'
+        ? 'receiptNo'
+        : endpoint === 'godown'
+        ? 'id'
+        : endpoint === 'cash-payments'
+        ? 'voucherNo'
+        : null;
+
+    console.log('id', id);
+    const approvedjson = json.filter((item) => {
+      const itemIdValue = String(item[id]).toLowerCase();
+      return approved.some((approvedValue) => itemIdValue.includes(approvedValue.toLowerCase()));
+    });
+    console.log('updatedJson', approvedjson);
+    await fs.mkdir(path.resolve(__dirname, '../db/approved'), { recursive: true });
+    await fs.writeFile(
+      path.resolve(__dirname, `../db/approved/${endpoint}.json`),
+      JSON.stringify(approvedjson, null, 2),
+    );
+    res.send(approvedjson);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
 module.exports = app;

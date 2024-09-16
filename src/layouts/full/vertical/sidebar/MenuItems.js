@@ -144,6 +144,44 @@ const Menuitems = [
     ],
   },
   {
+    id: uniqueId(),
+    title: 'Approved',
+    icon: IconChartDonut3,
+    href: '/approved/',
+    children: [
+      {
+        id: uniqueId(),
+        title: 'Account Master',
+        icon: IconUser,
+        href: '/approved/account-master',
+      },
+      {
+        id: uniqueId(),
+        title: 'Invoicing',
+        icon: IconReceipt,
+        href: '/approved/invoicing',
+      },
+      {
+        id: uniqueId(),
+        title: 'Cash Receipt',
+        icon: IconCurrencyDollarCanadian,
+        href: '/approved/cash-receipts',
+      },
+      {
+        id: uniqueId(),
+        title: 'Cash Payments',
+        icon: IconBrandMastercard,
+        href: '/approved/cash-payments',
+      },
+      {
+        id: uniqueId(),
+        title: 'Godown Transfer',
+        icon: IconTransferIn,
+        href: '/approved/godown',
+      },
+    ],
+  },
+  {
     navlabel: true,
     subheader: 'Home',
   },

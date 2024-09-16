@@ -18,6 +18,12 @@ import PrintCashReceipt from 'src/components/pages/Database/PrintCashReceipt';
 import PrintGodownTransfer from 'src/components/pages/Database/PrintGodown';
 import PrintInvoicing from 'src/components/pages/Database/PrintInvoice';
 import PrivateRoute from 'src/components/auth/PrivateRoute';
+// approved
+import APaccountmaster from 'src/components/pages/Approved/account-master.js';
+import APcashpayments from 'src/components/pages/Approved/cash-payment';
+import APcashreceipt from 'src/components/pages/Approved/cash-receipt';
+import APgodowntransfer from 'src/components/pages/Approved/godown-transfer';
+import APinvoicing from 'src/components/pages/Approved/invoicing';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -155,6 +161,12 @@ const Router = [
       { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
       { path: '/db/cash-payments', exact: true, element: <DBcashpayments /> },
       { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
+
+      { path: '/approved/account-master', exact: true, element: <APaccountmaster /> },
+      { path: '/approved/invoicing', exact: true, element: <APinvoicing /> },
+      { path: '/approved/cash-receipts', exact: true, element: <APcashreceipt /> },
+      { path: '/approved/cash-payments', exact: true, element: <APcashpayments /> },
+      { path: '/approved/godown', exact: true, element: <APgodowntransfer /> },
       { path: '/', element: <Navigate to="/account-master" /> },
       {
         path: '/account-master',
