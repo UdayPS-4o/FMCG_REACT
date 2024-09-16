@@ -5,7 +5,7 @@ import useAuth from 'src/utils/useAuth';
 const PrivateRoute = ({ children }) => {
   const { isAuth, loading } = useAuth(); // Assuming useAuth provides isAuth and loading state
   const [isLoaded, setIsLoaded] = useState(false);
-
+  console.log('isAuth in protected route', isAuth);
   useEffect(() => {
     if (!loading) {
       setIsLoaded(true);

@@ -5,12 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import constants from 'src/constants';
-import { startOfWeekWithOptions } from 'date-fns/fp';
 import useAuth from 'src/utils/useAuth';
 
 function FormSeparator() {
-  const [party, setParty] = useState(null);
-  const [sm, setSm] = useState(null);
   const [partyOptions, setPartyOptions] = useState([]);
   const [smOptions, setSmOptions] = useState([]);
   const [stateCountry, setStateofCountry] = useState([]);
@@ -31,10 +28,10 @@ function FormSeparator() {
     email: '',
     statecode: '',
     subgroup: '',
-    stateCode: '',
   });
   const navigate = useNavigate();
 
+  const { user } = useAuth();
   useEffect(() => {
     const currentUrl = window.location.href;
     if (currentUrl.includes('edit')) {
@@ -47,14 +44,11 @@ function FormSeparator() {
           const data = await accounts.json();
 
           const account = data.find((account) => account.subgroup === subgroup);
-          console.log('account', account);
           if (account) {
             setPartyOptions([{ label: account.subgroup, value: account.subgroup }]);
             setSubGroupCode(account.subgroup);
-            console.log('account', account);
 
             // Set the form fields with the fetched data
-
             setInitialValues({
               subgroup: account.subgroup,
               achead: account.achead,
@@ -106,12 +100,13 @@ function FormSeparator() {
 
           const stateres = await fetch(constants.baseURL + '/api/dbf/state.json');
           const statedata = await stateres.json();
-          setSmOptions(
-            statedata.map((state) => ({
-              value: state.ST_CODE,
-              label: state.ST_NAME,
-            })),
-          );
+          const stateList = statedata.map((state) => ({
+            value: state.ST_CODE,
+            label: state.ST_NAME,
+          }));
+
+          setSmOptions(stateList);
+          setStateofCountry(stateList);
         } catch (error) {
           toast.error('Failed to fetch account details');
         }
@@ -122,12 +117,7 @@ function FormSeparator() {
   }, []);
 
   const handlePartyChange = (event, newValue) => {
-    setParty(newValue?.label || null);
     setSubGroupCode(newValue?.value || null);
-  };
-
-  const handleSmChange = (event, newValue) => {
-    setSm(newValue || null);
   };
 
   return (
@@ -139,11 +129,6 @@ function FormSeparator() {
           try {
             values.subgroup = subGroupCode;
 
-            const stateCode = stateCountry.find((state) => state.label === sm?.label);
-            values.statecode = stateCode?.value;
-            // const route = "/account-master";
-            // if url -> edit then /edit/account-master else /account-master
-            const currentUrl = window.location.href;
             const route = isEDIT ? `/edit/account-master` : `/account-master`;
 
             const res = await fetch(constants.baseURL + route, {
@@ -154,7 +139,6 @@ function FormSeparator() {
               },
             });
             const data = await res.json();
-            console.log(res);
 
             if (res.status === 200 || res.status === 204) {
               toast.success(data.message);
@@ -163,32 +147,30 @@ function FormSeparator() {
               toast.error(data.message);
             }
           } catch (error) {
-            toast.success('Submitted');
-            navigate('/db/account-master');
+            toast.error('Submission failed');
           } finally {
             setSubmitting(false);
           }
         }}
       >
-        {({ isSubmitting, values }) => (
+        {({ isSubmitting, values, setFieldValue }) => (
           <Form>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <Autocomplete
                   options={partyOptions}
                   getOptionLabel={(option) => option.label}
-                  onChange={handlePartyChange}
+                  onChange={(event, newValue) => {
+                    handlePartyChange(event, newValue);
+                    setFieldValue('subgroup', newValue?.label || '');
+                  }}
                   renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
                   value={
-                    initialValues.subgroup
-                      ? {
-                          label: initialValues.subgroup,
-                          value: initialValues.subgroup,
-                        }
-                      : {
-                          label: '',
-                          value: '',
-                        }
+                    user
+                      ? { label: user.subgroup.title, value: user.subgroup.subgroupCode }
+                      : partyOptions.find((option) => option.value === subGroupCode)
+                      ? partyOptions.find((option) => option.value === subGroupCode)
+                      : { label: '', value: '' }
                   }
                 />
               </Grid>
@@ -205,13 +187,7 @@ function FormSeparator() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field
-                  required
-                  name="addressline2"
-                  as={TextField}
-                  label="Address Line 2"
-                  fullWidth
-                />
+                <Field name="addressline2" as={TextField} label="Address Line 2" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Field required name="place" as={TextField} label="Place" fullWidth />
@@ -222,7 +198,8 @@ function FormSeparator() {
                   name="pincode"
                   as={TextField}
                   label="Pin Code"
-                  type="number"
+                  type="text"
+                  inputProps={{ maxLength: 6 }}
                   fullWidth
                 />
               </Grid>
@@ -231,9 +208,8 @@ function FormSeparator() {
                   required
                   name="mobile"
                   as={TextField}
-                  type="number"
-                  maxLength="10"
-                  minLength="10"
+                  type="text"
+                  inputProps={{ maxLength: 10 }}
                   label="Mobile"
                   fullWidth
                 />
@@ -243,43 +219,35 @@ function FormSeparator() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Field
-                  required
                   name="aadhar"
                   as={TextField}
                   label="Aadhar"
-                  type="number"
+                  type="text"
+                  inputProps={{ maxLength: 12 }}
                   fullWidth
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field required name="gst" as={TextField} label="GSTIN" fullWidth />
+                <Field name="gst" as={TextField} label="GSTIN" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field required name="dlno" as={TextField} label="DL NO." fullWidth />
+                <Field name="dlno" as={TextField} label="DL NO." fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field required name="fssaino" as={TextField} label="FSSAI NO." fullWidth />
+                <Field name="fssaino" as={TextField} label="FSSAI NO." fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Field required name="email" as={TextField} label="Email" fullWidth />
+                <Field name="email" as={TextField} label="Email" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Autocomplete
                   options={smOptions}
                   getOptionLabel={(option) => option.label}
-                  onChange={handleSmChange}
+                  onChange={(event, newValue) => {
+                    setFieldValue('statecode', newValue?.value || '');
+                  }}
                   renderInput={(params) => <TextField {...params} label="State Code" fullWidth />}
-                  // value={}
-                  value={
-                    smOptions.find((state) => {
-                      console.log(state);
-                      return state.value === initialValues.statecode;
-                    }) || {
-                      label: '',
-                      value: '',
-                    }
-                  }
-                  // autoHighlight={true}
+                  value={smOptions.find((option) => option.value === values.statecode) || null}
                 />
               </Grid>
               <Grid item xs={12}>

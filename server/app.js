@@ -52,8 +52,8 @@ app.get('/admin', async (req, res) => {
 });
 
 app.post('/addUser', async (req, res) => {
-  const { name, number, perms, routes, password, powers } = req.body;
-  console.log('Adding user', number, perms, routes, powers, password);
+  const { name, number, perms, routes, password, powers, subgroup } = req.body;
+  console.log('Adding user', number, perms, routes, powers, password, subgroup);
   let users = await fs.readFile('./db/users.json');
   users = JSON.parse(users);
   if (users.find((user) => user.username === number)) {
@@ -62,6 +62,7 @@ app.post('/addUser', async (req, res) => {
     user.name = name;
     user.routes = routes;
     user.password = password;
+    user.powers = powers;
     fs.writeFile('./db/users.json', JSON.stringify(users, null, 2));
     res.redirect('/admin');
     return;

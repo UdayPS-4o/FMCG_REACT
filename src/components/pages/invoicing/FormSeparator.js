@@ -35,6 +35,7 @@ function FormSeparator() {
   const [partyOptions, setPartyOptions] = useState([]);
   const [smOptions, setSmOptions] = useState([]);
   const [pmplData, setPmplData] = useState([]);
+  const [errors, setErrors] = useState({});
   const baseURL = constants.baseURL;
 
   useEffect(() => {
@@ -109,7 +110,30 @@ function FormSeparator() {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!party) {
+      newErrors.party = 'Party is required';
+    }
+
+    if (!sm) {
+      newErrors.sm = 'S/M is required';
+    }
+
+    if (items.some((item) => !item.item || !item.qty || !item.rate)) {
+      newErrors.items = 'Each item must have a name, quantity, and rate';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async () => {
+    if (!validateForm()) {
+      return; // Stop submission if the form is invalid
+    }
+
     console.log('Party:', party);
     console.log('S/M:', sm);
     console.log('Items:', items); // Log the array of objects
@@ -178,7 +202,15 @@ function FormSeparator() {
           options={partyOptions}
           getOptionLabel={(option) => option.label}
           onChange={handlePartyChange}
-          renderInput={(params) => <TextField {...params} label="Party" fullWidth />}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Party"
+              fullWidth
+              error={!!errors.party}
+              helperText={errors.party}
+            />
+          )}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -186,7 +218,15 @@ function FormSeparator() {
           options={smOptions}
           getOptionLabel={(option) => option.label}
           onChange={handleSmChange}
-          renderInput={(params) => <TextField {...params} label="S/M" fullWidth />}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="S/M"
+              fullWidth
+              error={!!errors.sm}
+              helperText={errors.sm}
+            />
+          )}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -216,6 +256,7 @@ function FormSeparator() {
             updateItem={updateItem}
             removeItem={removeItem}
             pmplData={pmplData}
+            errors={errors.items}
           />
         ))}
         <Divider />

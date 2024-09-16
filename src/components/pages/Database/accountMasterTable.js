@@ -13,7 +13,9 @@ import {
   TextField,
   InputAdornment,
   Tooltip,
-  IconButton, // Keep this import
+  IconButton,
+  Checkbox,
+  Button,
 } from '@mui/material';
 
 import { IconSearch, IconFilter } from '@tabler/icons';
@@ -33,7 +35,7 @@ const fetchProducts = async (endpoint) => {
 
 const ProductTableList = () => {
   const [endpoint, setEndpoint] = React.useState('');
-
+  const [approved, setApproved] = React.useState([]);
   const [rows, setRows] = React.useState([]);
   const [headers, setHeaders] = React.useState([]);
   const [order, setOrder] = React.useState('asc');
@@ -41,12 +43,11 @@ const ProductTableList = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [search, setSearch] = React.useState('');
+
   React.useEffect(() => {
     let point = window.location.href.split('/db/')[1].toLowerCase();
-    // console.log('point', point);
     setEndpoint(point);
     fetchProducts(point).then((data) => {
-      console.log('data', data);
       setRows(data);
       if (data.length > 0) {
         setHeaders(Object.keys(data[0]));
@@ -85,21 +86,105 @@ const ProductTableList = () => {
     return a[orderBy] > b[orderBy] ? -1 : 1;
   });
 
-  console.log('sortedRows', sortedRows);
   const handlePrint = (ReceiptNo) => {
-    console.log('ReceiptNo', ReceiptNo);
     if (!endpoint) {
       toast.error('Endpoint is required');
     }
-    if (endpoint == 'cash-receipts') window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
-    if (endpoint == 'cash-payments') window.location.href = `/print?voucherNo=${ReceiptNo}`;
-    if (endpoint == 'godown') window.location.href = `/printGodownT?godownId=${ReceiptNo}`;
+    if (endpoint === 'cash-receipts') window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
+    if (endpoint === 'cash-payments') window.location.href = `/print?voucherNo=${ReceiptNo}`;
+    if (endpoint === 'godown') window.location.href = `/printGodownT?godownId=${ReceiptNo}`;
   };
 
   const handleEdit = (subgroup) => {
     console.log('subgroup', subgroup);
     window.location.href = `/edit/${endpoint}?sub=${subgroup}`;
   };
+
+  const handleApproveAdd = (itemId) => {
+    setApproved((prev) => {
+      if (prev.includes(itemId)) {
+        return prev.filter((id) => id !== itemId);
+      } else {
+        return [...prev, itemId];
+      }
+    });
+  };
+
+  // Handle Select All functionality
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      // Select all items across all pages
+      const allItemIds = sortedRows
+        .map((row) => {
+          if (endpoint === 'account-master') {
+            return row.subgroup;
+          } else if (endpoint === 'cash-receipts') {
+            return row.receiptNo;
+          } else if (endpoint === 'godown') {
+            return row.id;
+          } else if (endpoint === 'cash-payments') {
+            return row.voucherNo;
+          }
+          return null;
+        })
+        .filter((id) => id !== null);
+      setApproved(allItemIds);
+    } else {
+      // Deselect all items
+      setApproved([]);
+    }
+  };
+
+  // Determine if all items are selected
+  const isAllSelected = () => {
+    const allItemIds = sortedRows
+      .map((row) => {
+        if (endpoint === 'account-master') {
+          return row.subgroup;
+        } else if (endpoint === 'cash-receipts') {
+          return row.receiptNo;
+        } else if (endpoint === 'godown') {
+          return row.id;
+        } else if (endpoint === 'cash-payments') {
+          return row.voucherNo;
+        }
+        return null;
+      })
+      .filter((id) => id !== null);
+    return allItemIds.length > 0 && allItemIds.every((id) => approved.includes(id));
+  };
+
+  // Determine if some items are selected
+  const isSomeSelected = () => {
+    return approved.length > 0 && !isAllSelected();
+  };
+
+  // Handle Approve Button Click
+  const handleApprove = () => {
+    // Send POST request to /approve endpoint
+    fetch(`${constants.baseURL}/approve`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ endpoint, approved }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          toast.success('Items approved successfully');
+          // Clear approved list after successful approval
+          setApproved([]);
+        } else {
+          toast.error('Failed to approve items');
+        }
+      })
+      .catch((error) => {
+        console.error('Error approving items:', error);
+        toast.error('Error approving items');
+      });
+  };
+
+  React.useEffect(() => {
+    console.log('approved', approved);
+  }, [approved]);
 
   return (
     <Box>
@@ -124,63 +209,102 @@ const ProductTableList = () => {
             <IconFilter size="1.2rem" icon="filter" />
           </IconButton>
         </Tooltip>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={approved.length === 0}
+          onClick={handleApprove}
+          sx={{ ml: 2 }}
+        >
+          Approve {approved.length} items
+        </Button>
       </Toolbar>
       <Paper variant="outlined">
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
             <TableHead>
               <TableRow>
-                {headers.map((header) => (
+                {['Approve', ...headers, 'Action'].map((header) => (
                   <TableCell
                     key={header}
                     sortDirection={orderBy === header ? order : false}
-                    onClick={(event) => handleRequestSort(event, header)}
+                    onClick={(event) => {
+                      if (header !== 'Approve') handleRequestSort(event, header);
+                    }}
                   >
-                    {header.charAt(0).toUpperCase() + header.slice(1)}
+                    {header === 'Approve' ? (
+                      <Checkbox
+                        indeterminate={isSomeSelected()}
+                        checked={isAllSelected()}
+                        onChange={handleSelectAllClick}
+                        inputProps={{
+                          'aria-label': 'select all items',
+                        }}
+                      />
+                    ) : (
+                      header.charAt(0).toUpperCase() + header.slice(1)
+                    )}
                   </TableCell>
                 ))}
-                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredRows
+              {sortedRows
                 .reverse()
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow hover tabIndex={-1} key={index}>
-                    {headers.map((header) => {
-                      console.log('header', header);
+                .map((row, index) => {
+                  const itemId =
+                    endpoint === 'account-master'
+                      ? row.subgroup
+                      : endpoint === 'cash-receipts'
+                      ? row.receiptNo
+                      : endpoint === 'godown'
+                      ? row.id
+                      : endpoint === 'cash-payments'
+                      ? row.voucherNo
+                      : null;
 
-                      console.log('row[header]', row[header]);
-                      return (
+                  const isItemSelected = approved.includes(itemId);
+
+                  return (
+                    <TableRow hover tabIndex={-1} key={index}>
+                      <TableCell>
+                        <Checkbox
+                          checked={isItemSelected}
+                          onChange={() => {
+                            handleApproveAdd(itemId);
+                          }}
+                          color="primary"
+                          inputProps={{ 'aria-label': 'select item' }}
+                        />
+                      </TableCell>
+                      {headers.map((header) => (
                         <TableCell key={header}>
                           {header === 'items' ? row[header].length : row[header]}
                         </TableCell>
-                      );
-                    })}
+                      ))}
 
-                    <TableCell>
-                      <IconButton>
-                        <DeleteIcon />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => {
-                          if (endpoint === 'account-master') {
-                            handleEdit(row.subgroup);
-                          } else if (endpoint === 'cash-receipts') {
-                            handleEdit(row.receiptNo);
-                          } else if (endpoint === 'godown') {
-                            handleEdit(row.id);
-                          } else if (endpoint === 'cash-payments') {
-                            handleEdit(row.voucherNo);
-                          }
-                        }}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      {endpoint !== 'account-master' ? (
+                      <TableCell>
                         <IconButton>
-                          <div
+                          <DeleteIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => {
+                            if (endpoint === 'account-master') {
+                              handleEdit(row.subgroup);
+                            } else if (endpoint === 'cash-receipts') {
+                              handleEdit(row.receiptNo);
+                            } else if (endpoint === 'godown') {
+                              handleEdit(row.id);
+                            } else if (endpoint === 'cash-payments') {
+                              handleEdit(row.voucherNo);
+                            }
+                          }}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        {endpoint !== 'account-master' ? (
+                          <IconButton
                             onClick={() => {
                               if (endpoint === 'account-master') {
                                 handlePrint(row.subgroup);
@@ -194,12 +318,12 @@ const ProductTableList = () => {
                             }}
                           >
                             <PrintIcon />
-                          </div>
-                        </IconButton>
-                      ) : null}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                          </IconButton>
+                        ) : null}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>

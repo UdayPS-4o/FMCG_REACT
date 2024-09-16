@@ -29,7 +29,6 @@ const getCmplData = async () => {
   }
 };
 
-
 const getPMPLData = async () => {
   const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'PMPL.dbf');
   console.log(dbfFilePath);
@@ -50,7 +49,6 @@ const getPMPLData = async () => {
     throw error;
   }
 };
-
 
 function newData(json, accountMasterData) {
   json = json.filter((item) => item.M_GROUP === 'DT');
@@ -133,7 +131,6 @@ app.get('/subgrp', async (req, res) => {
     console.error('Error fetching or processing data:', error);
     res.status(500).send('Server error');
   }
-  z;
 });
 
 app.get('/cash-payments', async (req, res) => {
@@ -288,34 +285,33 @@ async function getNextInvoiceId(req, res) {
 async function printGodown(req, res) {
   try {
     const { retreat } = req.query;
- 
+
     let godownData = await fs.readFile(path.join(__dirname, '..', 'db', 'godown.json'), 'utf8');
-     godownData = JSON.parse(godownData);
- 
+    godownData = JSON.parse(godownData);
+
     const godown = godownData.find((godown) => godown.id === retreat);
 
     const pmplData = await getPMPLData();
 
-
     godown.items.forEach((item) => {
-        const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.code);
-        console.log("pmplItem", pmplItem);
-        if (pmplItem) {
-            item.particular = pmplItem.PRODUCT;
-            item.pack = pmplItem.PACK;
-            item.gst = pmplItem.GST;
-        }
-        console.log("myitem", item);
+      const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.code);
+      console.log('pmplItem', pmplItem);
+      if (pmplItem) {
+        item.particular = pmplItem.PRODUCT;
+        item.pack = pmplItem.PACK;
+        item.gst = pmplItem.GST;
+      }
+      console.log('myitem', item);
     });
     res.send(godown);
-} catch (error) {
+  } catch (error) {
     console.error('Error fetching data:', error);
-}
+  }
 }
 
-const   EditUser = async (req, res) => {
-  const { id, name, number,  routeAccess, password, powers } = req.body;
-  console.log('Editing user', id, number,  routeAccess, powers, password);
+const EditUser = async (req, res) => {
+  const { id, name, number, routeAccess, password, powers } = req.body;
+  console.log('Editing user', id, number, routeAccess, powers, password);
 
   try {
     // Read users from users.json file
@@ -333,12 +329,11 @@ const   EditUser = async (req, res) => {
       user.powers = powers;
 
       // Save the updated users list back to the JSON file
-      await fs.writeFile(path.join(__dirname, '../db/users.json'), JSON.stringify(users, null, 2)); 
-      
+      await fs.writeFile(path.join(__dirname, '../db/users.json'), JSON.stringify(users, null, 2));
 
       console.log(`User with ID: ${id} updated successfully.`);
       // res.redirect('/admin'); // Redirect back to admin page after successful update
-      res.status(200).send({id: id, message: 'User updated successfully'});
+      res.status(200).send({ id: id, message: 'User updated successfully' });
     } else {
       // If user with the provided ID is not found, return an error
       res.status(404).send('User not found');
@@ -349,7 +344,7 @@ const   EditUser = async (req, res) => {
   }
 };
 
-app.get('/json/users', async (req, res) => {  
+app.get('/json/users', async (req, res) => {
   try {
     const users = await fs.readFile(path.join(__dirname, '../db/users.json'));
     res.send(users);
@@ -357,11 +352,10 @@ app.get('/json/users', async (req, res) => {
     console.error('Failed to read users.json:', error);
     res.status(500).send('Server error');
   }
-}
-);
+});
 
 app.post('/addUser', async (req, res) => {
-  const { name, number, password, routeAccess, powers ,username } = req.body;
+  const { name, number, password, routeAccess, powers, username, subgroup } = req.body;
   try {
     let users = await fs.readFile('./db/users.json');
     users = JSON.parse(users);
@@ -375,6 +369,7 @@ app.post('/addUser', async (req, res) => {
       password: password,
       routeAccess: routeAccess,
       powers: powers,
+      subgroup: subgroup,
     };
 
     users.push(newUser);
@@ -386,40 +381,38 @@ app.post('/addUser', async (req, res) => {
   }
 });
 
-
 async function printInvoicing(req, res) {
   try {
     const { id } = req.query;
     console.log(id);
- 
+
     let invoiceData = await fs.readFile(path.join(__dirname, '..', 'db', 'invoicing.json'), 'utf8');
     invoiceData = JSON.parse(invoiceData);
-    
-    // console.log(invoiceData)
-    const invoice  = invoiceData.find((inv )=>inv.id=== Number(id));
-    console.log("THe invoice we found is",invoice)
-    const pmplData = await getPMPLData(); 
 
+    // console.log(invoiceData)
+    const invoice = invoiceData.find((inv) => inv.id === Number(id));
+    console.log('THe invoice we found is', invoice);
+    const pmplData = await getPMPLData();
 
     invoice.items.forEach((item) => {
-        const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.item);
-        console.log("pmplItem", pmplItem);
-        if (pmplItem) {
-            item.particular = pmplItem.PRODUCT;
-            item.pack = pmplItem.PACK;
-            item.gst = pmplItem.GST;
-        }
-        console.log("myitem", item);
+      const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.item);
+      console.log('pmplItem', pmplItem);
+      if (pmplItem) {
+        item.particular = pmplItem.PRODUCT;
+        item.pack = pmplItem.PACK;
+        item.gst = pmplItem.GST;
+      }
+      console.log('myitem', item);
     });
     res.send(invoice);
-} catch (error) {
+  } catch (error) {
     console.error('Error fetching data:', error);
-}
+  }
 }
 
-app.get('/printInvoice' ,printInvoicing);
+app.get('/printInvoice', printInvoicing);
 app.post('/editUser', EditUser);
-app.get('/printGodown' ,printGodown);
+app.get('/printGodown', printGodown);
 app.get('/godownId', getNextGodownId);
 app.get('/invoiceId', getNextInvoiceId);
 

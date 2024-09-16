@@ -9,10 +9,11 @@ import { set } from 'lodash';
 
 function UserForm() {
   const [routeAccessOptions, setRouteAccessOptions] = useState([]);
+  const [partyOptions, setPartyOptions] = useState([]);
   const [powersOptions, setPowersOptions] = useState([]);
   const [initialValues, setInitialValues] = useState({
     name: '',
-    number: '', 
+    number: '',
     password: '',
     routeAccess: [],
     powers: [],
@@ -20,7 +21,7 @@ function UserForm() {
 
   const [data, setData] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
- 
+
   useEffect(() => {
     const fetchUserData = async () => {
       const url = `${constants.baseURL}/slink/json/users`;
@@ -33,7 +34,7 @@ function UserForm() {
         const userId = params.get('id');
 
         if (userId && users.length) {
-          const userToEdit = users.find(user => user.id === Number(userId));
+          const userToEdit = users.find((user) => user.id === Number(userId));
           if (userToEdit) {
             setIsEdit(true);
             setInitialValues({
@@ -41,7 +42,9 @@ function UserForm() {
               name: userToEdit.name,
               number: userToEdit.number,
               password: userToEdit.password,
-              routeAccess: Array.isArray(userToEdit.routeAccess) ? userToEdit.routeAccess : [userToEdit.routeAccess],
+              routeAccess: Array.isArray(userToEdit.routeAccess)
+                ? userToEdit.routeAccess
+                : [userToEdit.routeAccess],
               powers: Array.isArray(userToEdit.powers) ? userToEdit.powers : [userToEdit.powers],
             });
           } else {
@@ -49,8 +52,8 @@ function UserForm() {
           }
         }
 
-        setRouteAccessOptions([...new Set(users.flatMap(user => user.routeAccess || []))]);
-        setPowersOptions([...new Set(users.flatMap(user => user.powers || []))]);
+        setRouteAccessOptions([...new Set(users.flatMap((user) => user.routeAccess || []))]);
+        setPowersOptions([...new Set(users.flatMap((user) => user.powers || []))]);
       } catch (error) {
         console.error('Failed to fetch user data:', error);
         toast.error('Failed to load user details');
@@ -58,7 +61,22 @@ function UserForm() {
     };
 
     fetchUserData();
-  }, [window.location.href]);  
+  }, [window.location.href]);
+
+  useEffect(() => {
+    const fetchPartyData = async () => {
+      const url = `${constants.baseURL}/slink/subgrp`;
+      try {
+        const response = await fetch(url);
+        const party = await response.json();
+        setPartyOptions(party);
+      } catch (error) {
+        console.error('Failed to fetch party data:', error);
+        toast.error('Failed to load party details');
+      }
+    };
+    fetchPartyData();
+  }, []);
 
   const handleSubmit = async (values) => {
     values.username = 'admin';
@@ -68,7 +86,7 @@ function UserForm() {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values)
+        body: JSON.stringify(values),
       });
 
       if (!response.ok) {
@@ -78,7 +96,9 @@ function UserForm() {
       }
 
       const result = await response.json();
-      toast.success(isEdit ? 'User updated successfully' : `User added successfully, ID: ${result.id}`);
+      toast.success(
+        isEdit ? 'User updated successfully' : `User added successfully, ID: ${result.id}`,
+      );
       if (isEdit === false) {
         setInitialValues({
           name: '',
@@ -88,7 +108,6 @@ function UserForm() {
           powers: [],
         });
         window.location.href = window.location.origin + '/editadduser' + '?id=' + result.id;
-
       }
     } catch (error) {
       console.error('Network error:', error);
@@ -106,13 +125,14 @@ function UserForm() {
                 <Field required name="name" as={TextField} label="Name" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Autocomplete required
+                <Autocomplete
+                  required
                   multiple
                   options={routeAccessOptions}
-                  getOptionLabel={option => option}
+                  getOptionLabel={(option) => option}
                   value={values.routeAccess}
                   onChange={(event, newValue) => setFieldValue('routeAccess', newValue)}
-                  renderInput={params => <TextField {...params} label="Route Access" fullWidth />}
+                  renderInput={(params) => <TextField {...params} label="Route Access" fullWidth />}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -122,13 +142,22 @@ function UserForm() {
                 <Field required name="password" as={TextField} label="Password" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Autocomplete required
+                <Autocomplete
+                  required
                   multiple
                   options={powersOptions}
-                  getOptionLabel={option => option}
+                  getOptionLabel={(option) => option}
                   value={values.powers}
                   onChange={(event, newValue) => setFieldValue('powers', newValue)}
-                  renderInput={params => <TextField {...params} label="Powers" fullWidth />}
+                  renderInput={(params) => <TextField {...params} label="Powers" fullWidth />}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Autocomplete
+                  options={partyOptions}
+                  getOptionLabel={(option) => option.title}
+                  onChange={(event, newValue) => setFieldValue('subgroup', newValue)}
+                  renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
                 />
               </Grid>
               <Grid item xs={12}>

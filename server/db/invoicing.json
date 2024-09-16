@@ -117,5 +117,95 @@
         "netAmount": ""
       }
     ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 15,
+    "party": "",
+    "sm": "",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "",
+        "godown": "",
+        "unit": "",
+        "stock": "",
+        "pack": "",
+        "gst": "",
+        "pcBx": "",
+        "mrp": "",
+        "rate": "",
+        "qty": "",
+        "cess": "",
+        "schRs": "",
+        "sch": "",
+        "cd": "",
+        "amount": "",
+        "netAmount": ""
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 16,
+    "party": "",
+    "sm": "",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "",
+        "godown": "",
+        "unit": "",
+        "stock": "",
+        "pack": "",
+        "gst": "",
+        "pcBx": "",
+        "mrp": "",
+        "rate": "",
+        "qty": "",
+        "cess": "",
+        "schRs": "",
+        "sch": "",
+        "cd": "",
+        "amount": "",
+        "netAmount": ""
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 17,
+    "party": "",
+    "sm": "",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "",
+        "godown": "",
+        "unit": "",
+        "stock": "",
+        "pack": "",
+        "gst": "",
+        "pcBx": "",
+        "mrp": "",
+        "rate": "",
+        "qty": "",
+        "cess": "",
+        "schRs": "",
+        "sch": "",
+        "cd": "",
+        "amount": "",
+        "netAmount": ""
+      }
+    ]
   }
 ]
