@@ -125,7 +125,6 @@ app.get('/subgrp', async (req, res) => {
     const accountMasterData = JSON.parse(await fs.readFile(accountMasterPath, 'utf8'));
 
     let partyList = newData(cmplData, accountMasterData);
-    console.log('Generated Party List:', partyList);
     res.json(partyList);
   } catch (error) {
     console.error('Error fetching or processing data:', error);
