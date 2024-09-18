@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 const fs = require('fs').promises;
 const path = require('path');
+const morgan = require('morgan');
 const app = express();
 const PORT = 80;
 const io = require('socket.io');
@@ -17,6 +18,7 @@ const {
 const cors = require('cors');
 app.use(cors());
 
+app.use(morgan('dev'));
 app.use(cookieParser());
 
 const spawn = require('child_process').spawn;
