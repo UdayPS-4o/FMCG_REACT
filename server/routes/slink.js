@@ -379,7 +379,6 @@ app.post('/addUser', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
 async function printInvoicing(req, res) {
   try {
     const { id } = req.query;
@@ -390,26 +389,112 @@ async function printInvoicing(req, res) {
 
     // console.log(invoiceData)
     const invoice = invoiceData.find((inv) => inv.id === Number(id));
-    console.log('THe invoice we found is', invoice);
+    console.log("THe invoice we found is", invoice)
     const pmplData = await getPMPLData();
+    let accountMasterData = await fs.readFile(path.join(__dirname, '..', 'db', 'account-master.json'), 'utf8');
+    accountMasterData = JSON.parse(accountMasterData);
 
-    invoice.items.forEach((item) => {
-      const pmplItem = pmplData.find((pmplItem) => pmplItem.CODE === item.item);
-      console.log('pmplItem', pmplItem);
-      if (pmplItem) {
-        item.particular = pmplItem.PRODUCT;
-        item.pack = pmplItem.PACK;
-        item.gst = pmplItem.GST;
-      }
-      console.log('myitem', item);
-    });
-    res.send(invoice);
+    accountMasterData = accountMasterData.filter((item) => item.subgroup === invoice.party);
+    console.log("Account Master Data", accountMasterData)
+    invoice.party = accountMasterData[0];
+
+
+
+
+    // console.log("before party",invoice.party)
+
+    // console.log("After party",invoice.party)
+    const ModifiedInv = {
+      company: {
+        name: "EKTA ENTERPRICE",
+        gstin: "23AJBPS6285R1ZF",
+        subject: "Subject to SEONI Jurisdiction",
+        fssaiNo: "11417230000027",
+        address: "BUDHWARI BAZAR,GN ROAD SEONI,",
+        phone: "Ph : 9179174888 , 9826623188",
+        officeNo: "07692-220897",
+        stateCode: "23"
+      },
+      dlNo: invoice.party.dlNo,
+      party: {
+        name: invoice.party.achead,
+        address: invoice.party.addressline1||invoice.party.addressline2,
+        gstin: invoice.party.gst,
+        stateCode: invoice.party.statecode,
+        mobileNo: invoice.party.mobile,
+        balanceBf: invoice.items.reduce((acc, item) => acc + item.netAmount, 0),
+      },
+      invoice: {
+        no: invoice.id,
+        mode: "CASH",
+        date: invoice.date,
+        time: new Date().toLocaleTimeString(),
+        dueDate: invoice.dueDays ? new Date(invoice.date).setDate(new Date(invoice.date).getDate() + invoice.dueDays) : "",
+      },
+      ack: {
+        no: invoice.id,
+        date: invoice.date,
+      },
+      irn: "",
+      items: [
+        // { particulars: "CHAVI WAX 40'S HM 36050010", pack: "BDLS", mrp: 600.00, gst: 12.00, rate: 460.00, unit: "BOX", qty: 60, free: 0, schRs: "", netAmount: 27600.00 },
+
+        ...invoice.items.map((item) => {
+
+          item.particular = pmplData.find((pmplItem) => pmplItem.CODE === item.item).PRODUCT;
+          item.pack = pmplData.find((pmplItem) => pmplItem.CODE === item.item).PACK;
+          item.gst = pmplData.find((pmplItem) => pmplItem.CODE === item.item).GST;
+          return item;
+        }
+        )
+
+      ],
+      summary: {
+        itemsInBill: invoice.items.length,
+        casesInBill: invoice.items.reduce((acc, item) => acc +Number( item.qty), 0),
+        looseItemsInBill: invoice.items.reduce((acc, item) => acc + item.free, 0)||0,
+      },
+      taxDetails: [
+        // { goods: 3807.49, sgst: 2.50, sgstValue: 95.190, cgst: 2.50, cgstValue: 95.190 },
+
+        ...invoice.items.map((item) => {
+          return {
+            goods: item.netAmount,
+            sgst: item.gst / 2,
+            sgstValue: item.netAmount * (item.gst / 2) / 100 || 0,
+            cgst: item.gst / 2,
+            cgstValue: item.netAmount * (item.gst / 2) / 100 || 0,
+          };
+        }
+        )
+      ],
+      totals: {
+        // grossAmt: 31721.52,
+        // lessSch: 0.00,
+        // lessCd: 123.65,
+        // rOff: 0.00,
+        // netAmount: 31598.00
+        grossAmt: invoice.items.reduce((acc, item) => acc + Number(item.netAmount), 0),
+        lessSch: 0.00,
+        lessCd: 0.00,
+        rOff: 0.00,
+        netAmount: invoice.items.reduce((acc, item) => acc + Number(item.netAmount), 0),
+      },
+    }
+    console.log(ModifiedInv);
+
+    res.send(ModifiedInv);
+
+
+
+
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 }
 
 app.get('/printInvoice', printInvoicing);
+
 app.post('/editUser', EditUser);
 app.get('/printGodown', printGodown);
 app.get('/godownId', getNextGodownId);

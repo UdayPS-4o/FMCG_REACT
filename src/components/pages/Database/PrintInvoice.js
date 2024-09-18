@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 import constants from 'src/constants';
 
 export default function PrintInvoicing() {
@@ -8,21 +9,13 @@ export default function PrintInvoicing() {
     const queryParams = new URLSearchParams(window.location.search);
     const queryKey = queryParams.keys().next().value;
     const invoiceId = queryParams.get(queryKey);
-    const [partyname, setPartyname] = useState('');
 
     useEffect(() => {
-        let invoicedata;
         // Fetch the invoice data
         fetch(`${constants.baseURL}/slink/printInvoice?id=${invoiceId}`)
             .then((res) => res.json())
             .then((data) => {
-                invoicedata = data;
                 setInvoiceData(data);
-
-                fetch(`${constants.baseURL}/cmpl`).then((res) => res.json()).then((data) => {
-                    const party = data.find((party) => party.id === invoicedata.party);
-                    setPartyname(party.name);
-                });
             });
     }, [invoiceId]);
 
@@ -39,498 +32,268 @@ export default function PrintInvoicing() {
         return <div>Loading...</div>;
     }
 
-    const { date, series, cash, id, party, sm, dueDays, ref, items } = invoiceData;
-
     return (
         <>
             <button onClick={handlePrint}>Print</button>
             <div ref={printRef}>
-                <div className='TopMostDIv'
-                    style={{
-                        display: 'flex',
-                    }}
-                >
-                    <div className="invoice-container" style={{ width: '1000px' }}>
-                        <div className="invoice-header">
-                            <div>
-                                <div>
-                                    <strong>GSTN : 23 AJBPS6285R1ZF</strong>
-                                </div>
-                                <div>
-                                    <strong>Subject to SEONI Jurisdiction</strong>
-                                </div>
-                                <div>
-                                    <strong>FSSAI NO : 11417230000027</strong>
-                                </div>
-                            </div>
-                            <div id="company-name">
-                                <h4>Tax Invoice</h4>
-                                <h1>EKTA ENTERPRISE</h1>
-                                <h5>BUDHWARI BAZAR, GN ROAD SEONI,</h5>
-                            </div>
-                            <div>
-                                <h6>Ph : 9179174888 , 9826623188</h6>
-                                <p>Office No. 07692-220897</p>
-                                <h6>State code: 23</h6>
-                            </div>
-                        </div>
-
-                        <div className="DLno">
-                            <strong>
-                                D.L. No.: 20B/807/54/2022 , 21B/808/54/2022 , 20/805/54/2022 ,
-                                21/806/54/2022
-                            </strong>
-                        </div>
-
-                        <div className="invoice-details section-2">
-                            <table style={{ borderRight: '2px solid black', height: '175px' }}>
-                                <tr>
-                                    <th>Party</th>
-                                    <th colSpan="2">{partyname}</th>
-                                    <th></th>
-                                    <th style={{ position: 'relative' }}>
-                                        <img src="./qr_ekta.png" alt="" style={{ position: 'absolute' }} />
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>Address</th>
-                                    <td colSpan="2">
-                                        BUS STAND
-                                        <br />
-                                        ADEGAON
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>GSTIN</th>
-                                    <td>23BPAPA8654L1ZW</td>
-                                    <th>State Code : 23</th>
-                                </tr>
-                                <tr>
-                                    <th>Mobile No.</th>
-                                    <td colSpan="2">9752899120</td>
-                                    <th>Balance B/f</th>
-                                    <td>55448.00 Dr</td>
-                                </tr>
-                            </table>
-                            <table>
-                                <tr>
-                                    <th>Inv. No : B-3114</th>
-                                    <th>Mode: CREDIT</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Date</strong>: {
-                                            date
-                                        }
-                                    </td>
-                                    <td>07:07:48 PM</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Due Date</strong> 20.06.2024
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <section className="section-2-bottom">
-                            <div
-
-                            >
-                                <span
-                                    style={{
-
-                                        padding: '10px',
-                                    }}
-                                >Ack. No.</span>
-                                <p>162417426714120</p>
-                            </div>
-                            <div>
-                                <span
-
-                                    style={
-                                        {
-
-                                            padding: '10px',
-                                        }
-                                    }
-
-                                >Ack. Date</span>
-                                <p>2024/06/13 07:08:00</p>
-                            </div>
-                            <div>
-                                <span
-                                    style={{
-
-                                     
-                                        padding: '10px',
-                                    }}
-                                >IRN No.</span>
-                                <p>
-                                    0265cdbc86f02a327272925c34fd6014d5701a832b58d00f5b5b85cf452f30b8
-                                </p>
-                            </div>
-                        </section>
-
-                        <div className="invoice-details">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Particulars/HSN</th>
-                                        <th>Pack</th>
-                                        <th>M.R.P.</th>
-                                        <th>GST %</th>
-                                        <th>Rate (incl of Tax)</th>
-                                        <th>Unit</th>
-                                        <th>Qty</th>
-                                        <th>Free</th>
-                                        <th>Sch Rs.</th>
-                                        <th>Co. Sch% Cash Disc%</th>
-                                        <th>Net Amt.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    {items.map((item, index) => (
-                                        <tr key={index}>
-                                            <td>{item.particular}</td>
-                                            <td>{item.pack}</td>
-                                            <td>{item.mrp}</td>
-                                            <td>{item.gst}</td>
-                                            <td>{item.rate}</td>
-                                            <td>{item.unit}</td>
-                                            <td>{item.qty}</td>
-                                            <td>0</td>
-                                            <td>{item.sch}</td>
-                                            <td>{item.cd}</td>
-                                            <td>{item.netAmount}</td>
-                                        </tr>
-                                    ))}
-
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="invoice-details" style={{ display: 'flex' }}>
-                            <div style={{ borderBottom: '2px solid black', width: '20%', padding: '10px' }}>
-                                <p>Items in Bill: {items.length}</p>
-                                <p>Cases in Bill: 60.0</p>
-                                <p>Loose items in Bill: {items.reduce((acc, item) => acc + parseInt(item.qty), 0)}</p>
-                            </div>
-                            <div
-                                className="terms"
-                                style={{
-                                    borderLeft: '2px solid black',
-                                    borderBottom: '2px solid black',
-                                    width: '50%',
-                                    padding: '10px',
-                                }}
-                            >
-                                <p style={{ fontSize: '10px', fontWeight: 700, textDecoration: 'underline' }}>
-                                    Terms & Conditions:
-                                </p>
-                                <p>
-                                    1. We hereby certify that articles of food mentioned in the invoice
-                                    are warranted to be of the nature and quality which they purport to
-                                    be as per the Food Safety and Standards Act and Rules.
-                                </p>
-                                <p>2. Goods once sold will not be taken back. E & OE.</p>
-                            </div>
-
-                            <div>
-                                <table style={{ border: '0px', height: '85.5%' }}>
-                                    <thead>
-                                        <tr>
-
-
-                                            <th>Goods</th>
-                                            <th>SGST%</th>
-                                            <th>Value</th>
-                                            <th>CGST%</th>
-                                            <th>Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            items.map((item, index) => (
-                                                <tr key={index}>
-                                                    <td>{item.particular}</td>
-                                                    <td>{item.gst / 2.0}</td>
-                                                    <td>{
-                                                        item.netAmount * 9 / 100
-                                                    }</td>
-                                                    <td>{item.gst / 2.0}</td>
-                                                    <td>{
-                                                        item.netAmount * 9 / 100
-                                                    }</td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        border: '1px solid black',
-                                    }}
-                                >
-                                    <div>28450.35</div>
-                                    <div>1573.76</div>
-                                    <div>1573.76</div>
-                                </div>
-                            </div>
-
-                            <div style={{ width: '37%' }}>
-                                <table style={{ border: '0px', height: '72.9%' }}>
-                                    <thead>
-                                        <tr>
-                                            <th>Gross Amt.</th>
-                                            <th>{
-                                                items.reduce((acc, item) => acc + item.netAmount, 0)
-                                            }</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Less Sch.</td>
-                                            <td>{
-                                                items.reduce((acc, item) => acc + item.sch, 0)
-                                            }</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Less CD</td>
-                                            <td>{
-                                                items.reduce((acc, item) => acc + item.cd, 0)
-                                            }</td>
-                                        </tr>
-                                        <tr>
-                                            <td>R.Off</td>
-                                            <td>{
-                                                items.reduce((acc, item) => acc + item.netAmount, 0) - items.reduce((acc, item) => acc + item.sch, 0) - items.reduce((acc, item) => acc + item.cd, 0)
-                                            }</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        padding: '8px',
-                                        justifyContent: 'space-between',
-                                        border: '1px solid black',
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    <div>Net Amt.</div>
-                                    <div>{
-                                        items.reduce((acc, item) => acc + item.netAmount, 0) - items.reduce((acc, item) => acc + item.sch, 0) - items.reduce((acc, item) => acc + item.cd, 0)
-                                    }</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="invoice-container">
-                        <div className="invoice-header">
-                            <div id="company-name">
-                                <h4>Tax Invoice</h4>
-                                <h1>EKTA ENTERPRISE</h1>
-                                <h5>BUDHWARI BAZAR, GN ROAD SEONI,</h5>
-                            </div>
-                        </div>
-                        <div className="DLno">&nbsp;</div>
-
-
-                        {/* Section 2 */}
-                        <div className="invoice-details section-2">
-                            <table style={{ height: '175px' }}>
-                                <tbody>
-                                    <tr>
-                                        <th>Inv. No : B-3114</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Date</strong>: {date}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Due Date</strong>: {date}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <section className="section-2-bottom">&nbsp;</section>
-
-                        <div className="invoice-details">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Particulars/HSN</th>
-                                        <th>M.R.P.</th>
-                                        <th>Qty</th>
-                                        <th>Free</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        items.map((item, index) => (
-                                            <tr key={index}>
-                                                <td>{item.particular}</td>
-                                                <td>{item.mrp}</td>
-                                                <td>{item.qty}</td>
-                                                <td>
-                                                    {item?.free || 0}
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="invoice-details" style={{ borderTop: '0' }}>
-                            <table style={{ border: '0px', height: '72.9%' }}>
-                                <thead>
-                                    <tr>
-                                        <th>Gross Amt.</th>
-                                        <th>{
-                                            items.reduce((acc, item) => acc + item.netAmount, 0)
-                                        }</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Less Sch.</td>
-                                        <td>{
-                                            items.reduce((acc, item) => acc + item.sch, 0)
-                                        }</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Less CD</td>
-                                        <td>{
-                                            items.reduce((acc, item) => acc + item.cd, 0)
-                                        }</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R.Off</td>
-                                        <td>{
-                                            items.reduce((acc, item) => acc + item.netAmount, 0) - items.reduce((acc, item) => acc + item.sch, 0) - items.reduce((acc, item) => acc + item.cd, 0)
-                                        }</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Net Amt.</th>
-                                        <th>{
-                                            items.reduce((acc, item) => acc + item.netAmount, 0) - items.reduce((acc, item) => acc + item.sch, 0) - items.reduce((acc, item) => acc + item.cd, 0)
-                                        }</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <style>
-                    {`
-
-              
-
-                .TopMostDIv {
-                        font-size: 0.9rem;
-                        font-family: Arial, sans-serif;
-                        margin: 0;
-                        padding: 10px;
-                        width: max-content;
-                }
-                .invoice-container {
-                  border: 2px solid black;
-                }
-
-                .invoice-header {
-                  padding-bottom: 10px;
-                  display: flex;
-                  justify-content: space-evenly;
-                }
-
-                .DLno {
-                  border-bottom: 2px solid black;
-                }
-
-                #company-name {
-                  text-align: center;
-                }
-
-                .section-2 {
-                  border: 0;
-                }
-
-                .section-2-bottom {
-                  display: flex;
-                  justify-content: space-between;
-                  border-top: 2px solid black;
-                  border-bottom: 2px solid black;
-                  padding-top: 4px;
-                  padding-bottom: 10px;
-                  font-size: 0.8rem;
-                }
-
-                .section-2-bottom div {
-                  display: flex;
-                }
-
-                .invoice-title {
-                  text-align: center;
-                  font-size: 20px;
-                }
-
-                .invoice-details {
-                  width: 100%;
-                  display: flex;
-                }
-
-                .invoice-details th,
-                .invoice-details td {
-                  border: 1px solid black;
-                  padding: 5px;
-                  text-align: left;
-                  font-size: 12px;
-                }
-
-                .section-2 th,
-                .section-2 td {
-                  border: 0;
-                }
-
-                .invoice-details table {
-                  width: 100%;
-                  border-collapse: collapse;
-                }
-
-                .terms {
-                  margin-top: 20px;
-                  font-size: 12px;
-                }
-
-                .terms p {
-                  margin: 5px 0;
-                }
-
-                .bank-details {
-                  margin-top: 10px;
-                  font-size: 12px;
-                  text-align: center;
-                }
-
-                .no-border td {
-                  border: none;
-                }
-            `}
-                </style>
-
+                <Invoice invoiceData={invoiceData} />
             </div>
         </>
     );
 }
+
+export function Invoice({ invoiceData }) {
+    return (
+        <>
+            <div className="invoice-container">
+                {/* Header */}
+                <div className="invoice-header">
+                    <div className="left-header">
+                        <p>GSTN : {invoiceData.company.gstin}</p>
+                        <p>{invoiceData.company.subject}</p>
+                        <p>FSSAI NO : {invoiceData.company.fssaiNo}</p>
+                    </div>
+                    <div className="center-header">
+                        <p className="uppercase">Tax Invoice</p>
+                        <h1>{invoiceData.company.name}</h1>
+                        <p>{invoiceData.company.address}</p>
+                    </div>
+                    <div className="right-header">
+                        <p>{invoiceData.company.phone}</p>
+                        <p>Office No. {invoiceData.company.officeNo}</p>
+                        <p>State Code: {invoiceData.company.stateCode}</p>
+                    </div>
+                </div>
+
+                {/* DL No */}
+                <div className="dl-no">
+                    <p>D.L. No.: {invoiceData.dlNo}</p>
+                </div>
+
+                {/* Party Details and Invoice Info */}
+                <div className="party-details">
+                    <div>
+                        <p><span className="font-bold">Party: </span>{invoiceData.party.name}</p>
+                        <p><span className="font-bold">Address: </span>{invoiceData.party.address}</p>
+                        <p><span className="font-bold">GSTIN: </span>{invoiceData.party.gstin} <span className="font-bold">State Code: </span>{invoiceData.party.stateCode}</p>
+                        <p><span className="font-bold">Mobile No.: </span>{invoiceData.party.mobileNo} <span className="font-bold">Balance B/f: </span>{invoiceData.party.balanceBf}</p>
+                    </div>
+                    <div>
+                        <p><span className="font-bold">Inv. No.: </span>{invoiceData.invoice.no} <span className="font-bold">Mode: </span>{invoiceData.invoice.mode}</p>
+                        <p><span className="font-bold">Date: </span>{invoiceData.invoice.date} {invoiceData.invoice.time}</p>
+                        <p><span className="font-bold">Due Date: </span>{invoiceData.invoice.dueDate}</p>
+                    </div>
+                </div>
+
+                {/* Ack and IRN */}
+                <div className="party-details">
+                    <p>Ack. No. {invoiceData.ack.no} <span className="ml-4">Ack.Date: {invoiceData.ack.date}</span></p>
+                    <p>IRN No. {invoiceData.irn}</p>
+                </div>
+
+                {/* Items Table */}
+                <div className="overflow-x-auto">
+                    <table className="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Particulars/HSN</th>
+                                <th>Pack</th>
+                                <th>M.R.P</th>
+                                <th>GST%</th>
+                                <th>Rate (incl of Tax)</th>
+                                <th>Unit</th>
+                                <th>Qty</th>
+                                <th>Free</th>
+                                <th>Sch Rs.</th>
+                                <th>Net Amt.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {invoiceData.items.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.particular}</td>
+                                    <td>{item.pack}</td>
+                                    <td>{item.mrp.toFixed(2)}</td>
+                                    <td>{item.gst.toFixed(2)}</td>
+                                    <td>{item.rate.toFixed(2)}</td>
+                                    <td>{item.unit}</td>
+                                    <td>{item.qty}</td>
+                                    <td>{item.free}</td>
+                                    <td>{item.sch}</td>
+                                    <td>{item.netAmount}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Summary and Totals */}
+                <div className="invoice-summary">
+                    <div className="w-[30%]">
+                        <p>Items in Bill: {invoiceData.summary.itemsInBill}</p>
+                        <p>Cases in Bill: {invoiceData.summary.casesInBill}</p>
+                        <p>Loose items in Bill: {invoiceData.summary.looseItemsInBill}</p>
+                    </div>
+                    <div className="w-[70%]">
+                        <p className="font-bold">Terms & Conditions:</p>
+                        <p>1. We hereby certify that articles of food mentioned in the invoice are warranted to be of the nature and quality which they purport to be as per the Food Safety and Standards Act and Rules.</p>
+                        <p>2. Goods once sold will not be taken back. E & OE.</p>
+                    </div>
+                </div>
+
+                {/* Tax and Total Tables */}
+                <div className="flex justify-between">
+                    <table className="invoice-table w-1/2">
+                        <thead>
+                            <tr>
+                                <th>Goods</th>
+                                <th>SGST%</th>
+                                <th>Value</th>
+                                <th>CGST%</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{invoiceData.taxDetails[0].goods}</td>
+                                <td>{invoiceData.taxDetails[0].sgst}%</td>
+                                <td>{invoiceData.taxDetails[0].sgstValue}</td>
+                                <td>{invoiceData.taxDetails[0].cgst}%</td>
+                                <td>{invoiceData.taxDetails[0].cgstValue}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table className="invoice-table w-1/2">
+                        <tbody>
+                            <tr>
+                                <td>Gross Amt.</td>
+                                <td>{invoiceData.totals.grossAmt}</td>
+                            </tr>
+                            <tr>
+                                <td>Less Sch.</td>
+                                <td>{invoiceData.totals.lessSch}</td>
+                            </tr>
+                            <tr>
+                                <td>Less CD</td>
+                                <td>{invoiceData.totals.lessCd}</td>
+                            </tr>
+                            <tr>
+                                <td>R.Off</td>
+                                <td>{invoiceData.totals.rOff}</td>
+                            </tr>
+                            <tr className="font-bold">
+                                <td>Net Amt.</td>
+                                <td>{invoiceData.totals.netAmount}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {/* Style Block */}
+            <style>
+                {`
+                    .invoice-container {
+                      font-family: Arial, sans-serif;
+                      max-width: 1300px;
+                      margin: 0 auto;
+                      padding: 20px;
+                      border: 1px solid #000;
+                    }
+                    .invoice-header {
+                      display: flex;
+                      justify-content: space-between;
+                      border-bottom: 1px solid #000;
+                      padding-bottom: 10px;
+                    }
+                    .left-header, .right-header {
+                      font-size: 12px;
+                    }
+                    .center-header {
+                      text-align: center;
+                    }
+                    .center-header h1 {
+                      margin: 0;
+                      font-size: 24px;
+                    }
+                    .dl-no {
+                      border-bottom: 1px solid #000;
+                      padding: 5px 0;
+                      font-size: 12px;
+                    }
+                    .party-details {
+                      display: flex;
+                      justify-content: space-between;
+                      border-bottom: 1px solid #000;
+                      padding: 10px 0;
+                      font-size: 14px;
+                    }
+                    .invoice-table {
+                      width: 100%;
+                      border-collapse: collapse;
+                      font-size: 12px;
+                    }
+                    .invoice-table th, .invoice-table td {
+                      border: 1px solid #000;
+                      padding: 5px;
+                      text-align: left;
+                    }
+                    .invoice-summary {
+                      display: flex;
+                      justify-content: space-between;
+                      margin-top: 20px;
+                      font-size: 12px;
+                    }
+                    .invoice-total {
+                      text-align: right;
+                      margin-top: 20px;
+                      font-size: 16px;
+                    }
+                    /* Overwrites for Tailwind */
+                    .bg-white {
+                      background-color: #fff;
+                    }
+                    .p-1 {
+                      padding: 5px;
+                    }
+                    .p-4 {
+                      padding: 16px;
+                    }
+                    .mx-auto {
+                      margin-left: auto;
+                      margin-right: auto;
+                    }
+                    .text-[0.6rem] {
+                      font-size: 0.6rem;
+                    }
+                    .sm\\:text-xs {
+                      font-size: 12px;
+                    }
+                    .print\\:text-[0.6rem] {
+                      font-size: 0.6rem !important;
+                    }
+                    .max-w-[1300px] {
+                      max-width: 1300px;
+                    }
+                    .border {
+                      border: 1px solid #000;
+                    }
+                    .border-black {
+                      border-color: black;
+                    }
+                    .text-center {
+                      text-align: center;
+                    }
+                    .text-right {
+                      text-align: right;
+                    }
+                    .font-bold {
+                      font-weight: bold;
+                    }
+                `}
+            </style>
+        </>
+    );
+}
+
