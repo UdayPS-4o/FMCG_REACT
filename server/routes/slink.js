@@ -8,6 +8,7 @@ const {
   ensureDirectoryExistence,
   saveDataToJsonFile,
 } = require('./utilities');
+const { queries } = require('@testing-library/react');
 
 const getCmplData = async () => {
   const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'CMPL.dbf');
@@ -125,7 +126,6 @@ app.get('/subgrp', async (req, res) => {
     const accountMasterData = JSON.parse(await fs.readFile(accountMasterPath, 'utf8'));
 
     let partyList = newData(cmplData, accountMasterData);
-    console.log('Generated Party List:', partyList);
     res.json(partyList);
   } catch (error) {
     console.error('Error fetching or processing data:', error);
@@ -403,7 +403,7 @@ async function printInvoicing(req, res) {
 
 
     // console.log("before party",invoice.party)
-
+    console.log("party", invoice.party)
     // console.log("After party",invoice.party)
     const ModifiedInv = {
       company: {
@@ -416,14 +416,14 @@ async function printInvoicing(req, res) {
         officeNo: "07692-220897",
         stateCode: "23"
       },
-      dlNo: invoice.party.dlNo,
+      dlNo: invoice.party.dlno||' 20B/807/54/2022 , 21B/808/54/2022 , 20/805/54/2022 , 21/806/54/2022',
       party: {
         name: invoice.party.achead,
         address: invoice.party.addressline1||invoice.party.addressline2,
         gstin: invoice.party.gst,
         stateCode: invoice.party.statecode,
         mobileNo: invoice.party.mobile,
-        balanceBf: invoice.items.reduce((acc, item) => acc + item.netAmount, 0),
+        balanceBf: invoice.items.reduce((acc, item) => acc + item.netAmt, 0)|| 0,
       },
       invoice: {
         no: invoice.id,
@@ -436,7 +436,7 @@ async function printInvoicing(req, res) {
         no: invoice.id,
         date: invoice.date,
       },
-      irn: "",
+      irn: "0265cdbc86f02a327272925c34fd6014d5701a832b58d00f5b5b85cf452f30b8",
       items: [
         // { particulars: "CHAVI WAX 40'S HM 36050010", pack: "BDLS", mrp: 600.00, gst: 12.00, rate: 460.00, unit: "BOX", qty: 60, free: 0, schRs: "", netAmount: 27600.00 },
 
@@ -494,6 +494,33 @@ async function printInvoicing(req, res) {
   }
 }
 
+app.get('/invocingPage', async (req, res) => {
+  const { id } = req.query;
+
+  let baseurl = req.protocol + '://' + req.get('host');
+
+  let invoiceData = await fetch(baseurl+'/slink/printInvoice?id='+id, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })  
+  invoiceData = await invoiceData.json();
+  invoiceData = JSON.stringify(invoiceData);
+  console.log(typeof invoiceData);
+    let encodedData = btoa(invoiceData);
+
+  
+    
+    res.send({value:encodedData});
+    // console.log(encodedData); 
+
+
+  
+
+});
+
+
 app.get('/printInvoice', printInvoicing);
 
 app.post('/editUser', EditUser);
@@ -501,4 +528,10 @@ app.get('/printGodown', printGodown);
 app.get('/godownId', getNextGodownId);
 app.get('/invoiceId', getNextInvoiceId);
 
+app.get('/printPage', async (req, res) => {
+  console.log('printPage');
+  
+  // console.log(path.join(__dirname, '..', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html') );
+});
 module.exports = app;

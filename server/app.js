@@ -31,6 +31,7 @@ app.use(loginRoutes);
 
 const slinkRoutes = require('./routes/slink');
 const orcusRoutes = require('./routes/orcusRoutes');
+app.use(express.static(path.join(__dirname, '.', 'dist')));
 app.use('/slink', slinkRoutes);
 app.use('/', orcusRoutes);
 

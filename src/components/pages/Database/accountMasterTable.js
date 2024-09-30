@@ -93,6 +93,7 @@ const ProductTableList = () => {
     if (endpoint === 'cash-receipts') window.location.href = `/print?ReceiptNo=${ReceiptNo}`;
     if (endpoint === 'cash-payments') window.location.href = `/print?voucherNo=${ReceiptNo}`;
     if (endpoint === 'godown') window.location.href = `/printGodownT?godownId=${ReceiptNo}`;
+    if (endpoint === 'invoicing') window.location.href = `/printInvoicing?id=${ReceiptNo}`
   };
 
   const handleEdit = (subgroup) => {
@@ -257,12 +258,12 @@ const ProductTableList = () => {
                     endpoint === 'account-master'
                       ? row.subgroup
                       : endpoint === 'cash-receipts'
-                      ? row.receiptNo
-                      : endpoint === 'godown'
-                      ? row.id
-                      : endpoint === 'cash-payments'
-                      ? row.voucherNo
-                      : null;
+                        ? row.receiptNo
+                        : endpoint === 'godown'
+                          ? row.id
+                          : endpoint === 'cash-payments'
+                            ? row.voucherNo
+                            : null;
 
                   const isItemSelected = approved.includes(itemId);
 
