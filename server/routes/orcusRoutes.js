@@ -158,6 +158,18 @@ app.post('/approve', async (req, res) => {
       const itemIdValue = String(item[id]).toLowerCase();
       return approved.some((approvedValue) => itemIdValue.includes(approvedValue.toLowerCase()));
     });
+
+    // Delete the approved items from the original json
+    const remainingjson = json.filter((item) => {
+      const itemIdValue = String(item[id]).toLowerCase();
+      return !approved.some((approvedValue) => itemIdValue.includes(approvedValue.toLowerCase()));
+    });
+
+    // Save the remaining items back to the original file
+    await fs.writeFile(
+      path.resolve(__dirname, `../db/${endpoint}.json`),
+      JSON.stringify(remainingjson, null, 2),
+    );
     console.log('updatedJson', approvedjson);
     await fs.mkdir(path.resolve(__dirname, '../db/approved'), { recursive: true });
     await fs.writeFile(
