@@ -209,6 +209,7 @@ function FormSeparator() {
               fullWidth
               error={!!errors.party}
               helperText={errors.party}
+              required={true}
             />
           )}
         />
@@ -225,6 +226,7 @@ function FormSeparator() {
               fullWidth
               error={!!errors.sm}
               helperText={errors.sm}
+              required={true}
             />
           )}
         />

@@ -9,8 +9,8 @@ function FormSeparator() {
   const [fromGodown, setFromGodown] = useState(null);
   const [toGodown, setToGodown] = useState(null);
   const [pmplData, setPmplData] = useState([]); // Hold product data from pmpl.json
-  const [urlParms , setUrlParms] = useState(window.location.search);
-
+  const [urlParms, setUrlParms] = useState(window.location.search);
+  const [searchItems, setSearchItems] = useState('');
   const [formValues, setFormValues] = useState({
     date: new Date().toISOString().split('T')[0],
     series: 'T',
@@ -169,6 +169,19 @@ function FormSeparator() {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const sortedFormValues = () => {
+    if (!searchItems) return formValues;
+
+    const filteredItems = formValues.items.filter((item) =>
+      item.item.toLowerCase().includes(searchItems.toLowerCase()),
+    );
+
+    return {
+      ...formValues,
+      items: filteredItems.sort((a, b) => a.item.localeCompare(b.item)),
+    };
+  };
+  console.log('formValues:', sortedFormValues());
   const handleSubmit = async () => {
     const payloadId = await fetch(`${baseURL}/slink/godownId`).then((res) => res.json());
     const { fromGodown, toGodown, items } = formValues;
@@ -228,7 +241,7 @@ function FormSeparator() {
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField name="#" label="#"  value={urlParms||null} fullWidth disabled />
+              <TextField name="#" label="#" value={urlParms || null} fullWidth disabled />
             </Grid>
           </Grid>
         </Grid>
@@ -239,7 +252,9 @@ function FormSeparator() {
             getOptionLabel={(option) => option.GDN_NAME}
             value={fromGodown}
             onChange={handleFromGodownChange}
-            renderInput={(params) => <TextField {...params} label="From Godown" fullWidth />}
+            renderInput={(params) => (
+              <TextField {...params} label="From Godown" required={true} fullWidth />
+            )}
           />
         </Grid>
 
@@ -249,23 +264,46 @@ function FormSeparator() {
             getOptionLabel={(option) => option.GDN_NAME}
             value={toGodown}
             onChange={handleToGodownChange}
-            renderInput={(params) => <TextField {...params} label="To Godown" fullWidth />}
+            renderInput={(params) => (
+              <TextField {...params} label="To Godown" fullWidth required={true} />
+            )}
           />
         </Grid>
 
+        <Grid item xs={12} sm={4}>
+          <TextField
+            label="Search Items"
+            fullWidth
+            value={searchItems}
+            onChange={(e) => setSearchItems(e.target.value)}
+          />
+        </Grid>
         <Grid item xs={12}>
-          {formValues.items.map((item, index) => (
-            <CollapsibleItemSection
-              key={index}
-              index={index}
-              itemData={item}
-              handleChange={handleAccordionChange}
-              expanded={expanded}
-              updateItem={updateItem}
-              removeItem={removeItem}
-              pmplData={pmplData}
-            />
-          ))}
+          {sortedFormValues
+            ? sortedFormValues().items.map((item, index) => (
+                <CollapsibleItemSection
+                  key={index}
+                  index={index}
+                  itemData={item}
+                  handleChange={handleAccordionChange}
+                  expanded={expanded}
+                  updateItem={updateItem}
+                  removeItem={removeItem}
+                  pmplData={pmplData}
+                />
+              ))
+            : formValues.items.map((item, index) => (
+                <CollapsibleItemSection
+                  key={index}
+                  index={index}
+                  itemData={item}
+                  handleChange={handleAccordionChange}
+                  expanded={expanded}
+                  updateItem={updateItem}
+                  removeItem={removeItem}
+                  pmplData={pmplData}
+                />
+              ))}
           <Divider />
         </Grid>
 

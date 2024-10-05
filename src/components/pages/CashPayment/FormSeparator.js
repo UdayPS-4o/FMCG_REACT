@@ -160,7 +160,9 @@ function FormSeparator() {
                 getOptionLabel={(option) => option.label}
                 onChange={handlePartyChange}
                 value={party || null}
-                renderInput={(params) => <TextField {...params} label="Party" fullWidth />}
+                renderInput={(params) => (
+                  <TextField {...params} label="Party" required={true} fullWidth />
+                )}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

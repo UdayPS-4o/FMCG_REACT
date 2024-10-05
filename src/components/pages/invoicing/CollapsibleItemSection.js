@@ -125,7 +125,7 @@ const CollapsibleItemSection = ({
   };
 
   const calculateAmounts = (data) => {
-    console.log(data)
+    console.log(data);
     let amount = data.rate * data.qty;
     const selectedItem = pmplData.find((item) => item.CODE === data.item);
 
@@ -146,7 +146,7 @@ const CollapsibleItemSection = ({
     if (data.sch && data.sch !== '') {
       netAmount -= amount * (data.sch / 100);
     }
-    console.log({amount, netAmount})
+    console.log({ amount, netAmount });
     return {
       ...data,
       amount: amount.toFixed(2),
@@ -174,7 +174,9 @@ const CollapsibleItemSection = ({
                 .map((item) => ({ label: `${item.CODE} | ${item.PRODUCT}`, value: item.CODE }))}
               getOptionLabel={(option) => option.label}
               onChange={handleItemChange}
-              renderInput={(params) => <TextField {...params} label="Item Name" fullWidth />}
+              renderInput={(params) => (
+                <TextField {...params} label="Item Name" fullWidth required={true} />
+              )}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -185,7 +187,9 @@ const CollapsibleItemSection = ({
               options={godownOptions}
               getOptionLabel={(option) => option.label}
               onChange={handleGodownChange}
-              renderInput={(params) => <TextField {...params} label="Godown" fullWidth />}
+              renderInput={(params) => (
+                <TextField {...params} label="Godown" fullWidth required={true} />
+              )}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -201,7 +205,9 @@ const CollapsibleItemSection = ({
               options={unitOptions}
               getOptionLabel={(option) => option}
               onChange={handleUnitChange}
-              renderInput={(params) => <TextField {...params} label="Unit" fullWidth />}
+              renderInput={(params) => (
+                <TextField {...params} label="Unit" fullWidth required={true} />
+              )}
             />
           </Grid>
           <Grid item xs={12} sm={2}>
