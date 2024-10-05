@@ -519,7 +519,7 @@ app.get('/invocingPage', async (req, res) => {
   
 
 });
-
+  
 
 app.get('/printInvoice', printInvoicing);
 
