@@ -182,6 +182,15 @@
     "series": "w",
     "amount": "1",
     "discount": "1",
-    "receiptNo": "79"
+    "receiptNo": "79",
+    "party": "CT001"
+  },
+  {
+    "date": "2024-10-06",
+    "series": "x",
+    "amount": "12341234",
+    "discount": "2",
+    "receiptNo": "82",
+    "party": "CT000"
   }
 ]

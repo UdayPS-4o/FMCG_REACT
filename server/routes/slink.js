@@ -107,8 +107,11 @@ app.get('/cash-receipts', async (req, res) => {
       },
     );
     if (data && data.length) {
-      const lastEntry = data[data.length - 1];
+       //highest number +1 sort by receiptNo
+      const lastEntry = data.sort((a, b) => a.receiptNo - b.receiptNo).pop();
       nextReceiptNo = Number(lastEntry.receiptNo) + 1;
+
+      
     }
   } catch (error) {
     console.error('Failed to read or parse cash-receipts.json:', error);
@@ -132,6 +135,7 @@ app.get('/subgrp', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 
 app.get('/cash-payments', async (req, res) => {
   const filePath = path.join(__dirname, '..', 'db', 'cash-payments.json');
