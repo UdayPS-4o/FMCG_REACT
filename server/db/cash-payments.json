@@ -53,7 +53,7 @@
     "amount": "22224",
     "discount": 23412312,
     "voucherNo": "16670",
-    "party": "CT000"
+    "party": "CT003"
   },
   {
     "date": "2024-09-18",
@@ -86,5 +86,21 @@
     "discount": 12,
     "voucherNo": "orcus01",
     "party": "AA001"
+  },
+  {
+    "date": "2024-10-06",
+    "series": "X",
+    "amount": "23",
+    "discount": "",
+    "voucherNo": "12342134123532",
+    "party": "AA001"
+  },
+  {
+    "date": "2024-10-06",
+    "series": "x",
+    "amount": "13241234",
+    "discount": 12,
+    "voucherNo": "asdfasdfsdavasd23123",
+    "party": "CT001"
   }
 ]

@@ -25,9 +25,10 @@ app.post('/:formType', async (req, res) => {
   const accountMasterData = JSON.parse(await fss.readFile(accountMasterPath, 'utf8'));
   // console.log(accountMasterData, 'accountMasterData');
   accountMasterData.forEach((element) => {
-    if (element.email === email || element.mobile === mobile || element.aadhar === aadhar) {
-      console.log('User already exists');
-      res.status(400).send({ message: 'User already exists' });
+    if (element.email == email || element.mobile == mobile) {
+      console.log(`User with same ${element.email == email ? "email" : "mobile"} already exists`);
+      res.status(400).send({ message: `User with same ${element.email == email ? "email" : "mobile"} already exists` });
+      return;
     }
   });
 
@@ -42,6 +43,7 @@ app.post('/:formType', async (req, res) => {
 
   // Store the original formData for potential logging
   const ogform = JSON.parse(JSON.stringify(formData));
+  'asdfasdf'
 
   // Safely parse formData.party if it's a JSON string
   if (formData.party && typeof formData.party === 'string') {
@@ -172,7 +174,7 @@ app.post('/:formType', async (req, res) => {
     } else {
       dbData.push(formData);
       await fs.promises.writeFile(filePath, JSON.stringify(dbData, null, 2), 'utf8');
-      res.status(200).send('Entry added successfully.');
+      res.status(200).json({"message": 'Entry added successfully.'});
     }
   } catch (err) {
     console.error(err);
@@ -227,7 +229,7 @@ app.post('/edit/:formType', async (req, res) => {
       dbData[entryIndex] = { ...dbData[entryIndex], ...formData };
       try {
         await fs.promises.writeFile(filePath, JSON.stringify(dbData, null, 2), 'utf8');
-        res.status(200).send('Entry updated successfully. ' + redirect(`/db/${formType}`, 500));
+        res.status(200).json({"message": 'Entry added successfully.'});
       } catch (writeError) {
         console.error('Error writing to database file:', writeError);
         res.status(500).send('Failed to write updated data.');

@@ -42,6 +42,7 @@ const Header = () => {
         {/* ------------------------------------------- */}
         {/* Toggle Button Sidebar */}
         {/* ------------------------------------------- */}
+        
         <IconButton
           color="inherit"
           aria-label="menu"
@@ -53,30 +54,10 @@ const Header = () => {
         {/* Search Dropdown */}
         {/* ------------------------------------------- */}
         <Search />
-        {lgUp ? (
-          <>
-            <Navigation />
-          </>
-        ) : null}
+    
 
         <Box flexGrow={1} />
-        <Stack spacing={1} direction="row" alignItems="center">
-
-          <Language />
-          {/* ------------------------------------------- */}
-          {/* Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          <Cart />
-          {/* ------------------------------------------- */}
-          {/* End Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          <Notifications />
-           {/* ------------------------------------------- */}
-          {/* Toggle Right Sidebar for mobile */}
-          {/* ------------------------------------------- */}
-          {lgDown ? <MobileRightSidebar /> : null}
-          <Profile />
-        </Stack>
+        
       </ToolbarStyled>
     </AppBarStyled>
   );

@@ -128,9 +128,9 @@ function FormSeparator() {
         onSubmit={async (values, { setSubmitting }) => {
           try {
             values.subgroup = subGroupCode;
-
+        
             const route = isEDIT ? `/edit/account-master` : `/account-master`;
-
+        
             const res = await fetch(constants.baseURL + route, {
               method: 'POST',
               body: JSON.stringify(values),
@@ -138,20 +138,26 @@ function FormSeparator() {
                 'Content-Type': 'application/json',
               },
             });
-            const data = await res.json();
-
-            if (res.status === 200 || res.status === 204) {
-              toast.success(data.message);
+        
+            let data;
+            if (res.status !== 204) {
+              data = await res.json();
+            }
+        
+            if (res.ok) { // checks for status code 200-299
+              toast.success(data?.message || 'Submission successful!');
               navigate('/db/account-master');
             } else {
-              toast.error(data.message);
+              toast.error(data?.message || 'An error occurred');
             }
           } catch (error) {
-            toast.error('Submission failed');
+            
+            toast.error('Submission failed'+error.message);
           } finally {
             setSubmitting(false);
           }
         }}
+        
       >
         {({ isSubmitting, values, setFieldValue }) => (
           <Form>

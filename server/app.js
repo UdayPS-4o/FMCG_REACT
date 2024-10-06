@@ -5,7 +5,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
-const PORT = 80;
+const PORT =8000;
 const io = require('socket.io');
 const {
   redirect,
@@ -107,9 +107,9 @@ app.use(postRoutes);
 
 // Initialize server
 const initServer = () => {
-  app.listen(PORT, () => {
+  app.listen(PORT,'rdp.udayps.com', () => {
     console.log(`Server running on port ${PORT}`);
-  });
+  } );
 };
 
 initServer();
