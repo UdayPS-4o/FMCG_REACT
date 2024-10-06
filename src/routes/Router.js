@@ -140,7 +140,7 @@ const Router = [
     path: '/',
     element: <FullLayout />,
     children: [
-      { path: '/', element: <Navigate to="/dashboards/modern" /> },
+      { path: '/', element: <Navigate to="/account-master" /> },
       { path: '/account-master', exact: true, element: <AccountMaster /> },
       { path: '/invoicing', exact: true, element: <Invoicing /> },
       { path: '/cash-receipts', exact: true, element: <Cash_Receipt /> },
