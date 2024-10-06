@@ -1,5 +1,5 @@
 const constants = {
-  baseURL: 'http://localhost:80',
+  baseURL: 'http://rdp.udayps.com:69',
 };
 
 export default constants;
