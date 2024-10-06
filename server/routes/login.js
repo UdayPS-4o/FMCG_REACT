@@ -75,7 +75,8 @@ async function calculateCurrentStock() {
   const salesData = await getSTOCKFILE('billdtl.json');
   const purchaseData = await getSTOCKFILE('purdtl.json');
   const transferData = await getSTOCKFILE('transfer.json');
-
+  const pmplData = await getSTOCKFILE('pmpl.json');
+  
   // Fetch the local godown transfer data
   const localTransferResponse = (await fs.readFile(`./db/godown.json`, 'utf8')) || '[]';
   const localTransferData = await JSON.parse(localTransferResponse);
@@ -85,6 +86,7 @@ async function calculateCurrentStock() {
 
   // Process purchases to increment stock
   purchaseData.forEach((purchase) => {
+    // console.log(purchase);
     const { CODE: code, GDN_CODE: gdn_code, QTY: qty, MULT_F: multF, UNIT: unit } = purchase;
     const qtyInPieces = unit === 'BOX' ? qty * multF : qty;
 
@@ -139,6 +141,7 @@ async function calculateCurrentStock() {
     const { fromGodown, toGodown, items } = transfer;
     items.forEach((item) => {
       const { code, qty, unit } = item;
+      const multF = pmplData.find((pmpl) => pmpl.CODE === code)?.MULT_F || 1;
       const qtyInPieces = unit === 'BOX' ? qty * multF : qty; // Assuming unit "BOX" needs multiplication, else use qty as is
 
       // Handle outgoing transfers

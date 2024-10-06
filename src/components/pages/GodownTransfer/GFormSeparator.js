@@ -3,14 +3,16 @@ import { Grid, Button, Stack, TextField, Autocomplete, Divider } from '@mui/mate
 import constants from 'src/constants';
 import CollapsibleItemSection from './CollapsibleItemSection'; // Adjust the import based on your file structure
 import { set } from 'lodash';
-
+import { toast, ToastContainer } from 'react-toastify';
 function FormSeparator() {
+  const [id, setId] = useState(0);
   const [partyOptions, setPartyOptions] = useState([]);
   const [fromGodown, setFromGodown] = useState(null);
   const [toGodown, setToGodown] = useState(null);
   const [pmplData, setPmplData] = useState([]); // Hold product data from pmpl.json
   const [urlParms, setUrlParms] = useState(window.location.search);
   const [searchItems, setSearchItems] = useState('');
+
   const [formValues, setFormValues] = useState({
     date: new Date().toISOString().split('T')[0],
     series: 'T',
@@ -38,6 +40,8 @@ function FormSeparator() {
     setUrlParms(godownId);
     const fetchOptions = async () => {
       try {
+        setId(await fetch(`${baseURL}/slink/godownId`).then((res) => res.json()));
+
         const res = await fetch(`${baseURL}/api/dbf/godown.json`);
         const data = await res.json();
         if (Array.isArray(data)) {
@@ -134,6 +138,11 @@ function FormSeparator() {
     setFormValues({ ...formValues, toGodown: newValue.GDN_CODE });
   };
 
+  const getAvailableItems = () => {
+    const selectedCodes = new Set(formValues.items.map(item => item.item));
+    return pmplData.filter(pmpl => !selectedCodes.has(pmpl.CODE));
+  };
+
   const addItem = () => {
     setFormValues({
       ...formValues,
@@ -183,8 +192,17 @@ function FormSeparator() {
   };
   console.log('formValues:', sortedFormValues());
   const handleSubmit = async () => {
-    const payloadId = await fetch(`${baseURL}/slink/godownId`).then((res) => res.json());
+    const payloadId = id
     const { fromGodown, toGodown, items } = formValues;
+
+    const allQuantitiesValid = items.every(item => item.qty > 0);
+
+    if (!allQuantitiesValid) {
+      toast.error('All items must have a quantity greater than 0.');
+      return;
+    }
+
+    console.log(formValues)
     const payload = {
       ...formValues,
       id: payloadId.nextGodownId,
@@ -206,7 +224,11 @@ function FormSeparator() {
         },
         body: JSON.stringify(payload),
       });
+      const json = await res.json()
+      toast.success(json.message)
     } catch (error) {
+      toast.error('Error submitting form:', error.message);
+
       console.error('Error submitting form:', error);
     }
   };
@@ -279,33 +301,21 @@ function FormSeparator() {
           />
         </Grid>
         <Grid item xs={12}>
-          {sortedFormValues
-            ? sortedFormValues().items.map((item, index) => (
-                <CollapsibleItemSection
-                  key={index}
-                  index={index}
-                  itemData={item}
-                  handleChange={handleAccordionChange}
-                  expanded={expanded}
-                  updateItem={updateItem}
-                  removeItem={removeItem}
-                  pmplData={pmplData}
-                />
-              ))
-            : formValues.items.map((item, index) => (
-                <CollapsibleItemSection
-                  key={index}
-                  index={index}
-                  itemData={item}
-                  handleChange={handleAccordionChange}
-                  expanded={expanded}
-                  updateItem={updateItem}
-                  removeItem={removeItem}
-                  pmplData={pmplData}
-                />
-              ))}
+          {(sortedFormValues ? sortedFormValues().items : formValues.items).map((item, index) => (
+            <CollapsibleItemSection
+              key={index}
+              index={index}
+              itemData={item}
+              handleChange={handleAccordionChange}
+              expanded={expanded}
+              updateItem={updateItem}
+              removeItem={removeItem}
+              pmplData={getAvailableItems()} // Ensure filtered items are used for all items
+            />
+          ))}
           <Divider />
         </Grid>
+
 
         <Grid item xs={12}>
           <Button variant="outlined" onClick={addItem}>

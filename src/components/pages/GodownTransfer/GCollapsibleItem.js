@@ -128,6 +128,8 @@ const CollapsibleItemSection = ({
     let amount = data.rate * data.qty;
     const selectedItem = pmplData.find((item) => item.CODE === data.item);
 
+    console.log("selectedItem", selectedItem);
+    console.log("data", data);
     if (data.unit === selectedItem.UNIT_2) {
       amount *= selectedItem.MULT_F;
     }

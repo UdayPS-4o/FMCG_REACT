@@ -11,7 +11,8 @@ import {
 } from '@mui/material';
 import { IconChevronDown, IconTrash } from '@tabler/icons';
 import constants from 'src/constants';
-
+import { toast, ToastContainer } from 'react-toastify';
+import { set } from 'lodash';
 const baseURL = constants.baseURL;
 
 const CollapsibleItemSection = ({
@@ -38,7 +39,7 @@ const CollapsibleItemSection = ({
   const [godownOptions, setGodownOptions] = useState([]);
   const [unitOptions, setUnitOptions] = useState([]);
   const [isQtyReadOnly, setIsQtyReadOnly] = useState(false);
-
+  const [proudctName, setProductName] = useState('');
   useEffect(() => {
     const fetchStockAndGodown = async () => {
       try {
@@ -64,6 +65,7 @@ const CollapsibleItemSection = ({
       const availableGodowns = Object.keys(stockList[selectedItem.CODE] || {}).map((gdnCode) => {
         const stock = stockList[selectedItem.CODE][gdnCode];
         const godown = godownOptions.find((gdn) => gdn.value === gdnCode);
+        setProductName(selectedItem.PRODUCT);
         return {
           value: gdnCode,
           label: `${godown?.label || ''} | ${stock}`,
@@ -119,31 +121,40 @@ const CollapsibleItemSection = ({
 
   const handleFieldChange = (event, newValue, name) => {
     let updatedData = { ...itemData, [name]: newValue };
+    console.log('updatedData:', updatedData);
 
     if (name === 'qty') {
-      const totalQty = parseInt(newValue, 10) || 0;
-      const requiredStock = totalQty * (itemData.pcBx || 1);
+        // Convert string input to integer safely
+        const totalQty = parseInt(newValue, 10) || 0;
 
-      if (requiredStock > itemData.stock) {
-        updatedData = { ...updatedData, qty: itemData.stock / (itemData.pcBx || 1) };
-        setIsQtyReadOnly(true);
-      } else {
-        setIsQtyReadOnly(false);
-      }
+        // Ensure the requested quantity does not exceed the available stock considering the package box multiplier
+        if (totalQty > 0) {
+            const stockLimit = Math.floor(itemData.stock / (itemData.pcBx || 1));
+            updatedData.qty = Math.min(totalQty, stockLimit);
+        }
 
-      updatedData = calculateAmounts(updatedData);
+        // Recalculate amounts since qty impacts the total and net amounts
+        updatedData = calculateAmounts(updatedData);
+    } else if (['rate', 'cess', 'cd', 'sch'].includes(name)) {
+        // For any rate or discount changes, recalculate amounts
+        updatedData = calculateAmounts(updatedData);
     }
 
-    if (['rate', 'cess', 'cd', 'sch'].includes(name)) {
-      updatedData = calculateAmounts(updatedData);
-    }
-
+    // Update the item data in the parent component
     updateItem(index, updatedData);
-  };
+};
+
+
 
   const calculateAmounts = (data) => {
     let amount = data.rate * data.qty;
-    const selectedItem = pmplData.find((item) => item.CODE === data.item);
+    const selectedItem = pmplData.find((item) => item.CODE == data.item);
+
+    
+    console.log("selectedItem", selectedItem);
+    console.log("data", data);
+    console.log("pmplData", pmplData)
+
 
     if (data.unit === selectedItem.UNIT_2 || selectedItem.UNIT_1 === selectedItem.UNIT_2) {
       amount *= selectedItem.MULT_F;
@@ -175,12 +186,12 @@ const CollapsibleItemSection = ({
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Typography variant="h6">
-            {itemData.item
-              ? `${itemData.item} | ${
-                  pmplData.find((item) => item.CODE === itemData.item)?.PRODUCT
-                }`
-              : `Item ${index + 1}`}
+            {itemData.item ? `${itemData.item} |
+            
+            ${proudctName} |`
+            : 'Select an item'}
           </Typography>
+
           <IconButton color="error" onClick={() => removeItem(index)}>
             <IconTrash />
           </IconButton>
@@ -191,29 +202,13 @@ const CollapsibleItemSection = ({
           {/* Row 1: 4 items */}
           <Grid item xs={12} sm={3}>
             <Autocomplete
-              options={pmplData
-                .filter((item) => item.STK > 0)
-                .map((item) => ({
-                  label: `${item.CODE} | ${item.PRODUCT}`,
-                  value: item.CODE,
-                }))}
-              getOptionLabel={(option) => option.label}
+              options={pmplData.filter(item => item.STK > 0).map(item => ({
+                label: `${item.CODE} | ${item.PRODUCT || 'No Product Name'}`, // Default text if PRODUCT is undefined
+                value: item.CODE
+              }))}
+              getOptionLabel={option => option.label}
               onChange={handleItemChange}
-              isOptionEqualToValue={(option, value) => option.value === value.value}
               renderInput={(params) => <TextField {...params} label="Item Name" fullWidth />}
-              value={
-                itemData.item
-                  ? {
-                      label: `${itemData.item} | ${
-                        pmplData.find((item) => item.CODE === itemData.item)?.PRODUCT
-                      }`,
-                      value: itemData.item,
-                    }
-                  : {
-                      label: '',
-                      value: '',
-                    }
-              } // Default item value
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -260,7 +255,7 @@ const CollapsibleItemSection = ({
               fullWidth
               value={itemData.qty}
               onChange={(event) => handleFieldChange(event, event.target.value, 'qty')}
-              InputProps={{ readOnly: isQtyReadOnly }} // Read-only based on the condition
+
             />
           </Grid>
         </Grid>

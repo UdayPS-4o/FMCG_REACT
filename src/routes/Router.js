@@ -161,7 +161,6 @@ const Router = [
       { path: '/db/cash-receipts', exact: true, element: <DBcashreceipt /> },
       { path: '/db/cash-payments', exact: true, element: <DBcashpayments /> },
       { path: '/db/godown', exact: true, element: <DBgodowntransfer /> },
-
       { path: '/approved/account-master', exact: true, element: <APaccountmaster /> },
       { path: '/approved/invoicing', exact: true, element: <APinvoicing /> },
       { path: '/approved/cash-receipts', exact: true, element: <APcashreceipt /> },
