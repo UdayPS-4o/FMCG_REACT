@@ -316,6 +316,9 @@ const ProductTableList = () => {
                               } else if (endpoint === 'cash-payments') {
                                 handlePrint(row.voucherNo);
                               }
+                              else if (endpoint === 'invoicing') {
+                                handlePrint(row.id);
+                              }
                             }}
                           >
                             <PrintIcon />
