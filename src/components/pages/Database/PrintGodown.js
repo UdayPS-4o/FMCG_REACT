@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState  ,useRef} from 'react';
 import constants from 'src/constants';
+const itemsPerPage = 15;
 
 export default function PrintGodownT() {
-  const printRef = React.useRef();
-  const [godownId, setGodownId] = useState(null);
+  const printRef = useRef();
+  const [godownData, setGodownData] = useState(null);
   const queryParams = new URLSearchParams(window.location.search);
-  const queryKey = queryParams.keys().next().value;
-  const retreat = queryParams.get(queryKey);
+  const retreat = queryParams.get(queryParams.keys().next().value);
 
   useEffect(() => {
     fetch(`${constants.baseURL}/slink/printGodown?retreat=${retreat}`)
       .then((res) => res.json())
       .then((data) => {
-        const godown = data;
-
-        setGodownId(godown);
+        setGodownData(data);
       });
   }, [retreat]);
 
@@ -27,16 +25,26 @@ export default function PrintGodownT() {
     winPrint.print();
   };
 
+  if (!godownData) {
+    return null;
+  }
+
+  // Calculate pages for print
+  const pages = [];
+  for (let i = 0; i < godownData.items.length; i += itemsPerPage) {
+    pages.push(godownData.items.slice(i, i + itemsPerPage));
+  }
+
   return (
     <div>
       <button onClick={handlePrint}>Print</button>
       <div ref={printRef}>
-        {godownId && (
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <TransferGodownData transferData={godownId} />
-            <TransferGodownData transferData={godownId} />
+        {pages.map((pageItems, index) => (
+          <div key={index} className="print-page " style={{ breakAfter: 'page' , display:'flex'}}>
+            <TransferGodownData transferData={{ ...godownData, items: pageItems }} />
+            <TransferGodownData transferData={{ ...godownData, items: pageItems }} />
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

@@ -16,6 +16,22 @@
     "statecode": "23"
   },
   {
+    "subgroup": "OB001",
+    "achead": "Enim maxime a quos p",
+    "addressline1": "30 East Milton Lane",
+    "addressline2": "Eiusmod natus ut mod",
+    "place": "Voluptas soluta ipsa",
+    "pincode": 17,
+    "mobile": 4,
+    "pan": "Quia est voluptatum ",
+    "aadhar": 84,
+    "gst": "Aute quos ullamco vo",
+    "dlno": "Quis aliquip nobis i",
+    "fssaino": "Irure repudiandae vo",
+    "email": "serur@mailinator.com",
+    "statecode": "23"
+  },
+  {
     "subgroup": "AD038",
     "achead": "avb",
     "addressline1": "99 MARIMATA SQ",
@@ -583,4 +599,5 @@
     "email": "serur@mailinator.com",
     "subgroup": "BK002"
   }
+  
 ]
