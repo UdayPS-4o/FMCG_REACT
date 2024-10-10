@@ -14,17 +14,24 @@ const { cp } = require('fs');
 const { id } = require('date-fns/locale');
 
 app.get('/api/checkiskAuth', (req, res) => {
-  const token = req.cookies.token; // Retrieve the token from the HttpOnly cookie
-
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ authenticated: false });
+  }
   const filePath = path.join(__dirname, '..', 'db', 'users.json');
   fs.readFile(filePath, 'utf8')
     .then((data) => {
       const users = JSON.parse(data);
       const user = users.find((u) => u.token === token);
-
+      console.log(user);
       if (user) {
         // Return user details if authenticated
-        return res.status(200).json({ authenticated: true, name: user.name, routeAccess: user.routeAccess ,id: user.id});
+        return res.status(200).json({
+          authenticated: true,
+          name: user.name,
+          routeAccess: user.routeAccess,
+          id: user.id,
+        });
       } else {
         // Return unauthorized if user is not found
         return res.status(401).json({ authenticated: false });
@@ -36,27 +43,29 @@ app.get('/api/checkiskAuth', (req, res) => {
     });
 });
 
-
-
 app.post('/api/login', async (req, res) => {
   const { mobile, password } = req.body;
   const filePath = path.join(__dirname, '..', 'db', 'users.json');
-  
+
   try {
     let dbData = await fs.readFile(filePath, 'utf8');
     let users = JSON.parse(dbData);
-    const user = users.find(user => user.number === mobile && user.password === password);
-    
+    const user = users.find((user) => user.number === mobile && user.password === password);
+
     if (user) {
       const newToken = Math.random().toString(36).substring(7);
       user.token = newToken;
-      
+
       // Save the updated users data with the new token
       await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf8');
-      
+
       // Set token in the cookie and respond
-      res.status(200)
-        .header('Set-Cookie', `token=${newToken}; Path=/; Domain=.udayps.com; Max-Age=3600; HttpOnly;`)
+      res
+        .status(200)
+        .header(
+          'Set-Cookie',
+          `token=${newToken}; Path=/; Domain=.udayps.com; Max-Age=3600; HttpOnly;`,
+        )
         .send('Login successful.');
     } else {
       res.status(404).send('Error: Invalid username or password.');
@@ -66,7 +75,6 @@ app.post('/api/login', async (req, res) => {
     res.status(500).send('Failed to login: ' + err.message);
   }
 });
-
 
 app.get('/login', async (req, res) => {
   let firms = await getDbfData(path.join(__dirname, '..', '..', 'FIRM', 'FIRM.DBF'));
@@ -102,7 +110,7 @@ async function calculateCurrentStock() {
   const purchaseData = await getSTOCKFILE('purdtl.json');
   const transferData = await getSTOCKFILE('transfer.json');
   const pmplData = await getSTOCKFILE('pmpl.json');
-  
+
   // Fetch the local godown transfer data
   const localTransferResponse = (await fs.readFile(`./db/godown.json`, 'utf8')) || '[]';
   const localTransferData = await JSON.parse(localTransferResponse);
@@ -188,8 +196,6 @@ async function calculateCurrentStock() {
 
   return stock;
 }
-
-
 
 app.get('/api/stock', async (req, res) => {
   const stock = await calculateCurrentStock();
