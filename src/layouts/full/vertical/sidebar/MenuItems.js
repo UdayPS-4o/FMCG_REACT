@@ -77,7 +77,7 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    title: 'Cash Receipt',
+    title: 'Cash Receipts',
     icon: IconCurrencyDollarCanadian,
     href: '/cash-receipts',
   },
@@ -181,9 +181,6 @@ const Menuitems = [
       },
     ],
   },
-
-
-  
 ];
 
 export default Menuitems;

@@ -8,9 +8,7 @@ import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
 import NavGroup from './NavGroup/NavGroup';
 import constants from 'src/constants';
-import { useState,useEffect } from 'react';
-
-
+import { useState, useEffect } from 'react';
 
 const SidebarItems = () => {
   const { pathname } = useLocation();
@@ -49,61 +47,62 @@ const SidebarItems = () => {
   }, []);
 
   // Filter Menuitems based on user access
-  const filterMenuItems = (items) => {
+  const filterMenuItems = (items, routeAccess) => {
     return items.filter((item) => {
-      // If item is "Database", check if the user has "Database" in routeAccess
-      if (item.title === 'Database' && !routeAccess.includes('Database')) {
-        return false; // Do not show the "Database" menu if the user doesn't have access
+      // Check for specific items like 'Database' and 'Approved'
+      if (
+        (item.title === 'Database' && !routeAccess.includes('Database')) ||
+        (item.title === 'Approved' && !routeAccess.includes('Approved'))
+      ) {
+        return false; // Don't show these menus if the user doesn't have access
       }
-    
-      if(item.title === 'Approved' && !routeAccess.includes('Approved')){
-        return false;
-      }
-      // If item has children, check if the user has access to at least one child
+
+      // If the item has children, check if the user has access to at least one child
       if (item.children) {
-        const accessibleChildren = item.children.some((child) =>
-          routeAccess.includes(child.title) // Check access for each child
+        item.children = item.children.filter(
+          (child) => routeAccess.includes(child.title), // Check access for each child
         );
-        return accessibleChildren;
+        return item.children.length > 0; // Keep parent only if it has accessible children
       }
-      
+
       // If the item doesn't have children, just check its title
       return routeAccess.includes(item.title);
     });
   };
 
-  const accessibleMenuItems = filterMenuItems(Menuitems);
-
+  const accessibleMenuItems = filterMenuItems(Menuitems, routeAccess);
+  console.log('accessibleMenuItems', accessibleMenuItems);
   return (
     <Box sx={{ px: 3 }}>
       <List sx={{ pt: 0 }} className="sidebarNav">
-        {accessibleMenuItems.map((item, index) => {
-          if (item.subheader) {
-            return <NavGroup item={item} hideMenu={hideMenu} key={item.subheader} />;
-          } else if (item.children) {
-            return (
-              <NavCollapse
-                menu={item}
-                pathDirect={pathDirect}
-                hideMenu={hideMenu}
-                pathWithoutLastPart={pathWithoutLastPart}
-                level={1}
-                key={item.id}
-                onClick={() => dispatch(toggleMobileSidebar())}
-              />
-            );
-          } else {
-            return (
-              <NavItem
-                item={item}
-                key={item.id}
-                pathDirect={pathDirect}
-                hideMenu={hideMenu}
-                onClick={() => dispatch(toggleMobileSidebar())}
-              />
-            );
-          }
-        })}
+        {accessibleMenuItems &&
+          accessibleMenuItems.map((item, index) => {
+            if (item.subheader) {
+              return <NavGroup item={item} hideMenu={hideMenu} key={item.subheader} />;
+            } else if (item.children) {
+              return (
+                <NavCollapse
+                  menu={item}
+                  pathDirect={pathDirect}
+                  hideMenu={hideMenu}
+                  pathWithoutLastPart={pathWithoutLastPart}
+                  level={1}
+                  key={item.id}
+                  onClick={() => dispatch(toggleMobileSidebar())}
+                />
+              );
+            } else {
+              return (
+                <NavItem
+                  item={item}
+                  key={item.id}
+                  pathDirect={pathDirect}
+                  hideMenu={hideMenu}
+                  onClick={() => dispatch(toggleMobileSidebar())}
+                />
+              );
+            }
+          })}
       </List>
     </Box>
   );
