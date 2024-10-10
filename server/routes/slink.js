@@ -527,7 +527,7 @@ app.get('/invocingPage', async (req, res) => {
   })  
   invoiceData = await invoiceData.json();
   invoiceData = JSON.stringify(invoiceData);
-  console.log(typeof invoiceData);
+
     let encodedData = btoa(invoiceData);
 
   

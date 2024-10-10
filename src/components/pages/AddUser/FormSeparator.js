@@ -8,7 +8,7 @@ import { use } from 'i18next';
 import { set } from 'lodash';
 
 function UserForm() {
-  const [routeAccessOptions, setRouteAccessOptions] = useState(['Account Master', 'Invoicing', 'Cash Receipt', 'Godown Transfer', 'Database']);
+  const [routeAccessOptions, setRouteAccessOptions] = useState(['Account Master', 'Invoicing', 'Cash Receipt', 'Godown Transfer', 'Database' ,'Approved']);
   const [partyOptions, setPartyOptions] = useState([]);
   const [powersOptions, setPowersOptions] = useState(['Read', 'Write', 'Delete']);
   const [initialValues, setInitialValues] = useState({
@@ -54,7 +54,7 @@ function UserForm() {
           }
         }
 
-        setRouteAccessOptions([...new Set(users.flatMap((user) => user.routeAccess || []))]);
+      
         setPowersOptions([...new Set(users.flatMap((user) => user.powers || []))]);
       } catch (error) {
         console.error('Failed to fetch user data:', error);

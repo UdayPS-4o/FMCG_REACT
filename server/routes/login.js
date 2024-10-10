@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
+const cors = require('cors');
 const {
   redirect,
   getDbfData,
@@ -9,38 +10,63 @@ const {
   ensureDirectoryExistence,
   saveDataToJsonFile,
 } = require('./utilities');
+const { cp } = require('fs');
+const { id } = require('date-fns/locale');
+
+app.get('/api/checkiskAuth', (req, res) => {
+  const token = req.cookies.token; // Retrieve the token from the HttpOnly cookie
+
+  const filePath = path.join(__dirname, '..', 'db', 'users.json');
+  fs.readFile(filePath, 'utf8')
+    .then((data) => {
+      const users = JSON.parse(data);
+      const user = users.find((u) => u.token === token);
+
+      if (user) {
+        // Return user details if authenticated
+        return res.status(200).json({ authenticated: true, name: user.name, routeAccess: user.routeAccess ,id: user.id});
+      } else {
+        // Return unauthorized if user is not found
+        return res.status(401).json({ authenticated: false });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ authenticated: false, error: 'Internal server error' });
+    });
+});
+
+
 
 app.post('/api/login', async (req, res) => {
-  const formData = req.body;
-  console.log(formData);
-  const { username, password } = formData;
+  const { mobile, password } = req.body;
   const filePath = path.join(__dirname, '..', 'db', 'users.json');
+  
   try {
-    let dbData = await fs
-      .readFile(filePath, 'utf8')
-      .then((data) => JSON.parse(data))
-      .catch(() => {
-        throw new Error('Database file read error or file does not exist.');
-      });
-
-    const user = dbData.find((entry) => entry.username === username && entry.password === password);
-
+    let dbData = await fs.readFile(filePath, 'utf8');
+    let users = JSON.parse(dbData);
+    const user = users.find(user => user.number === mobile && user.password === password);
+    
     if (user) {
       const newToken = Math.random().toString(36).substring(7);
       user.token = newToken;
-      await fs.writeFile(filePath, JSON.stringify(dbData, null, 2), 'utf8');
-      res
-        .status(200)
-        .header('Set-Cookie', `token=${newToken}; Path=/; Max-Age=3600;`)
-        .send('Login successful.' + redirect(`/db/cash-receipts`, 500));
+      
+      // Save the updated users data with the new token
+      await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf8');
+      
+      // Set token in the cookie and respond
+      res.status(200)
+        .header('Set-Cookie', `token=${newToken}; Path=/; Domain=.udayps.com; Max-Age=3600; HttpOnly;`)
+        .send('Login successful.');
     } else {
       res.status(404).send('Error: Invalid username or password.');
     }
   } catch (err) {
     console.error(err);
-    res.status(500).send('Failed to login.' + err);
+    res.status(500).send('Failed to login: ' + err.message);
   }
 });
+
 
 app.get('/login', async (req, res) => {
   let firms = await getDbfData(path.join(__dirname, '..', '..', 'FIRM', 'FIRM.DBF'));
@@ -162,6 +188,8 @@ async function calculateCurrentStock() {
 
   return stock;
 }
+
+
 
 app.get('/api/stock', async (req, res) => {
   const stock = await calculateCurrentStock();

@@ -57,8 +57,8 @@ function FormSeparator() {
     const fetchPmplData = async () => {
       try {
         const pmplRes = await fetch(`${baseURL}/api/dbf/pmpl.json`);
-        const pmplData = await pmplRes.json();
-        setPmplData(pmplData); // Set pmplData here
+        const pmplDatas = await pmplRes.json();
+        setPmplData(pmplDatas); // Set pmplData here
       } catch (error) {
         console.error('Error fetching PMPL data:', error);
       }

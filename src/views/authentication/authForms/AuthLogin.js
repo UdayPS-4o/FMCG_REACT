@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -9,42 +9,30 @@ import {
   Divider,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import CustomCheckbox from '../../../components/forms/theme-elements/CustomCheckbox';
 import CustomTextField from '../../../components/forms/theme-elements/CustomTextField';
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
-
 import AuthSocialButtons from './AuthSocialButtons';
-import { useState } from 'react';
-import axios from 'axios';
 import useAuth from 'src/utils/useAuth';
 
-const AuthLogin = ({ title, subtitle, subtext }) => {
-  const { user, isAuth, setIsAuth } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const AuthLogin = ({ title, subtitle, subtext ,handleSubmit ,setMobile,setPassword ,mobile, password }) => {
+  const { setIsAuth } = useAuth();
+ 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost/signin', { username, password });
-      if (response.data) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-        setIsAuth(true);
-        window.location.href = '/account-master';
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
+  const handleLogin = handleSubmit;
+ 
 
   return (
     <>
-      {title ? (
+      {title && (
         <Typography fontWeight="700" variant="h3" mb={1}>
           {title}
         </Typography>
-      ) : null}
+      )}
 
       {subtext}
 
@@ -66,13 +54,13 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
 
       <Stack>
         <Box>
-          <CustomFormLabel htmlFor="username">Username</CustomFormLabel>
+          <CustomFormLabel htmlFor="mobile">mobile</CustomFormLabel>
           <CustomTextField
-            id="username"
+            id="mobile"
             variant="outlined"
             fullWidth
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
           />
         </Box>
         <Box>
@@ -102,10 +90,11 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
               color: 'primary.main',
             }}
           >
-            Forgot Password ?
+            Forgot Password?
           </Typography>
         </Stack>
       </Stack>
+
       <Box>
         <Button
           color="primary"
@@ -114,10 +103,18 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
           fullWidth
           onClick={handleLogin}
           type="submit"
+          disabled={loading} // Disable button while loading
         >
-          Sign In
+          {loading ? 'Signing in...' : 'Sign In'}
         </Button>
       </Box>
+
+      {error && (
+        <Typography variant="body2" color="error" mt={2}>
+          {error}
+        </Typography>
+      )}
+
       {subtitle}
     </>
   );

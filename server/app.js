@@ -5,7 +5,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
-const PORT =8000;
+const PORT = 8000;
 const io = require('socket.io');
 const {
   redirect,
@@ -16,8 +16,12 @@ const {
 } = require('./routes/utilities');
 
 const cors = require('cors');
-app.use(cors());
-
+app.use(
+  cors({
+    origin: "http://rdp.udayps.com:3000", // Replace with your frontend URL
+    credentials: true, // Allow credentials (cookies) to be sent with requests
+  })
+);
 app.use(morgan('dev'));
 app.use(cookieParser());
 
@@ -107,9 +111,9 @@ app.use(postRoutes);
 
 // Initialize server
 const initServer = () => {
-  app.listen(PORT,'rdp.udayps.com', () => {
+  app.listen(PORT, 'rdp.udayps.com', () => {
     console.log(`Server running on port ${PORT}`);
-  } );
+  });
 };
 
 initServer();

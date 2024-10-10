@@ -148,7 +148,8 @@ const CollapsibleItemSection = ({
 
   const calculateAmounts = (data) => {
     let amount = data.rate * data.qty;
-    const selectedItem = pmplData.find((item) => item.CODE == data.item);
+    console.log("data.item", data.item, pmplData.length, typeof data.item)
+    const selectedItem = pmplData.find((item) => item["CODE"] == data.item);
 
     
     console.log("selectedItem", selectedItem);
