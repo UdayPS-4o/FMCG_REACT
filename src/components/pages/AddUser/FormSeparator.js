@@ -8,7 +8,14 @@ import { use } from 'i18next';
 import { set } from 'lodash';
 
 function UserForm() {
-  const [routeAccessOptions, setRouteAccessOptions] = useState(['Account Master', 'Invoicing', 'Cash Receipt', 'Godown Transfer', 'Database' ,'Approved']);
+  const [routeAccessOptions, setRouteAccessOptions] = useState([
+    'Account Master',
+    'Invoicing',
+    'Cash Receipt',
+    'Godown Transfer',
+    'Database',
+    'Approved',
+  ]);
   const [partyOptions, setPartyOptions] = useState([]);
   const [powersOptions, setPowersOptions] = useState(['Read', 'Write', 'Delete']);
   const [initialValues, setInitialValues] = useState({
@@ -54,7 +61,6 @@ function UserForm() {
           }
         }
 
-      
         setPowersOptions([...new Set(users.flatMap((user) => user.powers || []))]);
       } catch (error) {
         console.error('Failed to fetch user data:', error);
@@ -84,15 +90,16 @@ function UserForm() {
     values.username = 'admin';
 
     // Extract only relevant `subgroup` fields to send in the request
-    console.log(values, 'values'); 
+    console.log(values, 'values');
     const payload = {
       ...values,
-      subgroup: values.subgroup ? {
-        title: values.subgroup.title,
-      } : null,
+      subgroup: values.subgroup
+        ? {
+            title: values.subgroup.title,
+          }
+        : null,
     };
 
-    
     const endpoint = isEdit ? '/slink/editUser' : '/slink/addUser';
     const url = `${constants.baseURL}${endpoint}`;
     try {
@@ -126,7 +133,6 @@ function UserForm() {
       toast.error('Network error. Please try again later.');
     }
   };
-
 
   return (
     <>
@@ -174,11 +180,11 @@ function UserForm() {
                     // Update Formik's `subgroup` field value when selection changes
                     setFieldValue('subgroup', newValue);
                   }}
-                  isOptionEqualToValue={(option, value) => option.subgroupCode === value.subgroupCode}
+                  isOptionEqualToValue={(option, value) =>
+                    option.subgroupCode === value.subgroupCode
+                  }
                   renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
                 />
-
-
               </Grid>
               <Grid item xs={12}>
                 <Stack direction="row" spacing={2} justifyContent="flex-end">

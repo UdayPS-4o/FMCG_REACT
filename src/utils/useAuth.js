@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 export default function useAuth() {
   const [user, setUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false); // Start with `false`
-
+  const [routeAccess, setRouteAccess] = useState([]);
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -22,5 +22,5 @@ export default function useAuth() {
     console.log('isAuth status:', isAuth);
   }, [isAuth]);
 
-  return { user, isAuth, setIsAuth };
+  return { user, isAuth, setIsAuth, routeAccess, setRouteAccess };
 }
