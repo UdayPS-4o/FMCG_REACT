@@ -15,10 +15,7 @@ const BCrumb = [
 
 const GodownTransfer = () => {
   return (
-    <PageContainer title="Vertical Form" description="this is Vertical Form page">
-      {/* breadcrumb */}
-      <Breadcrumb title="Vertical Form" items={BCrumb} />
-      {/* end breadcrumb */}
+   
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <ParentCard title="Create New User">
@@ -26,7 +23,7 @@ const GodownTransfer = () => {
           </ParentCard>
         </Grid>
       </Grid>
-    </PageContainer>
+  
   );
 };
 

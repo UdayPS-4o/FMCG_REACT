@@ -8,9 +8,9 @@ import { use } from 'i18next';
 import { set } from 'lodash';
 
 function UserForm() {
-  const [routeAccessOptions, setRouteAccessOptions] = useState([]);
+  const [routeAccessOptions, setRouteAccessOptions] = useState(['Account Master', 'Invoicing', 'Cash Receipt', 'Godown Transfer', 'Database' ,'Approved']);
   const [partyOptions, setPartyOptions] = useState([]);
-  const [powersOptions, setPowersOptions] = useState([]);
+  const [powersOptions, setPowersOptions] = useState(['Read', 'Write', 'Delete']);
   const [initialValues, setInitialValues] = useState({
     name: '',
     number: '',
@@ -35,6 +35,7 @@ function UserForm() {
 
         if (userId && users.length) {
           const userToEdit = users.find((user) => user.id === Number(userId));
+          console.log(userToEdit, 'userToEdit');
           if (userToEdit) {
             setIsEdit(true);
             setInitialValues({
@@ -46,13 +47,14 @@ function UserForm() {
                 ? userToEdit.routeAccess
                 : [userToEdit.routeAccess],
               powers: Array.isArray(userToEdit.powers) ? userToEdit.powers : [userToEdit.powers],
+              subgroup: userToEdit.subgroup,
             });
           } else {
             toast.error('User not found');
           }
         }
 
-        setRouteAccessOptions([...new Set(users.flatMap((user) => user.routeAccess || []))]);
+      
         setPowersOptions([...new Set(users.flatMap((user) => user.powers || []))]);
       } catch (error) {
         console.error('Failed to fetch user data:', error);
@@ -80,18 +82,29 @@ function UserForm() {
 
   const handleSubmit = async (values) => {
     values.username = 'admin';
+
+    // Extract only relevant `subgroup` fields to send in the request
+    console.log(values, 'values'); 
+    const payload = {
+      ...values,
+      subgroup: values.subgroup ? {
+        title: values.subgroup.title,
+      } : null,
+    };
+
+    
     const endpoint = isEdit ? '/slink/editUser' : '/slink/addUser';
     const url = `${constants.baseURL}${endpoint}`;
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload), // Send the correct payload
       });
 
       if (!response.ok) {
-        const errorMessage = await response.text();
-        toast.error(`Error: ${errorMessage}`);
+        const errorMessage = await response.json();
+        toast.error(`Error: ${errorMessage.message}`);
         return;
       }
 
@@ -107,13 +120,13 @@ function UserForm() {
           routeAccess: [],
           powers: [],
         });
-        window.location.href = window.location.origin + '/editadduser' + '?id=' + result.id;
       }
     } catch (error) {
       console.error('Network error:', error);
       toast.error('Network error. Please try again later.');
     }
   };
+
 
   return (
     <>
@@ -156,9 +169,16 @@ function UserForm() {
                 <Autocomplete
                   options={partyOptions}
                   getOptionLabel={(option) => option.title}
-                  onChange={(event, newValue) => setFieldValue('subgroup', newValue)}
+                  value={values.subgroup || null} // Make sure to pass the correct value or null
+                  onChange={(event, newValue) => {
+                    // Update Formik's `subgroup` field value when selection changes
+                    setFieldValue('subgroup', newValue);
+                  }}
+                  isOptionEqualToValue={(option, value) => option.subgroupCode === value.subgroupCode}
                   renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
                 />
+
+
               </Grid>
               <Grid item xs={12}>
                 <Stack direction="row" spacing={2} justifyContent="flex-end">
@@ -175,7 +195,7 @@ function UserForm() {
           </Form>
         )}
       </Formik>
-      {data && <UserTable data={data} />}
+      {data && <UserTable data={data} toast={toast} />}
     </>
   );
 }

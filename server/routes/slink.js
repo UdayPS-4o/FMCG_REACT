@@ -314,8 +314,8 @@ async function printGodown(req, res) {
 }
 
 const EditUser = async (req, res) => {
-  const { id, name, number, routeAccess, password, powers } = req.body;
-  console.log('Editing user', id, number, routeAccess, powers, password);
+  const { id, name, number, routeAccess, password, powers, subgroup } = req.body; // Include subgroup in the destructure
+  console.log('Editing user', id, name, number, routeAccess, powers, password, subgroup);
 
   try {
     // Read users from users.json file
@@ -331,12 +331,12 @@ const EditUser = async (req, res) => {
       user.routeAccess = routeAccess;
       user.password = password;
       user.powers = powers;
+      user.subgroup = subgroup; // Update the subgroup field
 
       // Save the updated users list back to the JSON file
       await fs.writeFile(path.join(__dirname, '../db/users.json'), JSON.stringify(users, null, 2));
 
       console.log(`User with ID: ${id} updated successfully.`);
-      // res.redirect('/admin'); // Redirect back to admin page after successful update
       res.status(200).send({ id: id, message: 'User updated successfully' });
     } else {
       // If user with the provided ID is not found, return an error
@@ -347,6 +347,7 @@ const EditUser = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
 
 app.get('/json/users', async (req, res) => {
   try {
@@ -360,11 +361,21 @@ app.get('/json/users', async (req, res) => {
 
 app.post('/addUser', async (req, res) => {
   const { name, number, password, routeAccess, powers, username, subgroup } = req.body;
+  
   try {
     let users = await fs.readFile('./db/users.json');
     users = JSON.parse(users);
-    const maxId = users.reduce((max, user) => Math.max(max, user.id), 0); // Find max id
 
+    // Check if the phone number already exists
+    const existingUser = users.find(user => user.number === number);
+    if (existingUser) {
+      return res.status(400).send({ message: 'Phone number already exists' });
+    }
+
+    // Find max id
+    const maxId = users.reduce((max, user) => Math.max(max, user.id), 0); 
+
+    // Create new user
     const newUser = {
       id: maxId + 1,
       name: name,
@@ -376,14 +387,19 @@ app.post('/addUser', async (req, res) => {
       subgroup: subgroup,
     };
 
+    // Add new user to users array
     users.push(newUser);
+
+    // Write updated users array back to the file
     await fs.writeFile('./db/users.json', JSON.stringify(users, null, 2));
+
     res.status(201).send({ message: 'User added successfully', id: newUser.id });
   } catch (error) {
     console.error('Failed to add user:', error);
     res.status(500).send('Server error');
   }
 });
+
 async function printInvoicing(req, res) {
   try {
     const { id } = req.query;
@@ -511,7 +527,7 @@ app.get('/invocingPage', async (req, res) => {
   })  
   invoiceData = await invoiceData.json();
   invoiceData = JSON.stringify(invoiceData);
-  console.log(typeof invoiceData);
+
     let encodedData = btoa(invoiceData);
 
   
@@ -527,6 +543,38 @@ app.get('/invocingPage', async (req, res) => {
 
 app.get('/printInvoice', printInvoicing);
 
+const DeleteUser = async (req, res) => {
+  // const { id } = req.params; // Get user ID from the URL parameters
+  const { id } = req.query; // Get user ID from the query parameters
+  console.log('Deleting user with ID:', id);
+
+  try {
+    // Read the users from the users.json file
+    let users = await fs.readFile(path.join(__dirname, '../db/users.json'));
+    users = JSON.parse(users);
+
+    // Find the index of the user with the given ID
+    const userIndex = users.findIndex((user) => user.id === Number(id));
+
+    if (userIndex !== -1) {
+      // Remove the user from the users array
+      users.splice(userIndex, 1);
+
+      // Save the updated users list back to the JSON file
+      await fs.writeFile(path.join(__dirname, '../db/users.json'), JSON.stringify(users, null, 2));
+
+      console.log(`User with ID: ${id} deleted successfully.`);
+      res.status(200).send({ id: id, message: 'User deleted successfully' });
+    } else {
+      // If user with the provided ID is not found, return an error
+      res.status(404).send('User not found');
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).send('Server error');
+  }
+};
+app.get('/deleteUser', DeleteUser);
 app.post('/editUser', EditUser);
 app.get('/printGodown', printGodown);
 app.get('/godownId', getNextGodownId);
