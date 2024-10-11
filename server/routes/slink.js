@@ -107,11 +107,9 @@ app.get('/cash-receipts', async (req, res) => {
       },
     );
     if (data && data.length) {
-       //highest number +1 sort by receiptNo
+      //highest number +1 sort by receiptNo
       const lastEntry = data.sort((a, b) => a.receiptNo - b.receiptNo).pop();
       nextReceiptNo = Number(lastEntry.receiptNo) + 1;
-
-      
     }
   } catch (error) {
     console.error('Failed to read or parse cash-receipts.json:', error);
@@ -135,7 +133,6 @@ app.get('/subgrp', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
 
 app.get('/cash-payments', async (req, res) => {
   const filePath = path.join(__dirname, '..', 'db', 'cash-payments.json');
@@ -348,7 +345,6 @@ const EditUser = async (req, res) => {
   }
 };
 
-
 app.get('/json/users', async (req, res) => {
   try {
     const users = await fs.readFile(path.join(__dirname, '../db/users.json'));
@@ -361,19 +357,19 @@ app.get('/json/users', async (req, res) => {
 
 app.post('/addUser', async (req, res) => {
   const { name, number, password, routeAccess, powers, username, subgroup } = req.body;
-  
+
   try {
     let users = await fs.readFile('./db/users.json');
     users = JSON.parse(users);
 
     // Check if the phone number already exists
-    const existingUser = users.find(user => user.number === number);
+    const existingUser = users.find((user) => user.number === number);
     if (existingUser) {
       return res.status(400).send({ message: 'Phone number already exists' });
     }
 
     // Find max id
-    const maxId = users.reduce((max, user) => Math.max(max, user.id), 0); 
+    const maxId = users.reduce((max, user) => Math.max(max, user.id), 0);
 
     // Create new user
     const newUser = {
@@ -410,70 +406,71 @@ async function printInvoicing(req, res) {
 
     // console.log(invoiceData)
     const invoice = invoiceData.find((inv) => inv.id === Number(id));
-    console.log("THe invoice we found is", invoice)
+    console.log('THe invoice we found is', invoice);
     const pmplData = await getPMPLData();
-    let accountMasterData = await fs.readFile(path.join(__dirname, '..', 'db', 'account-master.json'), 'utf8');
+    let accountMasterData = await fs.readFile(
+      path.join(__dirname, '..', 'db', 'account-master.json'),
+      'utf8',
+    );
     accountMasterData = JSON.parse(accountMasterData);
 
     accountMasterData = accountMasterData.filter((item) => item.subgroup === invoice.party);
-    console.log("Account Master Data", accountMasterData)
+    console.log('Account Master Data', accountMasterData);
     invoice.party = accountMasterData[0];
 
-
-
-
     // console.log("before party",invoice.party)
-    console.log("party", invoice.party)
+    console.log('party', invoice.party);
     // console.log("After party",invoice.party)
     const ModifiedInv = {
       company: {
-        name: "EKTA ENTERPRICE",
-        gstin: "23AJBPS6285R1ZF",
-        subject: "Subject to SEONI Jurisdiction",
-        fssaiNo: "11417230000027",
-        address: "BUDHWARI BAZAR,GN ROAD SEONI,",
-        phone: "Ph : 9179174888 , 9826623188",
-        officeNo: "07692-220897",
-        stateCode: "23"
+        name: 'EKTA ENTERPRICE',
+        gstin: '23AJBPS6285R1ZF',
+        subject: 'Subject to SEONI Jurisdiction',
+        fssaiNo: '11417230000027',
+        address: 'BUDHWARI BAZAR,GN ROAD SEONI,',
+        phone: 'Ph : 9179174888 , 9826623188',
+        officeNo: '07692-220897',
+        stateCode: '23',
       },
-      dlNo: invoice.party.dlno||' 20B/807/54/2022 , 21B/808/54/2022 , 20/805/54/2022 , 21/806/54/2022',
+      dlNo:
+        invoice.party.dlno ||
+        ' 20B/807/54/2022 , 21B/808/54/2022 , 20/805/54/2022 , 21/806/54/2022',
       party: {
         name: invoice.party.achead,
-        address: invoice.party.addressline1||invoice.party.addressline2,
+        address: invoice.party.addressline1 || invoice.party.addressline2,
         gstin: invoice.party.gst,
         stateCode: invoice.party.statecode,
         mobileNo: invoice.party.mobile,
-        balanceBf: invoice.items.reduce((acc, item) => acc + item.netAmt, 0)|| 0,
+        balanceBf: invoice.items.reduce((acc, item) => acc + item.netAmt, 0) || 0,
       },
       invoice: {
         no: invoice.id,
-        mode: "CASH",
+        mode: 'CASH',
         date: invoice.date,
         time: new Date().toLocaleTimeString(),
-        dueDate: invoice.dueDays ? new Date(invoice.date).setDate(new Date(invoice.date).getDate() + invoice.dueDays) : "",
+        dueDate: invoice.dueDays
+          ? new Date(invoice.date).setDate(new Date(invoice.date).getDate() + invoice.dueDays)
+          : '',
       },
       ack: {
         no: invoice.id,
         date: invoice.date,
       },
-      irn: "0265cdbc86f02a327272925c34fd6014d5701a832b58d00f5b5b85cf452f30b8",
+      irn: '0265cdbc86f02a327272925c34fd6014d5701a832b58d00f5b5b85cf452f30b8',
       items: [
         // { particulars: "CHAVI WAX 40'S HM 36050010", pack: "BDLS", mrp: 600.00, gst: 12.00, rate: 460.00, unit: "BOX", qty: 60, free: 0, schRs: "", netAmount: 27600.00 },
 
         ...invoice.items.map((item) => {
-
           item.particular = pmplData.find((pmplItem) => pmplItem.CODE === item.item).PRODUCT;
           item.pack = pmplData.find((pmplItem) => pmplItem.CODE === item.item).PACK;
           item.gst = pmplData.find((pmplItem) => pmplItem.CODE === item.item).GST;
           return item;
-        }
-        )
-
+        }),
       ],
       summary: {
         itemsInBill: invoice.items.length,
-        casesInBill: invoice.items.reduce((acc, item) => acc +Number( item.qty), 0),
-        looseItemsInBill: invoice.items.reduce((acc, item) => acc + item.free, 0)||0,
+        casesInBill: invoice.items.reduce((acc, item) => acc + Number(item.qty), 0),
+        looseItemsInBill: invoice.items.reduce((acc, item) => acc + item.free, 0) || 0,
       },
       taxDetails: [
         // { goods: 3807.49, sgst: 2.50, sgstValue: 95.190, cgst: 2.50, cgstValue: 95.190 },
@@ -482,12 +479,11 @@ async function printInvoicing(req, res) {
           return {
             goods: item.netAmount,
             sgst: item.gst / 2,
-            sgstValue: item.netAmount * (item.gst / 2) / 100 || 0,
+            sgstValue: (item.netAmount * (item.gst / 2)) / 100 || 0,
             cgst: item.gst / 2,
-            cgstValue: item.netAmount * (item.gst / 2) / 100 || 0,
+            cgstValue: (item.netAmount * (item.gst / 2)) / 100 || 0,
           };
-        }
-        )
+        }),
       ],
       totals: {
         // grossAmt: 31721.52,
@@ -496,19 +492,15 @@ async function printInvoicing(req, res) {
         // rOff: 0.00,
         // netAmount: 31598.00
         grossAmt: invoice.items.reduce((acc, item) => acc + Number(item.netAmount), 0),
-        lessSch: 0.00,
-        lessCd: 0.00,
-        rOff: 0.00,
+        lessSch: 0.0,
+        lessCd: 0.0,
+        rOff: 0.0,
         netAmount: invoice.items.reduce((acc, item) => acc + Number(item.netAmount), 0),
       },
-    }
+    };
     console.log(ModifiedInv);
 
     res.send(ModifiedInv);
-
-
-
-
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -519,27 +511,20 @@ app.get('/invocingPage', async (req, res) => {
 
   let baseurl = req.protocol + '://' + req.get('host');
 
-  let invoiceData = await fetch(baseurl+'/slink/printInvoice?id='+id, {
+  let invoiceData = await fetch(baseurl + '/slink/printInvoice?id=' + id, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-  })  
+  });
   invoiceData = await invoiceData.json();
   invoiceData = JSON.stringify(invoiceData);
 
-    let encodedData = btoa(invoiceData);
+  let encodedData = btoa(invoiceData);
 
-  
-    
-    res.send({value:encodedData});
-    // console.log(encodedData); 
-
-
-  
-
+  res.send({ value: encodedData });
+  // console.log(encodedData);
 });
-  
 
 app.get('/printInvoice', printInvoicing);
 
@@ -582,8 +567,8 @@ app.get('/invoiceId', getNextInvoiceId);
 
 app.get('/printPage', async (req, res) => {
   console.log('printPage');
-  
+
   // console.log(path.join(__dirname, '..', 'dist', 'index.html'));
-  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html') );
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
 module.exports = app;

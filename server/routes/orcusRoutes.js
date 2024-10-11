@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
+const baseURL = 'http://rdp.udayps.com:8000';
 function convertAmountToWords(amount) {
   const oneToTwenty = [
     '',
@@ -74,11 +75,11 @@ app.get('/print', async (req, res) => {
     if (!ReceiptNo && !voucherNo && !godownId)
       throw new Error('ReceiptNo or VoucherNo is required');
     if (ReceiptNo) {
-      const data = await fetch('http://localhost/json/cash-receipts');
+      const data = await fetch(baseURL + '/json/cash-receipts');
       const json = await data.json();
       const receipt = json.find((receipt) => receipt.receiptNo === ReceiptNo);
       console.log('receipt', receipt);
-      const cmpl = await fetch('http://localhost/cmpl');
+      const cmpl = await fetch(baseURL + '/cmpl');
       const cmplJson = await cmpl.json();
       const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
       const AmountInWords = convertAmountToWords(receipt.amount);

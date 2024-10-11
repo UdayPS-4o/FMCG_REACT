@@ -11,13 +11,14 @@
       "Cash Receipts",
       "Godown Transfer",
       "Database",
-      "Approved"
+      "Approved",
+      "Cash Payments"
     ],
     "powers": ["Read", "Write"],
     "subgroup": {
       "title": "BUS STAND"
     },
-    "token": "jqg9yj"
+    "token": "cztml8"
   },
   {
     "id": 3,

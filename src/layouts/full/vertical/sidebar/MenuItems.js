@@ -91,7 +91,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Godown Transfer',
     icon: IconTransferIn,
-    href: '/godown',
+    href: '/godown-transfer',
   },
   {
     id: uniqueId(),
@@ -125,7 +125,7 @@ const Menuitems = [
       },
       {
         id: uniqueId(),
-        title: 'Cash Receipt',
+        title: 'Cash Receipts',
         icon: IconCurrencyDollarCanadian,
         href: '/db/cash-receipts',
       },

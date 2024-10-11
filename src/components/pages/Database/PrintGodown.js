@@ -1,6 +1,6 @@
-import React, { useEffect, useState  ,useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import constants from 'src/constants';
-const itemsPerPage = 15;
+const itemsPerPage = 12;
 
 export default function PrintGodownT() {
   const printRef = useRef();
@@ -40,7 +40,7 @@ export default function PrintGodownT() {
       <button onClick={handlePrint}>Print</button>
       <div ref={printRef}>
         {pages.map((pageItems, index) => (
-          <div key={index} className="print-page " style={{ breakAfter: 'page' , display:'flex'}}>
+          <div key={index} className="print-page " style={{ breakAfter: 'page', display: 'flex' }}>
             <TransferGodownData transferData={{ ...godownData, items: pageItems }} />
             <TransferGodownData transferData={{ ...godownData, items: pageItems }} />
           </div>

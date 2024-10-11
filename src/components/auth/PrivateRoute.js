@@ -5,10 +5,14 @@ import { useLocation } from 'react-router-dom';
 import constants from 'src/constants';
 
 function convertToTitleCase(str) {
-  return str
-    .split('-') // Split by hyphen
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
-    .join(' '); // Join the words with a space
+  if (str.includes('-')) {
+    return str
+      .split('-') // Split by hyphen
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
+      .join(' '); // Join the words with a space
+  } else {
+    return str.charAt(0).toUpperCase() + str.slice(1); // Convert to title case if no hyphen
+  }
 }
 
 const PrivateRoute = ({ children }) => {
@@ -35,9 +39,16 @@ const PrivateRoute = ({ children }) => {
 
             // Check if the user has access to the route
             let accessGranted = false;
-            let pathneames = ['account-master', 'cash-receipts', 'cash-payments'];
+            let pathneames = [
+              'account-master',
+              'cash-receipts',
+              'cash-payments',
+              'godown-transfer',
+              'invoicing',
+            ];
 
             pathneames.forEach((path) => {
+              console.log(path, 'path');
               if (
                 window.location.pathname.includes(path) &&
                 data.routeAccess.includes(convertToTitleCase(path))
@@ -52,6 +63,12 @@ const PrivateRoute = ({ children }) => {
                     !data.routeAccess.includes('Database')) ||
                   (window.location.pathname.includes('print') &&
                     !data.routeAccess.includes('Database'))
+                ) {
+                  accessGranted = false;
+                }
+                if (
+                  window.location.pathname.includes('approved') &&
+                  !data.routeAccess.includes('Approved')
                 ) {
                   accessGranted = false;
                 }
@@ -80,7 +97,7 @@ const PrivateRoute = ({ children }) => {
 
             // Handle "Approved" routes
             if (
-              window.location.pathname.includes('Approved') &&
+              window.location.pathname.includes('approved') &&
               data.routeAccess.includes('Approved')
             ) {
               accessGranted = true;

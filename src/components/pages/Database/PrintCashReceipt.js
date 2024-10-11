@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import constants from 'src/constants';
 // function getEndpoint
 
 export default function PrintCashReceipt() {
@@ -13,7 +13,7 @@ export default function PrintCashReceipt() {
   console.log('retreat', queryKey);
 
   useEffect(() => {
-    fetch(`http://localhost/print?${queryKey}=${retreat}`)
+    fetch(constants.baseURL + `/print?${queryKey}=${retreat}`)
       .then((res) => res.json())
       .then((data) => {
         setReceipt(data);
@@ -93,7 +93,7 @@ const Receipt = ({ receipt }) => {
               <tr>
                 <td>
                   {' '}
-                  By R/no {series[0]}.-{receiptNo}
+                  By R/no {M_NAME} {C_CODE}
                 </td>
                 <td> </td>
                 <td id="amount"> </td>
