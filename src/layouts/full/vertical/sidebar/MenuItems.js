@@ -103,7 +103,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Add User',
     icon: IconDatabase,
-    href: '/adduser',
+    href: '/add-user',
   },
   {
     id: uniqueId(),
@@ -163,7 +163,7 @@ const Menuitems = [
       },
       {
         id: uniqueId(),
-        title: 'Cash Receipt',
+        title: 'Cash Receipts',
         icon: IconCurrencyDollarCanadian,
         href: '/approved/cash-receipts',
       },

@@ -86,20 +86,20 @@ app.get('/print', async (req, res) => {
       res.send({ ...receipt, ...cmplData, AmountInWords });
     }
     if (voucherNo) {
-      const data = await fetch('http://localhost/json/cash-payments');
+      const data = await fetch(baseURL + '/json/cash-payments');
       const json = await data.json();
       const receipt = json.find((receipt) => receipt.voucherNo === voucherNo);
-      const cmpl = await fetch('http://localhost/cmpl');
+      const cmpl = await fetch(baseURL + '/cmpl');
       const cmplJson = await cmpl.json();
       const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
       const AmountInWords = convertAmountToWords(receipt.amount);
       res.send({ ...receipt, ...cmplData, AmountInWords });
     }
     if (godownId) {
-      const data = await fetch('http://localhost/json/godown');
+      const data = await fetch(baseURL + '/json/godown');
       const json = await data.json();
       const receipt = json.find((receipt) => receipt.id === godownId);
-      const cmpl = await fetch('http://localhost/cmpl');
+      const cmpl = await fetch(baseURL + '/cmpl');
       const cmplJson = await cmpl.json();
       const cmplData = cmplJson.find((cmpl) => cmpl.C_CODE === receipt.party);
       const AmountInWords = convertAmountToWords(receipt.amount);
@@ -113,7 +113,7 @@ app.get('/print', async (req, res) => {
 app.get('/account-master', async (req, res) => {
   try {
     const { code } = req.query;
-    const data = await fetch('http://localhost/json/account-master');
+    const data = await fetch(baseURL + '/json/account-master');
     const json = await data.json();
     const user = json.find((user) => user.C_CODE === req.query.code);
   } catch (error) {

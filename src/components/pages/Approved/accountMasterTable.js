@@ -30,6 +30,7 @@ import { toast } from 'react-toastify';
 const fetchProducts = async (endpoint) => {
   let data = await fetch(constants.baseURL + '/approved/json/' + endpoint);
   let response = await data.json();
+  console.log('response', response);
   return response;
 };
 

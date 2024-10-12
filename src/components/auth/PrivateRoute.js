@@ -45,6 +45,7 @@ const PrivateRoute = ({ children }) => {
               'cash-payments',
               'godown-transfer',
               'invoicing',
+              'add-user',
             ];
 
             pathneames.forEach((path) => {
@@ -100,6 +101,10 @@ const PrivateRoute = ({ children }) => {
               window.location.pathname.includes('approved') &&
               data.routeAccess.includes('Approved')
             ) {
+              accessGranted = true;
+            }
+
+            if (data.routeAccess.includes('Admin')) {
               accessGranted = true;
             }
 

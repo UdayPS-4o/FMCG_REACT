@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import constants from 'src/constants';
 
 // function getEndpoint
 
@@ -13,7 +14,7 @@ export default function PrintCashReceipt() {
   console.log('retreat', queryKey);
 
   useEffect(() => {
-    fetch(`http://localhost/print?${queryKey}=${retreat}`)
+    fetch(constants.baseURL + `/print?${queryKey}=${retreat}`)
       .then((res) => res.json())
       .then((data) => {
         setReceipt(data);

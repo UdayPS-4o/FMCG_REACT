@@ -70,7 +70,9 @@ const SidebarItems = () => {
     });
   };
 
-  const accessibleMenuItems = filterMenuItems(Menuitems, routeAccess);
+  const accessibleMenuItems = routeAccess.includes('Admin')
+    ? Menuitems
+    : filterMenuItems(Menuitems, routeAccess);
   console.log('accessibleMenuItems', accessibleMenuItems);
   return (
     <Box sx={{ px: 3 }}>

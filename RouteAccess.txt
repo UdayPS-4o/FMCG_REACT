@@ -1,0 +1,25 @@
+Namespace for route Access:-
+    "Account Master",
+      "Invoicing",
+      "Cash Receipts",
+      "Godown Transfer",
+      "Database",
+      "Add User",
+      "Approved",
+      "Cash Payments"
+      "Admin"
+
+
+    ROUTES:-
+    account-master
+    invoicing
+    cash-receipts
+    cash-payments
+    godown-transfer
+    add-user
+    db/
+        ----
+        godown
+    approved/
+        ----
+        godown

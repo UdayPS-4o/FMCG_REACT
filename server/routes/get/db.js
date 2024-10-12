@@ -25,6 +25,7 @@ app.get('/approved/json/:file', async (req, res) => {
   const { file } = req.params;
   try {
     let data = (await fs.readFile(`./db/approved/${file}.json`, 'utf8')) || '[]';
+    console.log(data);
     res.json(JSON.parse(data));
   } catch (error) {
     console.error(`Failed to read or parse ${file}.json:`, error);

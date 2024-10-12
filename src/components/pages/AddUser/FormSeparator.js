@@ -11,10 +11,13 @@ function UserForm() {
   const [routeAccessOptions, setRouteAccessOptions] = useState([
     'Account Master',
     'Invoicing',
-    'Cash Receipt',
+    'Cash Receipts',
     'Godown Transfer',
     'Database',
+    'Add User',
     'Approved',
+    'Cash Payments',
+    'Admin',
   ]);
   const [partyOptions, setPartyOptions] = useState([]);
   const [powersOptions, setPowersOptions] = useState(['Read', 'Write', 'Delete']);
