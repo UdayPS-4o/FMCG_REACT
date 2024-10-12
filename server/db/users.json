@@ -15,11 +15,14 @@
       "Approved",
       "Cash Payments"
     ],
-    "powers": ["Read", "Write"],
+    "powers": [
+      "Read",
+      "Write"
+    ],
     "subgroup": {
       "title": "BUS STAND"
     },
-    "token": "p8zptd"
+    "token": "7vzel"
   },
   {
     "id": 3,
@@ -27,8 +30,13 @@
     "username": "admin",
     "number": "12341234",
     "password": "12341234",
-    "routeAccess": ["Account Master", "Cash Receipts"],
-    "powers": ["Write"],
+    "routeAccess": [
+      "Account Master",
+      "Cash Receipts"
+    ],
+    "powers": [
+      "Write"
+    ],
     "subgroup": {
       "title": "BHAIROGUNJ",
       "subgroupCode": "BG007"
@@ -40,8 +48,13 @@
     "username": "admin",
     "number": "12341234",
     "password": "12341234",
-    "routeAccess": ["Account Master", "Cash Receipt"],
-    "powers": ["Write"],
+    "routeAccess": [
+      "Account Master",
+      "Cash Receipt"
+    ],
+    "powers": [
+      "Write"
+    ],
     "subgroup": {
       "title": "BHAIROGUNJ",
       "subgroupCode": "BG007"
@@ -53,8 +66,12 @@
     "username": "admin",
     "number": "1342344444444444444444444444444",
     "password": "123441234",
-    "routeAccess": ["Account Master"],
-    "powers": ["Read"],
+    "routeAccess": [
+      "Account Master"
+    ],
+    "powers": [
+      "Read"
+    ],
     "subgroup": {
       "title": "ADEGAON"
     }

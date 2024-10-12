@@ -23,8 +23,20 @@ app.get('/json/:file', async (req, res) => {
 app.get('/approved/json/:file', async (req, res) => {
   console.log('approved');
   const { file } = req.params;
+  const filePath = `./db/approved/${file}.json`;
   try {
-    let data = (await fs.readFile(`./db/approved/${file}.json`, 'utf8')) || '[]';
+    let data;
+    try {
+      data = await fs.readFile(filePath, 'utf8');
+    } catch (readError) {
+      if (readError.code === 'ENOENT') {
+        // File doesn't exist, create it with empty array
+        data = '[]';
+        await fs.writeFile(filePath, data, 'utf8');
+      } else {
+        throw readError;
+      }
+    }
     console.log(data);
     res.json(JSON.parse(data));
   } catch (error) {
