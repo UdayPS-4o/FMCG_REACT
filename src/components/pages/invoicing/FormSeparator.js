@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Button, Stack, Divider, TextField, Autocomplete } from '@mui/material';
 import CollapsibleItemSection from './CollapsibleItemSection';
 import constants from 'src/constants';
+import { ToastContainer, toast } from 'react-toastify';
 
 function FormSeparator() {
   const [party, setParty] = useState(null);
@@ -36,6 +37,8 @@ function FormSeparator() {
   const [smOptions, setSmOptions] = useState([]);
   const [pmplData, setPmplData] = useState([]);
   const [errors, setErrors] = useState({});
+  const [searchItems, setSearchItems] = useState('');
+  const [clicked, setClicked] = useState(false);
   const baseURL = constants.baseURL;
 
   useEffect(() => {
@@ -130,6 +133,7 @@ function FormSeparator() {
   };
 
   const handleSubmit = async () => {
+    setClicked(true);
     if (!validateForm()) {
       return; // Stop submission if the form is invalid
     }
@@ -154,7 +158,7 @@ function FormSeparator() {
 
     console.log('Data:', data);
     try {
-      const res = await fetch(`${baseURL}/invoicing`, {
+      let res = await fetch(`${baseURL}/invoicing`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -162,10 +166,22 @@ function FormSeparator() {
         body: JSON.stringify(data),
       });
       console.log('res', res);
+      res = await res.json();
+      toast.success(res.message);
+      window.location.reload();
     } catch (error) {
       console.error(error);
+
+      toast.error('Failed to add invoice');
     }
     // Simulate form submission or handle your submission logic here
+  };
+  const sortedFormValues = () => {
+    if (!searchItems) return items;
+
+    return items
+      .filter((item) => item.item.toLowerCase().includes(searchItems.toLowerCase()))
+      .sort((a, b) => a.item.localeCompare(b.item));
   };
 
   return (
@@ -247,8 +263,16 @@ function FormSeparator() {
           onChange={(e) => setRef(e.target.value)}
         />
       </Grid>
+      <Grid item xs={12} sm={4}>
+        <TextField
+          label="Search Items"
+          fullWidth
+          value={searchItems}
+          onChange={(e) => setSearchItems(e.target.value)}
+        />
+      </Grid>
       <Grid item xs={12} alignItems="stretch">
-        {items.map((item, index) => (
+        {sortedFormValues().map((item, index) => (
           <CollapsibleItemSection
             key={index}
             index={index}
@@ -263,6 +287,7 @@ function FormSeparator() {
         ))}
         <Divider />
       </Grid>
+
       <Grid item xs={12}>
         <Button variant="outlined" onClick={addItem}>
           Add Another Item
@@ -270,7 +295,7 @@ function FormSeparator() {
       </Grid>
       <Grid item xs={12}>
         <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="primary" onClick={handleSubmit} disabled={clicked}>
             Submit
           </Button>
           <Button variant="text" color="error">
@@ -278,6 +303,7 @@ function FormSeparator() {
           </Button>
         </Stack>
       </Grid>
+      <ToastContainer />
     </Grid>
   );
 }

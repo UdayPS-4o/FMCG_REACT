@@ -12,7 +12,7 @@ function FormSeparator() {
   const [pmplData, setPmplData] = useState([]); // Hold product data from pmpl.json
   const [urlParms, setUrlParms] = useState(window.location.search);
   const [searchItems, setSearchItems] = useState('');
-
+  const [clicked, setClicked] = useState(false);
   const [formValues, setFormValues] = useState({
     date: new Date().toISOString().split('T')[0],
     series: 'T',
@@ -139,8 +139,8 @@ function FormSeparator() {
   };
 
   const getAvailableItems = () => {
-    const selectedCodes = new Set(formValues.items.map(item => item.item));
-    return pmplData.filter(pmpl => !selectedCodes.has(pmpl.CODE));
+    const selectedCodes = new Set(formValues.items.map((item) => item.item));
+    return pmplData.filter((pmpl) => !selectedCodes.has(pmpl.CODE));
   };
 
   const addItem = () => {
@@ -192,17 +192,18 @@ function FormSeparator() {
   };
   console.log('formValues:', sortedFormValues());
   const handleSubmit = async () => {
-    const payloadId = id
+    setClicked(true);
+    const payloadId = id;
     const { fromGodown, toGodown, items } = formValues;
 
-    const allQuantitiesValid = items.every(item => item.qty > 0);
+    const allQuantitiesValid = items.every((item) => item.qty > 0);
 
     if (!allQuantitiesValid) {
       toast.error('All items must have a quantity greater than 0.');
       return;
     }
 
-    console.log(formValues)
+    console.log(formValues);
     const payload = {
       ...formValues,
       id: payloadId.nextGodownId,
@@ -224,8 +225,9 @@ function FormSeparator() {
         },
         body: JSON.stringify(payload),
       });
-      const json = await res.json()
-      toast.success(json.message)
+      const json = await res.json();
+      toast.success(json.message);
+      window.location.reload();
     } catch (error) {
       toast.error('Error submitting form:', error.message);
 
@@ -316,7 +318,6 @@ function FormSeparator() {
           <Divider />
         </Grid>
 
-
         <Grid item xs={12}>
           <Button variant="outlined" onClick={addItem}>
             Add Another Item
@@ -325,7 +326,7 @@ function FormSeparator() {
 
         <Grid item xs={12}>
           <Stack direction="row" spacing={2} justifyContent="flex-end">
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="primary" type="submit" disabled={clicked}>
               Save changes
             </Button>
             <Button variant="text" color="error">

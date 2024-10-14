@@ -128,8 +128,8 @@ const CollapsibleItemSection = ({
     let amount = data.rate * data.qty;
     const selectedItem = pmplData.find((item) => item.CODE === data.item);
 
-    console.log("selectedItem", selectedItem);
-    console.log("data", data);
+    console.log('selectedItem', selectedItem);
+    console.log('data', data);
     if (data.unit === selectedItem.UNIT_2) {
       amount *= selectedItem.MULT_F;
     }
@@ -147,7 +147,7 @@ const CollapsibleItemSection = ({
     <Accordion expanded={expanded === index} onChange={handleChange(index)}>
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">Item {index + 1}</Typography>
+          <Typography variant="h6">Item {pmplData[index].CODE}</Typography>
           <IconButton color="error" onClick={() => removeItem(index)}>
             <IconTrash />
           </IconButton>

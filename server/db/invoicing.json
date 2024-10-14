@@ -908,5 +908,150 @@
         "cd": "10"
       }
     ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "H",
+    "cash": "12",
+    "id": 23,
+    "party": "OB001",
+    "sm": "SM001",
+    "dueDays": "12",
+    "ref": "12",
+    "items": [
+      {
+        "item": "MK001",
+        "stock": 1655,
+        "godown": "02",
+        "pack": "4.5 KG",
+        "gst": 5,
+        "pcBx": 4,
+        "mrp": 907,
+        "rate": 585,
+        "qty": "01",
+        "unit": "PCS",
+        "amount": "585.00",
+        "netAmount": "579.15",
+        "cess": "1",
+        "sch": "1",
+        "cd": "1"
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "M",
+    "cash": "12",
+    "id": 24,
+    "party": "OB001",
+    "sm": "SM001",
+    "dueDays": "2",
+    "ref": "1",
+    "items": [
+      {
+        "item": "MK001",
+        "stock": 1833,
+        "godown": "",
+        "pack": "4.5 KG",
+        "gst": 5,
+        "pcBx": 4,
+        "mrp": 907,
+        "rate": 585,
+        "qty": "01",
+        "unit": "PCS",
+        "amount": "585.00",
+        "netAmount": "579.15",
+        "cess": "1",
+        "sch": "1",
+        "cd": "1"
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "H",
+    "cash": "1",
+    "id": 25,
+    "party": "OB000",
+    "sm": "SM001",
+    "dueDays": "1",
+    "ref": "1",
+    "items": [
+      {
+        "item": "MK001",
+        "stock": 1655,
+        "godown": "02",
+        "pack": "4.5 KG",
+        "gst": 5,
+        "pcBx": 4,
+        "mrp": 907,
+        "rate": 585,
+        "qty": "01",
+        "unit": "PCS",
+        "amount": "585.00",
+        "netAmount": "579.15",
+        "cess": "1",
+        "sch": "1",
+        "cd": "1"
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 26,
+    "party": "AA001",
+    "sm": "SM003",
+    "dueDays": "",
+    "ref": "",
+    "items": [
+      {
+        "item": "MK005",
+        "stock": 13198,
+        "godown": "02",
+        "pack": "895G P",
+        "gst": 5,
+        "pcBx": 12,
+        "mrp": 130,
+        "rate": 97,
+        "qty": "12",
+        "unit": "PCS",
+        "amount": "1164.00",
+        "netAmount": "NaN",
+        "cess": "A",
+        "sch": "12",
+        "cd": "1"
+      }
+    ]
+  },
+  {
+    "date": "2024-08-10",
+    "series": "",
+    "cash": "",
+    "id": 27,
+    "party": "AA001",
+    "sm": "SM004",
+    "dueDays": "12",
+    "ref": "12",
+    "items": [
+      {
+        "item": "MK001",
+        "stock": 1833,
+        "godown": "",
+        "pack": "4.5 KG",
+        "gst": 5,
+        "pcBx": 4,
+        "mrp": 907,
+        "rate": 585,
+        "qty": "2",
+        "unit": "PCS",
+        "amount": "1170.00",
+        "netAmount": "900.90",
+        "cess": "1",
+        "sch": "12",
+        "cd": "12"
+      }
+    ]
   }
 ]

@@ -9,6 +9,7 @@ import { set } from 'lodash';
 
 function UserForm() {
   const [routeAccessOptions, setRouteAccessOptions] = useState([
+    'Admin',
     'Account Master',
     'Invoicing',
     'Cash Receipts',
@@ -17,7 +18,6 @@ function UserForm() {
     'Add User',
     'Approved',
     'Cash Payments',
-    'Admin',
   ]);
   const [partyOptions, setPartyOptions] = useState([]);
   const [powersOptions, setPowersOptions] = useState(['Read', 'Write', 'Delete']);

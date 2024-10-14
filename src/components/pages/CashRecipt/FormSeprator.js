@@ -17,6 +17,8 @@ function FormSeparator() {
     receiptNo: '',
   });
   const [isEditMode, setIsEditMode] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -110,6 +112,7 @@ function FormSeparator() {
       initialValues={initialValues}
       enableReinitialize
       onSubmit={async (values, { setSubmitting }) => {
+        setClicked(true);
         values.receiptNo = `${receiptNo || values.receiptNo}`;
         values.party = party?.value;
         values.amount = `${values.amount}`;
@@ -195,7 +198,8 @@ function FormSeparator() {
             </Grid>
             <Grid item xs={12}>
               <Stack direction="row" spacing={2} justifyContent="flex-end">
-                <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
+                {/* <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}> */}
+                <Button variant="contained" color="primary" type="submit" disabled={clicked}>
                   Save changes
                 </Button>
                 <Button variant="text" color="error" onClick={() => navigate('/db/cash-receipts')}>

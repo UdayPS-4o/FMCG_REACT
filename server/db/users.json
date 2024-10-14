@@ -6,14 +6,7 @@
     "number": "7223969469",
     "password": "7223969469",
     "routeAccess": [
-      "Account Master",
-      "Invoicing",
-      "Cash Receipts",
-      "Godown Transfer",
-      "Database",
-      "Add User",
-      "Approved",
-      "Cash Payments"
+      "Admin"
     ],
     "powers": [
       "Read",
@@ -22,7 +15,7 @@
     "subgroup": {
       "title": "BUS STAND"
     },
-    "token": "7vzel"
+    "token": "in0vr"
   },
   {
     "id": 3,

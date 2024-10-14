@@ -25,6 +25,7 @@ const CollapsibleItemSection = ({
   const [stockList, setStockList] = useState({});
   const [godownOptions, setGodownOptions] = useState([]);
   const [unitOptions, setUnitOptions] = useState([]);
+  const [searchItems, setSearchItems] = useState('');
 
   useEffect(() => {
     const fetchStockAndGodown = async () => {
