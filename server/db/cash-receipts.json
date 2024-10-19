@@ -192,5 +192,13 @@
     "discount": "2",
     "receiptNo": "82",
     "party": "CT000"
+  },
+  {
+    "date": "2024-10-17",
+    "series": "2",
+    "amount": "12",
+    "discount": "12",
+    "receiptNo": "83",
+    "party": "OB000"
   }
 ]

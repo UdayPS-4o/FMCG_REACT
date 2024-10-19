@@ -1273,5 +1273,38 @@
       }
     ],
     "id": 67
+  },
+  {
+    "date": "2024-10-19",
+    "series": "T",
+    "fromGodown": "",
+    "toGodown": "",
+    "items": [
+      {
+        "code": "MK001",
+        "qty": 2637,
+        "unit": "PCS"
+      },
+      {
+        "code": "ME006",
+        "qty": 132,
+        "unit": "BOX"
+      }
+    ],
+    "id": 68
+  },
+  {
+    "date": "2024-10-19",
+    "series": "T",
+    "fromGodown": "",
+    "toGodown": "",
+    "items": [
+      {
+        "code": "MK001",
+        "qty": 659,
+        "unit": "Box"
+      }
+    ],
+    "id": 69
   }
 ]

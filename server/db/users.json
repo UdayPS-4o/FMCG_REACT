@@ -15,7 +15,7 @@
     "subgroup": {
       "title": "BUS STAND"
     },
-    "token": "in0vr"
+    "token": "ig9cb"
   },
   {
     "id": 3,
@@ -68,5 +68,22 @@
     "subgroup": {
       "title": "ADEGAON"
     }
+  },
+  {
+    "id": 6,
+    "name": "Uday Pratap Singh Parihar",
+    "username": "admin",
+    "number": "2",
+    "password": "2",
+    "routeAccess": [
+      "Admin"
+    ],
+    "powers": [
+      "Write"
+    ],
+    "subgroup": {
+      "title": "BARAPATHAR"
+    },
+    "token": "92ekr"
   }
 ]
