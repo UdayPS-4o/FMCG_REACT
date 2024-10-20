@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Piyush",
-    "username": "admin",
+    "username": "harkrishna",
     "number": "7223969469",
     "password": "7223969469",
     "routeAccess": [
@@ -13,9 +13,10 @@
       "Write"
     ],
     "subgroup": {
-      "title": "BUS STAND"
+      "title": "BHAIROGUNJ",
+      "subgroupCode": "BG007"
     },
-    "token": "ig9cb"
+    "token": "lyckmp"
   },
   {
     "id": 3,

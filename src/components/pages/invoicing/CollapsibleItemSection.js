@@ -15,7 +15,26 @@ const baseURL = constants.baseURL;
 
 const CollapsibleItemSection = ({
   index,
-  itemData,
+  itemData = {
+    item: '',
+    godown: '',
+    unit: '',
+    stock: '',
+    pack: '',
+    gst: '',
+    pcBx: '',
+    mrp: '',
+    rate: '',
+    qty: '',
+    cess: '',
+    schRs: '',
+    sch: '',
+    cd: '',
+    amount: '',
+    netAmount: '',
+    selectedItem: null,
+    stockLimit: 0,
+  },
   handleChange,
   expanded,
   updateItem,
@@ -25,7 +44,6 @@ const CollapsibleItemSection = ({
   const [stockList, setStockList] = useState({});
   const [godownOptions, setGodownOptions] = useState([]);
   const [unitOptions, setUnitOptions] = useState([]);
-  const [searchItems, setSearchItems] = useState('');
 
   useEffect(() => {
     const fetchStockAndGodown = async () => {
@@ -43,58 +61,86 @@ const CollapsibleItemSection = ({
   }, []);
 
   const handleItemChange = (event, newValue) => {
-    const selectedItem = pmplData.find((item) => item.CODE === newValue.value);
-    if (selectedItem) {
-      // Filter godowns that have stock for the selected item
-      const availableGodowns = Object.keys(stockList[selectedItem.CODE] || {}).map((gdnCode) => {
-        const stock = stockList[selectedItem.CODE][gdnCode];
-        const godown = godownOptions.find((gdn) => gdn.value === gdnCode);
-        return {
-          value: gdnCode,
-          label: `${godown?.label || ''} | ${stock}`,
-        };
-      });
+    if (!newValue) return;
 
-      // Calculate total stock for the selected item
-      const totalStock = Object.values(stockList[selectedItem.CODE] || {}).reduce(
-        (acc, val) => acc + val,
-        0,
-      );
+    const selectedItem = newValue;
 
-      // Set the unit options
-      const units = [selectedItem.UNIT_1, selectedItem.UNIT_2];
+    // Calculate total stock in pieces
+    const totalStock = Object.values(stockList[selectedItem.CODE] || {}).reduce(
+      (acc, val) => acc + val,
+      0,
+    );
 
-      // Update state with the selected item data and dropdown options
-      const updatedData = {
-        item: selectedItem.CODE,
-        stock: totalStock,
-        godown: '',
-        pack: selectedItem.PACK,
-        gst: selectedItem.GST,
-        pcBx: selectedItem.MULT_F,
-        mrp: selectedItem.MRP1,
-        rate: selectedItem.RATE1,
-        qty: 0,
-        unit: units[0], // Auto-select the first unit option
-        amount: 0,
-        netAmount: 0,
-      };
+    // Set the unit options
+    const units = [selectedItem.UNIT_1, selectedItem.UNIT_2].filter(Boolean);
 
-      setGodownOptions(availableGodowns);
-      setUnitOptions(units);
+    // Set the initial unit
+    const initialUnit = units[0];
 
-      updateItem(index, updatedData);
+    // Calculate stock limit based on the initial unit
+    let stockLimit;
+    if (initialUnit === selectedItem.UNIT_2) {
+      // Unit is BOX
+      stockLimit = Math.floor(totalStock / selectedItem.MULT_F);
+    } else {
+      // Unit is PCS
+      stockLimit = totalStock;
     }
+
+    // Update state with the selected item data and dropdown options
+    const updatedData = {
+      ...itemData,
+      item: selectedItem.CODE,
+      stock: totalStock, // Stock in pieces
+      stockLimit: stockLimit, // Add stockLimit
+      godown: '',
+      pack: selectedItem.PACK,
+      gst: selectedItem.GST,
+      pcBx: selectedItem.MULT_F,
+      mrp: selectedItem.MRP1,
+      rate: selectedItem.RATE1,
+      qty: '',
+      unit: initialUnit, // Auto-select the first unit option
+      amount: '',
+      netAmount: '',
+      selectedItem: selectedItem, // Store the selected item
+    };
+
+    // Update godown options
+    const availableGodowns = Object.keys(stockList[selectedItem.CODE] || {}).map((gdnCode) => {
+      const stock = stockList[selectedItem.CODE][gdnCode];
+      const godown = godownOptions.find((gdn) => gdn.value === gdnCode);
+      return {
+        value: gdnCode,
+        label: `${godown?.label || ''} | ${stock}`,
+      };
+    });
+
+    setGodownOptions(availableGodowns);
+    setUnitOptions(units);
+
+    updateItem(index, updatedData);
   };
 
   const handleGodownChange = (event, newValue) => {
     const selectedGodown = godownOptions.find((gdn) => gdn.value === newValue.value);
     const stock = selectedGodown ? selectedGodown.label.split('|')[1].trim() : 0;
 
+    // Recalculate stock limit based on selected godown
+    let stockLimit;
+    if (itemData.unit === itemData.selectedItem.UNIT_2) {
+      // Unit is BOX
+      stockLimit = Math.floor(parseInt(stock, 10) / itemData.pcBx);
+    } else {
+      // Unit is PCS
+      stockLimit = parseInt(stock, 10);
+    }
+
     const updatedData = {
       ...itemData,
       godown: newValue.value,
       stock: parseInt(stock, 10) || 0,
+      stockLimit: stockLimit,
     };
 
     updateItem(index, updatedData);
@@ -105,6 +151,24 @@ const CollapsibleItemSection = ({
       ...itemData,
       unit: newValue,
     };
+
+    // Recalculate stockLimit based on the new unit
+    let stockLimit;
+    if (newValue === itemData.selectedItem.UNIT_2) {
+      // Unit is BOX
+      stockLimit = Math.floor(itemData.stock / itemData.pcBx);
+    } else {
+      // Unit is PCS
+      stockLimit = itemData.stock;
+    }
+
+    updatedData.stockLimit = stockLimit;
+
+    // Optionally adjust qty if it exceeds new stockLimit
+    if (parseInt(updatedData.qty, 10) > stockLimit) {
+      updatedData.qty = stockLimit.toString();
+    }
+
     updateItem(index, calculateAmounts(updatedData));
   };
 
@@ -112,13 +176,26 @@ const CollapsibleItemSection = ({
     let updatedData = { ...itemData, [name]: newValue };
 
     if (name === 'qty') {
-      if (parseInt(newValue, 10) > itemData.stock) {
-        updatedData = { ...updatedData, qty: itemData.stock };
+      if (newValue === '') {
+        updatedData.qty = '';
+      } else {
+        const totalQty = parseInt(newValue, 10);
+
+        if (!isNaN(totalQty)) {
+          const stockLimit = itemData.stockLimit;
+
+          if (stockLimit > 0 && totalQty > stockLimit) {
+            updatedData.qty = stockLimit.toString();
+          } else {
+            updatedData.qty = totalQty.toString();
+          }
+        }
       }
+
       updatedData = calculateAmounts(updatedData);
     }
 
-    if (name === 'rate' || name === 'cess' || name === 'cd' || name === 'sch') {
+    if (['rate', 'cess', 'cd', 'sch'].includes(name)) {
       updatedData = calculateAmounts(updatedData);
     }
 
@@ -126,28 +203,46 @@ const CollapsibleItemSection = ({
   };
 
   const calculateAmounts = (data) => {
-    console.log(data);
-    let amount = data.rate * data.qty;
-    const selectedItem = pmplData.find((item) => item.CODE === data.item);
+    const qty = parseFloat(data.qty);
+    if (isNaN(qty) || qty <= 0) {
+      return {
+        ...data,
+        amount: '',
+        netAmount: '',
+      };
+    }
 
-    if (data.unit === selectedItem.UNIT_2 || selectedItem.UNIT_1 == selectedItem.UNIT_2) {
-      amount *= selectedItem.MULT_F;
+    let amount;
+
+    const selectedItem = data.selectedItem;
+
+    if (selectedItem) {
+      if (data.unit === selectedItem.UNIT_2) {
+        // Unit is BOX
+        amount = data.rate * qty;
+      } else {
+        // Unit is PCS
+        const qtyInBoxes = qty / selectedItem.MULT_F;
+        amount = data.rate * qtyInBoxes;
+      }
+    } else {
+      amount = data.rate * qty;
     }
 
     let netAmount = amount;
 
-    if (data.cess && data.cess !== '') {
-      netAmount += amount * (data.cess / 100);
+    if (data.cess) {
+      netAmount += amount * (parseFloat(data.cess) / 100);
     }
 
-    if (data.cd && data.cd !== '') {
-      netAmount -= amount * (data.cd / 100);
+    if (data.cd) {
+      netAmount -= amount * (parseFloat(data.cd) / 100);
     }
 
-    if (data.sch && data.sch !== '') {
-      netAmount -= amount * (data.sch / 100);
+    if (data.sch) {
+      netAmount -= amount * (parseFloat(data.sch) / 100);
     }
-    console.log({ amount, netAmount });
+
     return {
       ...data,
       amount: amount.toFixed(2),
@@ -159,7 +254,11 @@ const CollapsibleItemSection = ({
     <Accordion expanded={expanded === index} onChange={handleChange(index)}>
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">Item {index + 1}</Typography>
+          <Typography variant="h6">
+            {itemData.item
+              ? `${itemData.item} | ${itemData.selectedItem?.PRODUCT || 'No Product Name'}`
+              : 'Select an item'}
+          </Typography>
           <IconButton color="error" onClick={() => removeItem(index)}>
             <IconTrash />
           </IconButton>
@@ -170,18 +269,27 @@ const CollapsibleItemSection = ({
           {/* Row 1: 4 items */}
           <Grid item xs={12} sm={3}>
             <Autocomplete
-              options={pmplData
-                .filter((item) => item.STK > 0)
-                .map((item) => ({ label: `${item.CODE} | ${item.PRODUCT}`, value: item.CODE }))}
-              getOptionLabel={(option) => option.label}
+              options={pmplData.filter((item) => item.STK > 0)}
+              getOptionLabel={(option) => `${option.CODE} | ${option.PRODUCT || 'No Product Name'}`}
               onChange={handleItemChange}
               renderInput={(params) => (
                 <TextField {...params} label="Item Name" fullWidth required={true} />
               )}
+              value={itemData.selectedItem || null}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField label="Total Stock" name="stock" fullWidth disabled value={itemData.stock} />
+            <TextField
+              label={`Total Stock (${itemData.unit})`}
+              name="stock"
+              fullWidth
+              disabled
+              value={
+                itemData.unit === itemData.selectedItem?.UNIT_2
+                  ? Math.floor(itemData.stock / itemData.pcBx)
+                  : itemData.stock
+              }
+            />
           </Grid>
           <Grid item xs={12} sm={3}>
             <Autocomplete
@@ -191,6 +299,7 @@ const CollapsibleItemSection = ({
               renderInput={(params) => (
                 <TextField {...params} label="Godown" fullWidth required={true} />
               )}
+              value={godownOptions.find((option) => option.value === itemData.godown) || null}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -209,6 +318,7 @@ const CollapsibleItemSection = ({
               renderInput={(params) => (
                 <TextField {...params} label="Unit" fullWidth required={true} />
               )}
+              value={itemData.unit || unitOptions[0] || ''}
             />
           </Grid>
           <Grid item xs={12} sm={2}>
@@ -228,7 +338,7 @@ const CollapsibleItemSection = ({
           </Grid>
           <Grid item xs={12} sm={2}>
             <TextField
-              label="QTY"
+              label={`QTY (${itemData.unit})`}
               name="qty"
               fullWidth
               value={itemData.qty}

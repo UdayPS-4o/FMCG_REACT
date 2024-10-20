@@ -36,7 +36,19 @@ const PrivateRoute = ({ children }) => {
           if (data.authenticated) {
             setIsAuth(true); // Update auth status
             setRouteAccess(data.routeAccess); // Store the user's route access
+            // const name=
+            const name = data.name;
+            const username = data.username;
+            let subgroup = data.subgroup;
+            subgroup = JSON.stringify(subgroup);
+            localStorage.setItem('subgroup', subgroup);
+            const storedName = localStorage.getItem('name');
+            const storedUsername = localStorage.getItem('username');
 
+            if (storedName !== name || storedUsername !== username) {
+              localStorage.setItem('name', name);
+              localStorage.setItem('username', username);
+            }
             // Check if the user has access to the route
             let accessGranted = false;
             let pathneames = [

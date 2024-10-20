@@ -116,6 +116,16 @@ function FormSeparator() {
     }
   }, []);
 
+  useEffect(() => {
+    let subg = localStorage.getItem('subgroup');
+    subg = JSON.parse(subg);
+    console.log(subg);
+    setInitialValues({
+      ...initialValues,
+      subgroup: subg.subgroupCode,
+    });
+  }, []);
+
   const handlePartyChange = (event, newValue) => {
     setSubGroupCode(newValue?.value || null);
   };
@@ -128,9 +138,9 @@ function FormSeparator() {
         onSubmit={async (values, { setSubmitting }) => {
           try {
             values.subgroup = subGroupCode;
-        
+
             const route = isEDIT ? `/edit/account-master` : `/account-master`;
-        
+
             const res = await fetch(constants.baseURL + route, {
               method: 'POST',
               body: JSON.stringify(values),
@@ -138,26 +148,25 @@ function FormSeparator() {
                 'Content-Type': 'application/json',
               },
             });
-        
+
             let data;
             if (res.status !== 204) {
               data = await res.json();
             }
-        
-            if (res.ok) { // checks for status code 200-299
+
+            if (res.ok) {
+              // checks for status code 200-299
               toast.success(data?.message || 'Submission successful!');
               navigate('/db/account-master');
             } else {
               toast.error(data?.message || 'An error occurred');
             }
           } catch (error) {
-            
-            toast.error('Submission failed'+error.message);
+            toast.error('Submission failed' + error.message);
           } finally {
             setSubmitting(false);
           }
         }}
-        
       >
         {({ isSubmitting, values, setFieldValue }) => (
           <Form>
@@ -171,11 +180,14 @@ function FormSeparator() {
                     setFieldValue('subgroup', newValue?.label || '');
                   }}
                   renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
+                  disabled={initialValues.subgroup != '' ? true : false}
                   value={
                     user
                       ? { label: user.subgroup.title, value: user.subgroup.subgroupCode }
                       : partyOptions.find((option) => option.value === subGroupCode)
                       ? partyOptions.find((option) => option.value === subGroupCode)
+                      : initialValues.subgroup != ''
+                      ? { label: initialValues.subgroup, value: initialValues.subgroup }
                       : { label: '', value: '' }
                   }
                 />

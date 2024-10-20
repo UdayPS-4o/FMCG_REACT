@@ -412,15 +412,23 @@ async function printInvoicing(req, res) {
       path.join(__dirname, '..', 'db', 'account-master.json'),
       'utf8',
     );
-    accountMasterData = JSON.parse(accountMasterData);
 
-    accountMasterData = accountMasterData.filter((item) => item.subgroup === invoice.party);
-    console.log('Account Master Data', accountMasterData);
-    invoice.party = accountMasterData[0];
+    // filter by cmpl
+    // accountMasterData = JSON.parse(accountMasterData);
+
+    // accountMasterData = accountMasterData.filter((item) => item.subgroup === invoice.party);
+    // console.log('Account Master Data', accountMasterData);
+    // invoice.party = accountMasterData[0];
+    let cmplData = await getCmplData();
+    // console.log('cmplData', cmplData);
+    console.log('invoice.party', invoice.party);
+    let cmplyParty = cmplData.find((item) => item.C_CODE == invoice.party);
+    console.log('cmplData', cmplyParty);
 
     // console.log("before party",invoice.party)
     console.log('party', invoice.party);
     // console.log("After party",invoice.party)
+
     const ModifiedInv = {
       company: {
         name: 'EKTA ENTERPRICE',
@@ -436,7 +444,7 @@ async function printInvoicing(req, res) {
         invoice.party.dlno ||
         ' 20B/807/54/2022 , 21B/808/54/2022 , 20/805/54/2022 , 21/806/54/2022',
       party: {
-        name: invoice.party.achead,
+        name: cmplyParty.C_NAME,
         address: invoice.party.addressline1 || invoice.party.addressline2,
         gstin: invoice.party.gst,
         stateCode: invoice.party.statecode,

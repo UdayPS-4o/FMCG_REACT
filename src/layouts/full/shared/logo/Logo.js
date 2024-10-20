@@ -4,6 +4,7 @@ import { ReactComponent as LogoDark } from 'src/assets/images/logos/dark-logo.sv
 import { ReactComponent as LogoDarkRTL } from 'src/assets/images/logos/dark-rtl-logo.svg';
 import { ReactComponent as LogoLight } from 'src/assets/images/logos/light-logo.svg';
 import { ReactComponent as LogoLightRTL } from 'src/assets/images/logos/light-logo-rtl.svg';
+import { ReactComponent as Ekta } from 'src/assets/images/logos/ekta.svg';
 import { styled } from '@mui/material';
 
 const Logo = () => {
@@ -19,9 +20,9 @@ const Logo = () => {
     return (
       <LinkStyled to="/">
         {customizer.activeMode === 'dark' ? (
-          <LogoLight height={customizer.TopbarHeight} />
+          <Ekta height={customizer.TopbarHeight} />
         ) : (
-          <LogoDark height={customizer.TopbarHeight} />
+          <Ekta height={customizer.TopbarHeight} />
         )}
       </LinkStyled>
     );

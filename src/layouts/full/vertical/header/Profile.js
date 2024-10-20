@@ -66,9 +66,7 @@ const Profile = () => {
             <Stack direction="row" py={3} spacing={2} alignItems="center">
               <Avatar src={ProfileImg} alt={ProfileImg} sx={{ width: 95, height: 95 }} />
               <Box>
-                <Typography variant="subtitle2" color="textPrimary" fontWeight={600}>
-                  Mathew Anderson
-                </Typography>
+                <Typography variant="subtitle2" color="textPrimary" fontWeight={600}></Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                   Designer
                 </Typography>

@@ -31,6 +31,8 @@ app.get('/api/checkiskAuth', (req, res) => {
           name: user.name,
           routeAccess: user.routeAccess,
           id: user.id,
+          username: user.username,
+          subgroup: user.subgroup,
         });
       } else {
         // Return unauthorized if user is not found
