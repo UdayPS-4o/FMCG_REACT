@@ -30,6 +30,18 @@ const getCmplData = async () => {
   }
 };
 
+const completeCmplData = async (C_CODE) => {
+  // 'd01-2324',
+  //           'data',
+  //           'json',
+  // cmpl.json
+  const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data/json', 'CMPL.json');
+  const cmplData = await fs.readFile(dbfFilePath, 'utf8');
+  let jsonData = JSON.parse(cmplData);
+  let cmpld = jsonData.find((item) => item.C_CODE === C_CODE);
+  return cmpld;
+};
+
 const getPMPLData = async () => {
   const dbfFilePath = path.join(__dirname, '..', '..', 'd01-2324/data', 'PMPL.dbf');
   console.log(dbfFilePath);
@@ -419,15 +431,15 @@ async function printInvoicing(req, res) {
     // accountMasterData = accountMasterData.filter((item) => item.subgroup === invoice.party);
     // console.log('Account Master Data', accountMasterData);
     // invoice.party = accountMasterData[0];
-    let cmplData = await getCmplData();
+
+    let cmpl = await completeCmplData(invoice.party);
+    console.log('complete cmpl  data', cmpl);
     // console.log('cmplData', cmplData);
     console.log('invoice.party', invoice.party);
-    let cmplyParty = cmplData.find((item) => item.C_CODE == invoice.party);
-    console.log('cmplData', cmplyParty);
 
     // console.log("before party",invoice.party)
     console.log('party', invoice.party);
-    // console.log("After party",invoice.party)
+    // console.log("After party",letinvoice.party)
 
     const ModifiedInv = {
       company: {
@@ -444,11 +456,11 @@ async function printInvoicing(req, res) {
         invoice.party.dlno ||
         ' 20B/807/54/2022 , 21B/808/54/2022 , 20/805/54/2022 , 21/806/54/2022',
       party: {
-        name: cmplyParty.C_NAME,
-        address: invoice.party.addressline1 || invoice.party.addressline2,
-        gstin: invoice.party.gst,
-        stateCode: invoice.party.statecode,
-        mobileNo: invoice.party.mobile,
+        name: cmpl.C_NAME,
+        address: cmpl.C_ADD1 || cmpl.C_ADD2,
+        gstin: cmpl.C_GST,
+        stateCode: cmpl.C_STATE,
+        mobileNo: cmpl.C_MOBILE,
         balanceBf: invoice.items.reduce((acc, item) => acc + item.netAmt, 0) || 0,
       },
       invoice: {

@@ -177,6 +177,7 @@ function FormSeparator() {
     // Simulate form submission or handle your submission logic here
   };
   const sortedFormValues = () => {
+    console.log('items:', items);
     if (!searchItems) return items;
 
     return items

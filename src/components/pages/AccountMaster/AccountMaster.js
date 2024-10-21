@@ -13,6 +13,7 @@ function FormSeparator() {
   const [stateCountry, setStateofCountry] = useState([]);
   const [subGroupCode, setSubGroupCode] = useState(null);
   const [isEDIT, setIsEDIT] = useState(false);
+  const [SubName, setSubName] = useState('');
   const [initialValues, setInitialValues] = useState({
     achead: '',
     addressline1: '',
@@ -124,6 +125,7 @@ function FormSeparator() {
       ...initialValues,
       subgroup: subg.subgroupCode,
     });
+    setSubName(subg.title);
   }, []);
 
   const handlePartyChange = (event, newValue) => {
@@ -187,7 +189,7 @@ function FormSeparator() {
                       : partyOptions.find((option) => option.value === subGroupCode)
                       ? partyOptions.find((option) => option.value === subGroupCode)
                       : initialValues.subgroup != ''
-                      ? { label: initialValues.subgroup, value: initialValues.subgroup }
+                      ? { label: SubName, value: initialValues.subgroup }
                       : { label: '', value: '' }
                   }
                 />

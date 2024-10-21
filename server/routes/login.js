@@ -32,6 +32,7 @@ app.get('/api/checkiskAuth', (req, res) => {
           routeAccess: user.routeAccess,
           id: user.id,
           username: user.username,
+
           subgroup: user.subgroup,
         });
       } else {
@@ -66,7 +67,7 @@ app.post('/api/login', async (req, res) => {
         .status(200)
         .header(
           'Set-Cookie',
-          `token=${newToken}; Path=/; Domain=.udayps.com; Max-Age=3600; HttpOnly;`,
+          `token=${newToken}; Path=/; Domain=.udayps.com; Max-Age=6800; HttpOnly;`,
         )
         .send('Login successful.');
     } else {
