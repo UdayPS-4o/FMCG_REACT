@@ -67,7 +67,7 @@ app.post('/api/login', async (req, res) => {
         .status(200)
         .header(
           'Set-Cookie',
-          `token=${newToken}; Path=/; Domain=.udayps.com; Max-Age=6800; HttpOnly;`,
+          `token=${newToken}; Path=/; Domain=180.188.226.114; Max-Age=6800; HttpOnly;`,
         )
         .send('Login successful.');
     } else {

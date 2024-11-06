@@ -3,15 +3,25 @@ import { Grid, Button, Stack, Divider, TextField, Autocomplete } from '@mui/mate
 import CollapsibleItemSection from './CollapsibleItemSection';
 import constants from 'src/constants';
 import { ToastContainer, toast } from 'react-toastify';
+import Switch from '@mui/material/Switch';
+import Label from '@mui/material/FormLabel';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+const switchprops = { inputProps: { 'aria-label': 'Switch demo' } };
 
 function FormSeparator() {
   const [party, setParty] = useState(null);
   const [sm, setSm] = useState(null);
-  const [date, setDate] = useState('2024-08-10');
+  const [date, setDate] = useState(
+    new Date().toISOString().slice(0, 10).split('-').reverse().join('-'),
+  );
   const [series, setSeries] = useState('');
-  const [cash, setCash] = useState('');
-  const [dueDays, setDueDays] = useState('');
+  const [cash, setCash] = useState('Y');
+  const [dueDays, setDueDays] = useState('7');
   const [ref, setRef] = useState('');
+  const [gst, setGst] = useState('');
   const [items, setItems] = useState([
     {
       item: '',
@@ -151,8 +161,9 @@ function FormSeparator() {
       id: InvoiceId.nextInvoiceId,
       party: party?.value || '',
       sm: sm?.value || '',
-      dueDays,
+      dueDays: cash === 'N' && dueDays === '' ? '7' : dueDays, // Set default to '7' if cash is 'N' and dueDays is empty
       ref,
+      gst,
       items,
     };
 
@@ -186,15 +197,19 @@ function FormSeparator() {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={4}>
-        <TextField
-          label="Date"
-          type="date"
-          fullWidth
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={3}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Date"
+            value={date.split('-').reverse().join('-') || ''}
+            inputFormat="DD-MM-YYYY"
+            onChange={(newValue) => {
+              setDate(newValue.toISOString().slice(0, 10).split('-').reverse().join('-'));
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
@@ -205,15 +220,18 @@ function FormSeparator() {
           onChange={(e) => setSeries(e.target.value)}
         />
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <TextField
-          label="Cash"
-          placeholder="Y"
-          fullWidth
-          value={cash}
-          onChange={(e) => setCash(e.target.value)}
+      <Grid item xs={12} sm={4} style={{ display: 'flex', alignItems: 'center' }}>
+        <Label style={{ marginLeft: '10px' }}>CREDIT {cash === 'N' ? '(O)' : ''}</Label>
+        <Switch
+          {...switchprops}
+          checked={cash === 'Y'}
+          onChange={() => {
+            setCash((prev) => (prev === 'Y' ? 'N' : 'Y'));
+          }}
         />
+        <Label style={{ marginRight: '10px' }}>CASH {cash === 'Y' ? '(O)' : ''}</Label>
       </Grid>
+
       <Grid item xs={12} sm={6}>
         <Autocomplete
           options={partyOptions}
@@ -229,6 +247,19 @@ function FormSeparator() {
               required={true}
             />
           )}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          label="GST"
+          fullWidth
+          value={
+            partyOptions.find((option) => option.value === party?.value)?.label.split('|')[1] || ''
+          }
+          disabled={true}
+          required={true}
+          onChange={(e) => setGst(e.target.value)}
+          placeholder="Enter GST number"
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -248,15 +279,18 @@ function FormSeparator() {
           )}
         />
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} sm={6} style={{ display: cash === 'Y' ? 'none' : 'block' }}>
         <TextField
           label="Due Days"
           fullWidth
           value={dueDays}
           onChange={(e) => setDueDays(e.target.value)}
+          // Show '7' as a placeholder only when cash is 'N'
+          disabled={cash === 'Y'} // Disables input when cash is 'Y'
         />
       </Grid>
-      <Grid item xs={12} sm={4}>
+
+      <Grid item xs={12} sm={6}>
         <TextField
           label="Reference"
           fullWidth

@@ -11,90 +11,128 @@ import {
 } from '@mui/material';
 import { IconChevronDown, IconTrash } from '@tabler/icons';
 import constants from 'src/constants';
-
 const baseURL = constants.baseURL;
 
 const CollapsibleItemSection = ({
   index,
-  itemData = {
-    item: '',
-    stock: 0,
-    stockLimit: 0,
-    pack: '',
-    gst: 0,
-    unit: '',
-    pcBx: 0,
-    mrp: 0,
-    rate: 0,
-    qty: '',
-    selectedItem: null,
-  },
+  itemData,
   handleChange,
   expanded,
   updateItem,
   removeItem,
   pmplData,
 }) => {
+  const [stockList, setStockList] = useState({});
+  const [godownOptions, setGodownOptions] = useState([]);
   const [unitOptions, setUnitOptions] = useState([]);
-  const [productName, setProductName] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStockAndGodown = async () => {
+      try {
+        setIsLoading(true);
+        const stockRes = await fetch(`${baseURL}/api/stock`);
+        const stockData = await stockRes.json();
+
+        const godownRes = await fetch(`${baseURL}/api/dbf/godown.json`);
+        const godownData = await godownRes.json();
+
+        setStockList(stockData);
+        setGodownOptions(godownData.map((gdn) => ({ value: gdn.GDN_CODE, label: gdn.GDN_NAME })));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStockAndGodown();
+  }, []);
+
+  useEffect(() => {
+    if (itemData.item) {
+      // When the selected item changes, filter the available godowns
+      const availableGodowns = Object.keys(stockList[itemData.item] || {}).map((gdnCode) => {
+        const stock = stockList[itemData.item][gdnCode];
+        const godown = godownOptions.find((gdn) => gdn.value === gdnCode);
+        return {
+          value: gdnCode,
+          label: `${godown?.label || ''} | ${stock}`,
+        };
+      });
+      setGodownOptions(availableGodowns);
+      console.log('availableGodowns', availableGodowns);
+    }
+  }, [itemData.item, stockList]);
 
   const handleItemChange = (event, newValue) => {
     if (!newValue) return;
 
-    const selectedItem = newValue;
+    const selectedItem = pmplData.find((item) => item.CODE === newValue.value);
+    if (selectedItem) {
+      // Filter godowns that have stock for the selected item
+      const availableGodowns = Object.keys(stockList[selectedItem.CODE] || {}).map((gdnCode) => {
+        const stock = stockList[selectedItem.CODE][gdnCode];
+        const godown = godownOptions.find((gdn) => gdn.value === gdnCode);
+        return {
+          value: gdnCode,
+          label: `${godown?.label || ''} | ${stock}`,
+        };
+      });
 
-    let totalStock = selectedItem.STK || 0; // Stock in pieces
+      // Calculate total stock for the selected item
+      const totalStock = Object.values(stockList[selectedItem.CODE] || {}).reduce(
+        (acc, val) => acc + val,
+        0,
+      );
 
-    const units = [selectedItem.UNIT_1, selectedItem.UNIT_2].filter(Boolean);
+      // Set the unit options
+      const units = [selectedItem.UNIT_1, selectedItem.UNIT_2];
 
-    // Set the initial unit
-    const initialUnit = units[0];
+      // Update state with the selected item data and dropdown options
+      const updatedData = {
+        item: selectedItem.CODE,
+        stock: totalStock,
+        godown: '',
+        pack: selectedItem.PACK,
+        gst: selectedItem.GST,
+        pcBx: selectedItem.MULT_F,
+        mrp: selectedItem.MRP1,
+        rate: selectedItem.RATE1,
+        qty: '',
+        unit: units[0], // Auto-select the first unit option
+        amount: '',
+        netAmount: '',
+      };
 
-    // Calculate stock limit based on the initial unit
-    let stockLimit;
-    if (initialUnit === selectedItem.UNIT_2) {
-      // Unit is BOX
-      stockLimit = Math.floor(totalStock / selectedItem.MULT_F);
-    } else {
-      // Unit is PCS
-      stockLimit = totalStock;
+      setGodownOptions(availableGodowns);
+      setUnitOptions(units);
+
+      updateItem(index, updatedData);
     }
+  };
 
-    const updatedData = {
-      ...itemData,
-      item: selectedItem.CODE,
-      stock: totalStock, // Stock in pieces
-      stockLimit: stockLimit, // Store the stock limit based on unit
-      pack: selectedItem.PACK,
-      gst: selectedItem.GST,
-      unit: initialUnit,
-      pcBx: selectedItem.MULT_F,
-      mrp: selectedItem.MRP1,
-      rate: selectedItem.RATE1,
-      qty: '',
-      selectedItem: selectedItem,
-    };
+  const handleGodownChange = (event, newValue) => {
+    if (!newValue) return;
 
-    setUnitOptions(units);
-    setProductName(selectedItem.PRODUCT);
+    const selectedGodown = godownOptions.find((gdn) => gdn.value === newValue.value);
+    if (selectedGodown) {
+      const stock = selectedGodown.label.split('|')[1]?.trim() || 0;
 
-    updateItem(index, updatedData);
+      const updatedData = {
+        ...itemData,
+        godown: newValue.value,
+        stock: parseInt(stock, 10) || 0,
+      };
+
+      updateItem(index, updatedData);
+    }
   };
 
   const handleUnitChange = (event, newValue) => {
-    let stockLimit;
-    if (newValue === itemData.selectedItem.UNIT_2) {
-      // Unit is BOX
-      stockLimit = Math.floor(itemData.stock / itemData.pcBx);
-    } else {
-      // Unit is PCS
-      stockLimit = itemData.stock;
-    }
+    if (!newValue) return;
 
     const updatedData = {
       ...itemData,
       unit: newValue,
-      stockLimit: stockLimit,
     };
     updateItem(index, calculateAmounts(updatedData));
   };
@@ -103,24 +141,13 @@ const CollapsibleItemSection = ({
     let updatedData = { ...itemData, [name]: newValue };
 
     if (name === 'qty') {
-      if (newValue === '') {
-        updatedData.qty = '';
-      } else {
-        const totalQty = parseInt(newValue, 10);
-
-        if (!isNaN(totalQty)) {
-          const { stockLimit } = itemData;
-
-          if (stockLimit > 0 && totalQty > stockLimit) {
-            updatedData.qty = stockLimit;
-          } else {
-            updatedData.qty = totalQty;
-          }
-        }
+      if (parseInt(newValue, 10) > itemData.stock) {
+        updatedData = { ...updatedData, qty: itemData.stock };
       }
-
       updatedData = calculateAmounts(updatedData);
-    } else if (['rate', 'cess', 'cd', 'sch'].includes(name)) {
+    }
+
+    if (name === 'rate' || name === 'cess' || name === 'cd' || name === 'sch') {
       updatedData = calculateAmounts(updatedData);
     }
 
@@ -128,46 +155,15 @@ const CollapsibleItemSection = ({
   };
 
   const calculateAmounts = (data) => {
-    const qty = parseFloat(data.qty);
-    if (isNaN(qty) || qty <= 0) {
-      return {
-        ...data,
-        amount: '0.00',
-        netAmount: '0.00',
-      };
+    let amount = data.rate * data.qty;
+    const selectedItem = pmplData.find((item) => item.CODE === data.item);
+
+    if (selectedItem && data.unit === selectedItem.UNIT_2) {
+      amount *= selectedItem.MULT_F;
     }
 
-    let amount;
-
-    const selectedItem = data.selectedItem;
-
-    if (selectedItem) {
-      if (data.unit === selectedItem.UNIT_2) {
-        // Unit is BOX
-        amount = data.rate * qty;
-      } else {
-        // Unit is PCS
-        const qtyInBoxes = qty / selectedItem.MULT_F;
-        amount = data.rate * qtyInBoxes;
-      }
-    } else {
-      amount = data.rate * qty;
-    }
-
-    let netAmount = amount;
-
-    if (data.cess) {
-      netAmount += amount * (data.cess / 100);
-    }
-
-    if (data.cd) {
-      netAmount -= amount * (data.cd / 100);
-    }
-
-    if (data.sch) {
-      netAmount -= amount * (data.sch / 100);
-    }
-
+    const netAmount =
+      amount + amount * (data.cess / 100) - amount * (data.cd / 100) - amount * (data.sch / 100);
     return {
       ...data,
       amount: amount.toFixed(2),
@@ -180,7 +176,10 @@ const CollapsibleItemSection = ({
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Typography variant="h6">
-            {itemData.item ? `${itemData.item} | ${productName} |` : 'Select an item'}
+            {' '}
+            {itemData.item
+              ? pmplData.find((i) => i.CODE === itemData.item)?.PRODUCT || 'N/A'
+              : 'Item'}
           </Typography>
 
           <IconButton color="error" onClick={() => removeItem(index)}>
@@ -190,30 +189,37 @@ const CollapsibleItemSection = ({
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
-          {/* Row 1: Item Selection */}
+          {/* Row 1: 4 items */}
           <Grid item xs={12} sm={3}>
             <Autocomplete
-              options={pmplData.filter((item) => item.STK > 0)}
-              getOptionLabel={(option) => `${option.CODE} | ${option.PRODUCT || 'No Product Name'}`}
+              options={pmplData
+                .filter((item) => item.STK > 0)
+                .map((item) => ({ label: `${item.CODE} | ${item.PRODUCT}`, value: item.CODE }))}
+              getOptionLabel={(option) => option.label}
               onChange={handleItemChange}
               renderInput={(params) => <TextField {...params} label="Item Name" fullWidth />}
-              value={itemData.selectedItem || null}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField
-              label={`Total Stock (${itemData.unit})`}
-              name="stock"
-              fullWidth
-              disabled
-              value={itemData.stockLimit || 0}
-            />
+            <TextField label="Total Stock" name="stock" fullWidth disabled value={itemData.stock} />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            {!isLoading ? (
+              <Autocomplete
+                options={godownOptions}
+                getOptionLabel={(option) => option.label}
+                onChange={handleGodownChange}
+                renderInput={(params) => <TextField {...params} label="Godown" fullWidth />}
+              />
+            ) : (
+              <Typography>Loading Godowns...</Typography>
+            )}
           </Grid>
           <Grid item xs={12} sm={3}>
             <TextField label="Pack" name="pack" fullWidth disabled value={itemData.pack} />
           </Grid>
 
-          {/* Row 2: Other Details */}
+          {/* Row 2: 6 items */}
           <Grid item xs={12} sm={2}>
             <TextField label="GST%" name="gst" fullWidth disabled value={itemData.gst} />
           </Grid>
@@ -223,7 +229,6 @@ const CollapsibleItemSection = ({
               getOptionLabel={(option) => option}
               onChange={handleUnitChange}
               renderInput={(params) => <TextField {...params} label="Unit" fullWidth />}
-              value={itemData.unit || unitOptions[0] || ''}
             />
           </Grid>
           <Grid item xs={12} sm={2}>
@@ -239,18 +244,56 @@ const CollapsibleItemSection = ({
               fullWidth
               value={itemData.rate}
               onChange={(event) => handleFieldChange(event, event.target.value, 'rate')}
-              disabled
             />
           </Grid>
           <Grid item xs={12} sm={2}>
             <TextField
-              label={`QTY (${itemData.unit})`}
+              label="QTY"
               name="qty"
               fullWidth
-              type="number"
-              inputProps={{ min: 0, max: itemData.stockLimit }}
               value={itemData.qty}
               onChange={(event) => handleFieldChange(event, event.target.value, 'qty')}
+            />
+          </Grid>
+
+          {/* Row 3: 5 items */}
+          <Grid item xs={12} sm={2}>
+            <TextField
+              label="Cess"
+              name="cess"
+              fullWidth
+              value={itemData.cess}
+              onChange={(event) => handleFieldChange(event, event.target.value, 'cess')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <TextField
+              label="Sch%"
+              name="sch"
+              fullWidth
+              value={itemData.sch}
+              onChange={(event) => handleFieldChange(event, event.target.value, 'sch')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <TextField
+              label="CD%"
+              name="cd"
+              fullWidth
+              value={itemData.cd}
+              onChange={(event) => handleFieldChange(event, event.target.value, 'cd')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <TextField label="Amount" name="amount" fullWidth disabled value={itemData.amount} />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <TextField
+              label="Net Amount"
+              name="netAmount"
+              fullWidth
+              disabled
+              value={itemData.netAmount}
             />
           </Grid>
         </Grid>

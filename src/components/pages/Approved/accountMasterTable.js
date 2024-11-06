@@ -163,7 +163,7 @@ const ProductTableList = () => {
   // Handle Approve Button Click
   const handleApprove = () => {
     // Send POST request to /approve endpoint
-    fetch(`${constants.baseURL}/approve`, {
+    fetch(`${constants.baseURL}/toDBF`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ endpoint, approved }),
@@ -217,7 +217,7 @@ const ProductTableList = () => {
           onClick={handleApprove}
           sx={{ ml: 2 }}
         >
-          Approve {approved.length} items
+          convert to dbf {approved.length} items
         </Button>
       </Toolbar>
       <Paper variant="outlined">

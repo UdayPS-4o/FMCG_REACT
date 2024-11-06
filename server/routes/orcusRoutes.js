@@ -2,7 +2,7 @@ const express = require('express');
 const app = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
-const baseURL = 'http://rdp.udayps.com:8000';
+const baseURL = 'http://app.ekta-enterprises.com:8000';
 function convertAmountToWords(amount) {
   const oneToTwenty = [
     '',
@@ -138,6 +138,53 @@ app.post('/signin', async (req, res) => {
 });
 
 app.post('/approve', async (req, res) => {
+  try {
+    const { approved, endpoint } = req.body;
+    console.log('approved', approved, 'endpoint', endpoint);
+    const data = await fs.readFile(path.resolve(__dirname, `../db/${endpoint}.json`));
+    const json = JSON.parse(data);
+    const id =
+      endpoint === 'account-master'
+        ? 'subgroup'
+        : endpoint === 'cash-receipts'
+        ? 'receiptNo'
+        : endpoint === 'godown'
+        ? 'id'
+        : endpoint === 'cash-payments'
+        ? 'voucherNo'
+        : null;
+
+    console.log('id', id);
+    const approvedjson = json.filter((item) => {
+      const itemIdValue = String(item[id]).toLowerCase();
+      return approved.some((approvedValue) => itemIdValue.includes(approvedValue.toLowerCase()));
+    });
+
+    // Delete the approved items from the original json
+    const remainingjson = json.filter((item) => {
+      const itemIdValue = String(item[id]).toLowerCase();
+      return !approved.some((approvedValue) => itemIdValue.includes(approvedValue.toLowerCase()));
+    });
+
+    // Save the remaining items back to the original file
+    await fs.writeFile(
+      path.resolve(__dirname, `../db/${endpoint}.json`),
+      JSON.stringify(remainingjson, null, 2),
+    );
+    console.log('updatedJson', approvedjson);
+    await fs.mkdir(path.resolve(__dirname, '../db/approved'), { recursive: true });
+    await fs.writeFile(
+      path.resolve(__dirname, `../db/approved/${endpoint}.json`),
+      JSON.stringify(approvedjson, null, 2),
+    );
+    res.send(approvedjson);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
+app.post('/toDBF', async (req, res) => {
   try {
     const { approved, endpoint } = req.body;
     console.log('approved', approved, 'endpoint', endpoint);

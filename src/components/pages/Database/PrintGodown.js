@@ -67,18 +67,28 @@ const TransferGodownData = ({ transferData }) => {
           </div>
         </header>
         <p id="address">BUDHWARI BAZAR, GN ROAD SEONI,, SEONI</p>
-        <div className="details">
+        <div
+          className="details"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
           <div>
-            ID: <strong>{id}</strong>
+            <div>
+              ID: <strong>{id}</strong>
+            </div>
+            <div>
+              Date: <strong>{date}</strong>
+            </div>
           </div>
           <div>
-            Date: <strong>{date}</strong>
-          </div>
-          <div>
-            From Godown: <strong>{fromGodown}</strong>
-          </div>
-          <div>
-            To Godown: <strong>{toGodown}</strong>
+            <div>
+              From Godown: <strong>{fromGodown}</strong>
+            </div>
+            <div>
+              To Godown: <strong>{toGodown}</strong>
+            </div>
           </div>
         </div>
 
@@ -213,7 +223,6 @@ const TransferGodownData = ({ transferData }) => {
 const headerStyles = {
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'space-between',
   gap: '2px',
   padding: '20px',
 };

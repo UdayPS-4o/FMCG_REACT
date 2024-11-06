@@ -93,12 +93,7 @@ const Menuitems = [
     icon: IconTransferIn,
     href: '/godown-transfer',
   },
-  {
-    id: uniqueId(),
-    title: 'DBF READER',
-    icon: IconDatabase,
-    href: '/dbf',
-  },
+
   {
     id: uniqueId(),
     title: 'Add User',

@@ -25,23 +25,46 @@ const CollapsibleItemSection = ({
   const [stockList, setStockList] = useState({});
   const [godownOptions, setGodownOptions] = useState([]);
   const [unitOptions, setUnitOptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchStockAndGodown = async () => {
-      const stockRes = await fetch(`${baseURL}/api/stock`);
-      const stockData = await stockRes.json();
+      try {
+        setIsLoading(true);
+        const stockRes = await fetch(`${baseURL}/api/stock`);
+        const stockData = await stockRes.json();
 
-      const godownRes = await fetch(`${baseURL}/api/dbf/godown.json`);
-      const godownData = await godownRes.json();
+        const godownRes = await fetch(`${baseURL}/api/dbf/godown.json`);
+        const godownData = await godownRes.json();
 
-      setStockList(stockData);
-      setGodownOptions(godownData.map((gdn) => ({ value: gdn.GDN_CODE, label: gdn.GDN_NAME })));
+        setStockList(stockData);
+        setGodownOptions(godownData.map((gdn) => ({ value: gdn.GDN_CODE, label: gdn.GDN_NAME })));
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchStockAndGodown();
   }, []);
 
+  useEffect(() => {
+    if (itemData.item) {
+      // When the selected item changes, filter the available godowns
+      const availableGodowns = Object.keys(stockList[itemData.item] || {}).map((gdnCode) => {
+        const stock = stockList[itemData.item][gdnCode];
+        const godown = godownOptions.find((gdn) => gdn.value === gdnCode);
+        return {
+          value: gdnCode,
+          label: `${godown?.label || ''} | ${stock}`,
+        };
+      });
+      setGodownOptions(availableGodowns);
+    }
+  }, [itemData.item, stockList]);
+
   const handleItemChange = (event, newValue) => {
+    if (!newValue) return;
+
     const selectedItem = pmplData.find((item) => item.CODE === newValue.value);
     if (selectedItem) {
       // Filter godowns that have stock for the selected item
@@ -87,19 +110,25 @@ const CollapsibleItemSection = ({
   };
 
   const handleGodownChange = (event, newValue) => {
+    if (!newValue) return;
+
     const selectedGodown = godownOptions.find((gdn) => gdn.value === newValue.value);
-    const stock = selectedGodown ? selectedGodown.label.split('|')[1].trim() : 0;
+    if (selectedGodown) {
+      const stock = selectedGodown.label.split('|')[1]?.trim() || 0;
 
-    const updatedData = {
-      ...itemData,
-      godown: newValue.value,
-      stock: parseInt(stock, 10) || 0,
-    };
+      const updatedData = {
+        ...itemData,
+        godown: newValue.value,
+        stock: parseInt(stock, 10) || 0,
+      };
 
-    updateItem(index, updatedData);
+      updateItem(index, updatedData);
+    }
   };
 
   const handleUnitChange = (event, newValue) => {
+    if (!newValue) return;
+
     const updatedData = {
       ...itemData,
       unit: newValue,
@@ -128,9 +157,7 @@ const CollapsibleItemSection = ({
     let amount = data.rate * data.qty;
     const selectedItem = pmplData.find((item) => item.CODE === data.item);
 
-    console.log('selectedItem', selectedItem);
-    console.log('data', data);
-    if (data.unit === selectedItem.UNIT_2) {
+    if (selectedItem && data.unit === selectedItem.UNIT_2) {
       amount *= selectedItem.MULT_F;
     }
 
@@ -147,7 +174,7 @@ const CollapsibleItemSection = ({
     <Accordion expanded={expanded === index} onChange={handleChange(index)}>
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">Item {pmplData[index].CODE}</Typography>
+          <Typography variant="h6">Item {pmplData[index]?.CODE || 'N/A'}</Typography>
           <IconButton color="error" onClick={() => removeItem(index)}>
             <IconTrash />
           </IconButton>
@@ -170,12 +197,16 @@ const CollapsibleItemSection = ({
             <TextField label="Total Stock" name="stock" fullWidth disabled value={itemData.stock} />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Autocomplete
-              options={godownOptions}
-              getOptionLabel={(option) => option.label}
-              onChange={handleGodownChange}
-              renderInput={(params) => <TextField {...params} label="Godown" fullWidth />}
-            />
+            {!isLoading ? (
+              <Autocomplete
+                options={godownOptions}
+                getOptionLabel={(option) => option.label}
+                onChange={handleGodownChange}
+                renderInput={(params) => <TextField {...params} label="Godown" fullWidth />}
+              />
+            ) : (
+              <Typography>Loading Godowns...</Typography>
+            )}
           </Grid>
           <Grid item xs={12} sm={3}>
             <TextField label="Pack" name="pack" fullWidth disabled value={itemData.pack} />

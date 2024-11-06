@@ -125,6 +125,7 @@ function FormSeparator() {
       ...initialValues,
       subgroup: subg.subgroupCode,
     });
+    console.log(subg.title);
     setSubName(subg.title);
   }, []);
 
@@ -182,14 +183,22 @@ function FormSeparator() {
                     setFieldValue('subgroup', newValue?.label || '');
                   }}
                   renderInput={(params) => <TextField {...params} label="Sub Group" fullWidth />}
-                  disabled={initialValues.subgroup != '' ? true : false}
+                  disabled={
+                    initialValues.subgroup != ''
+                      ? localStorage.getItem('routeAccess').includes('Admin')
+                        ? false
+                        : true
+                      : false
+                  }
                   value={
                     user
                       ? { label: user.subgroup.title, value: user.subgroup.subgroupCode }
                       : partyOptions.find((option) => option.value === subGroupCode)
                       ? partyOptions.find((option) => option.value === subGroupCode)
                       : initialValues.subgroup != ''
-                      ? { label: SubName, value: initialValues.subgroup }
+                      ? localStorage.getItem('routeAccess').includes('Admin')
+                        ? null
+                        : { label: SubName, value: initialValues.subgroup }
                       : { label: '', value: '' }
                   }
                 />

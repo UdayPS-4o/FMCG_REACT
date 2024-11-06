@@ -12,11 +12,11 @@
       "Read",
       "Write"
     ],
+    "token": "kcmv2b",
     "subgroup": {
       "title": "BHAIROGUNJ",
       "subgroupCode": "BG007"
-    },
-    "token": "bbdt8r"
+    }
   },
   {
     "id": 3,
@@ -86,5 +86,41 @@
       "title": "BARAPATHAR"
     },
     "token": "92ekr"
+  },
+  {
+    "id": 7,
+    "name": "udayps",
+    "username": "admin",
+    "number": "8819923334",
+    "password": "8819923334",
+    "routeAccess": [
+      "Admin"
+    ],
+    "powers": [
+      "Write",
+      "Read"
+    ],
+    "subgroup": {
+      "title": "ADEGAON"
+    },
+    "token": "4mkcdi"
+  },
+  {
+    "id": 8,
+    "name": "SHUBHAM",
+    "username": "admin",
+    "number": "9179174888",
+    "password": "9179174888",
+    "routeAccess": [
+      "Invoicing",
+      "Cash Receipts",
+      "Cash Payments",
+      "Godown Transfer"
+    ],
+    "powers": [
+      "Write"
+    ],
+    "subgroup": null,
+    "token": "13zdi7"
   }
 ]

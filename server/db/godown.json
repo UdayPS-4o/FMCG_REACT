@@ -1306,5 +1306,19 @@
       }
     ],
     "id": 69
+  },
+  {
+    "date": "2024-10-23",
+    "series": "T",
+    "fromGodown": "",
+    "toGodown": "",
+    "items": [
+      {
+        "code": "MK009",
+        "qty": 852,
+        "unit": "PCS"
+      }
+    ],
+    "id": 70
   }
 ]

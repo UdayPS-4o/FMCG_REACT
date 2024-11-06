@@ -17,19 +17,27 @@ import CustomFormLabel from '../../../components/forms/theme-elements/CustomForm
 import AuthSocialButtons from './AuthSocialButtons';
 import useAuth from 'src/utils/useAuth';
 
-const AuthLogin = ({ title, subtitle, subtext ,handleSubmit ,setMobile,setPassword ,mobile, password }) => {
+const AuthLogin = ({
+  title,
+  subtitle,
+  subtext,
+  handleSubmit,
+  setMobile,
+  setPassword,
+  mobile,
+  password,
+}) => {
   const { setIsAuth } = useAuth();
- 
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleLogin = handleSubmit;
- 
 
   return (
     <>
       {title && (
-        <Typography fontWeight="700" variant="h3" mb={1}>
+        <Typography className="text-center" fontWeight="700" variant="h3" mb={1}>
           {title}
         </Typography>
       )}
@@ -54,7 +62,7 @@ const AuthLogin = ({ title, subtitle, subtext ,handleSubmit ,setMobile,setPasswo
 
       <Stack>
         <Box>
-          <CustomFormLabel htmlFor="mobile">mobile</CustomFormLabel>
+          <CustomFormLabel htmlFor="mobile">Mobile</CustomFormLabel>
           <CustomTextField
             id="mobile"
             variant="outlined"

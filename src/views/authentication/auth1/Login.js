@@ -41,6 +41,7 @@ const Login = () => {
     };
     checkAuthentication();
   }, []);
+
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,8 +73,11 @@ const Login = () => {
   };
 
   return (
-    <PageContainer title="Login" description="this is Login page" >
-      <Grid container spacing={0} >
+    <PageContainer title="Login" description="this is Login page">
+      <Grid
+        container
+        style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
         <Grid
           item
           xs={12}
@@ -81,18 +85,13 @@ const Login = () => {
           lg={5}
           xl={4}
           style={{
-            height: "100vh",
-            width: "100vw",
-            display: "flex",
-            position: "absolute",
-            justifyContent: "center",
-            alignItems: "center"
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
           }}
         >
-          <Box p={4} >
-          <h1>
-        orcus
-      </h1>
+          <Box p={4}>
             <AuthLogin
               title="Welcome to Ekta Enterprises"
               subtext={''}

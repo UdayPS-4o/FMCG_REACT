@@ -44,6 +44,7 @@ const PrivateRoute = ({ children }) => {
             localStorage.setItem('subgroup', subgroup);
             const storedName = localStorage.getItem('name');
             const storedUsername = localStorage.getItem('username');
+            localStorage.setItem('routeAccess', JSON.stringify(data.routeAccess));
 
             if (storedName !== name || storedUsername !== username) {
               localStorage.setItem('name', name);

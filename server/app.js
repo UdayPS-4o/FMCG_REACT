@@ -18,9 +18,9 @@ const {
 const cors = require('cors');
 app.use(
   cors({
-    origin: "http://rdp.udayps.com:3000", // Replace with your frontend URL
+    origin: 'http://180.188.226.114:3000', // Replace with your frontend URL
     credentials: true, // Allow credentials (cookies) to be sent with requests
-  })
+  }),
 );
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -111,7 +111,7 @@ app.use(postRoutes);
 
 // Initialize server
 const initServer = () => {
-  app.listen(PORT, 'rdp.udayps.com', () => {
+  app.listen(PORT, '180.188.226.114', () => {
     console.log(`Server running on port ${PORT}`);
   });
 };

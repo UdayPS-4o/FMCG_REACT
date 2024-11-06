@@ -14,5 +14,37 @@
     "email": "dsa@dsa.coom",
     "statecode": "23",
     "subgroup": "BD001"
+  },
+  {
+    "achead": "SHUSSS",
+    "addressline1": "gn road",
+    "addressline2": "",
+    "place": "seoni",
+    "pincode": "480661",
+    "mobile": "9179174888",
+    "pan": "D",
+    "aadhar": "",
+    "gst": "",
+    "dlno": "",
+    "fssaino": "",
+    "email": "shubham_stocks@yahoo.co.in",
+    "statecode": "23",
+    "subgroup": "AD001"
+  },
+  {
+    "achead": "Shubham ",
+    "addressline1": "Main road ",
+    "addressline2": "",
+    "place": "Chapara",
+    "pincode": "480884",
+    "mobile": "9169164888",
+    "pan": "E",
+    "aadhar": "",
+    "gst": "",
+    "dlno": "",
+    "fssaino": "",
+    "email": "",
+    "statecode": "",
+    "subgroup": "BC001"
   }
 ]
