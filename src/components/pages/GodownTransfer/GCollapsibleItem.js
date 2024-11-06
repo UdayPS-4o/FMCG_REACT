@@ -174,7 +174,7 @@ const CollapsibleItemSection = ({
     <Accordion expanded={expanded === index} onChange={handleChange(index)}>
       <AccordionSummary expandIcon={<IconChevronDown />}>
         <Grid container alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">Item {pmplData[index]?.CODE || 'N/A'}</Typography>
+          <Typography variant="h6">Item {pmplData[index]?.CODE || 'hell'}</Typography>
           <IconButton color="error" onClick={() => removeItem(index)}>
             <IconTrash />
           </IconButton>

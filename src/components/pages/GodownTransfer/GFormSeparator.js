@@ -234,6 +234,9 @@ function FormSeparator() {
       console.error('Error submitting form:', error);
     }
   };
+  useEffect(() => {
+    console.log('formValues:', formValues);
+  }, [formValues]);
 
   return (
     <form
@@ -313,6 +316,7 @@ function FormSeparator() {
               updateItem={updateItem}
               removeItem={removeItem}
               pmplData={getAvailableItems()} // Ensure filtered items are used for all items
+              pmpl={pmplData}
             />
           ))}
           <Divider />

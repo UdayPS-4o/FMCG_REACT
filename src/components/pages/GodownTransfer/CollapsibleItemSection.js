@@ -14,6 +14,7 @@ import constants from 'src/constants';
 const baseURL = constants.baseURL;
 
 const CollapsibleItemSection = ({
+  pmpl,
   index,
   itemData,
   handleChange,
@@ -62,6 +63,13 @@ const CollapsibleItemSection = ({
       console.log('availableGodowns', availableGodowns);
     }
   }, [itemData.item, stockList]);
+
+  useEffect(() => {
+    console.log('itemData', itemData);
+    console.log('pmplData', pmplData);
+
+    console.log(pmpl.filter((item) => item.CODE == itemData.item));
+  }, [itemData]);
 
   const handleItemChange = (event, newValue) => {
     if (!newValue) return;
@@ -177,9 +185,7 @@ const CollapsibleItemSection = ({
         <Grid container alignItems="center" justifyContent="space-between">
           <Typography variant="h6">
             {' '}
-            {itemData.item
-              ? pmplData.find((i) => i.CODE === itemData.item)?.PRODUCT || 'N/A'
-              : 'Item'}
+            {itemData.item ? pmpl.find((item) => item.CODE == itemData.item)?.PRODUCT : 'Item'}
           </Typography>
 
           <IconButton color="error" onClick={() => removeItem(index)}>
